@@ -1,6 +1,27 @@
+export type ExamStage = "Prelims" | "Mains" | "Both";
+
+export type SubjectTag =
+  | "Geography"
+  | "Economy"
+  | "Polity"
+  | "IR"
+  | "Environment"
+  | "Science & Tech"
+  | "History"
+  | "Ethics"
+  | "Strategy"
+  | "Optional"
+  | "Interview"
+  | "CSAT";
+
 export type BlogPost = {
   slug: string;
+  /** Display / legacy filter label */
   category: string;
+  /** Exam stage for Current Affairs tabs */
+  stage: ExamStage;
+  /** Subject tags — article auto-appears in matching subject tabs */
+  subjects: SubjectTag[];
   title: string;
   excerpt: string;
   read: string;
@@ -10,10 +31,48 @@ export type BlogPost = {
   content: string[];
 };
 
+export const SUBJECT_TAGS: SubjectTag[] = [
+  "Geography",
+  "Economy",
+  "Polity",
+  "IR",
+  "Environment",
+  "Science & Tech",
+  "History",
+  "Ethics",
+  "Strategy",
+  "Optional",
+  "Interview",
+  "CSAT",
+];
+
 export const blogPosts: BlogPost[] = [
+  {
+    slug: "president-of-india-prelims-polity",
+    category: "Polity",
+    stage: "Prelims",
+    subjects: ["Polity"],
+    title: "President of India: what Prelims usually asks",
+    excerpt:
+      "Election, powers, impeachment, and ordinances — a short Prelims-ready note on the President. Tagged Polity so it also appears on the Polity subject tab.",
+    read: "6 min read",
+    date: "22 July 2026",
+    image:
+      "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=1400&h=900&q=85",
+    alt: "Government building facade for polity study",
+    content: [
+      "A current-affairs note on the President is usually a Polity fact note for Prelims — election method, term, impeachment, and a few high-yield powers.",
+      "Remember: the President is elected by an electoral college (elected MPs and MLAs), not by direct popular vote. Proportional representation with a single transferable vote is the method named in standard texts.",
+      "For powers, keep a short list: executive, legislative (including ordinances under Article 123), judicial, and emergency provisions — with one example each from recent news if relevant.",
+      "Impeachment needs a special majority in both Houses for ‘violation of the Constitution’. Do not confuse this with removal of other constitutional posts.",
+      "Because this article is tagged Prelims + Polity, it shows under Current Affairs → Prelims and under the Polity subject tab — so daily revisers and subject-focused students both find it.",
+    ],
+  },
   {
     slug: "geography-current-affairs-maps-first",
     category: "Geography",
+    stage: "Prelims",
+    subjects: ["Geography", "Environment"],
     title: "Geography Current Affairs: maps first, then reports",
     excerpt:
       "A free weekly method for map points, climate & environment updates, disasters, and Prelims-ready location facts.",
@@ -33,6 +92,8 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "mains-current-affairs-issue-to-answer",
     category: "Mains",
+    stage: "Mains",
+    subjects: ["Polity", "IR", "Economy"],
     title: "Mains Current Affairs: from issue to answer",
     excerpt:
       "How to turn editorials into GS-ready arguments — stakeholders, both sides, examples, and a crisp way forward.",
@@ -52,6 +113,8 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "revise-gs-without-burning-out",
     category: "Strategy",
+    stage: "Both",
+    subjects: ["Strategy"],
     title: "How to revise GS without burning out",
     excerpt:
       "A 7-day revision rhythm that pairs static subjects with current affairs, plus what to skip in the last 30 days before Prelims.",
@@ -71,6 +134,8 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "answer-writing-examiners-notice",
     category: "Mains",
+    stage: "Mains",
+    subjects: ["Strategy", "Ethics"],
     title: "Answer writing that examiners notice",
     excerpt:
       "How to decode the demand of the question, write a sharp introduction, and add current-affairs examples without crossing the word limit.",
@@ -92,6 +157,8 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "optional-subject-choose-with-intent",
     category: "Optional",
+    stage: "Mains",
+    subjects: ["Optional", "Strategy"],
     title: "Optional subject: choose with intent",
     excerpt:
       "Overlap with GS, interest, coaching access, and past trends — a practical checklist before you lock your optional.",
@@ -111,6 +178,8 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "csat-stop-ignoring-qualifying-paper",
     category: "Prelims",
+    stage: "Prelims",
+    subjects: ["CSAT", "Strategy"],
     title: "CSAT: stop ignoring the qualifying paper",
     excerpt:
       "Comprehension drills, maths basics, and a weekly CSAT habit so Paper II never becomes a last-minute panic.",
@@ -131,6 +200,8 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "newspaper-reading-exam-ready",
     category: "Current Affairs",
+    stage: "Both",
+    subjects: ["Polity", "Economy", "Geography"],
     title: "Making newspaper reading exam-ready",
     excerpt:
       "What to note from The Hindu / Indian Express, how to link editorials to GS papers, and when monthly magazines are enough.",
@@ -150,6 +221,8 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "preparing-daf-without-overthinking",
     category: "Interview",
+    stage: "Mains",
+    subjects: ["Interview", "Strategy"],
     title: "Preparing your DAF without overthinking",
     excerpt:
       "Hobby, education, and home-state questions that boards often ask — and how current affairs opinion-building helps.",
@@ -174,4 +247,28 @@ export function getPostBySlug(slug: string) {
 
 export function getAllSlugs() {
   return blogPosts.map((p) => p.slug);
+}
+
+export function matchesStage(post: BlogPost, stage?: string | null) {
+  if (!stage || stage === "All") return true;
+  if (stage === "Prelims")
+    return post.stage === "Prelims" || post.stage === "Both";
+  if (stage === "Mains") return post.stage === "Mains" || post.stage === "Both";
+  return true;
+}
+
+export function matchesSubject(post: BlogPost, subject?: string | null) {
+  if (!subject || subject === "All") return true;
+  return post.subjects.some(
+    (s) => s.toLowerCase() === subject.toLowerCase(),
+  );
+}
+
+export function filterPosts(opts: {
+  stage?: string | null;
+  subject?: string | null;
+}) {
+  return blogPosts.filter(
+    (p) => matchesStage(p, opts.stage) && matchesSubject(p, opts.subject),
+  );
 }

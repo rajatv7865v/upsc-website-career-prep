@@ -9,9 +9,9 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Career Prepp | Free UPSC Current Affairs",
+  title: "Career Prepp | Clear notes on current affairs & public life",
   description:
-    "Free UPSC Current Affairs for Geography and Mains — maps, environment, newspaper methods, and answer-ready analysis for Civil Services aspirants.",
+    "Knowledge-first articles on geography, economy, polity, and current affairs — written for curious readers, not just exam classrooms.",
 };
 
 export default function RootLayout({

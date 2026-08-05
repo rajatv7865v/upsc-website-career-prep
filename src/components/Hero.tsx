@@ -1,8 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { IconArrow } from "@/components/Icons";
+import { blogPosts } from "@/data/blog";
 
 export default function Hero() {
+  const latest = blogPosts[0];
+
   return (
     <section className="hero relative min-h-[100svh] overflow-hidden bg-black">
       <div className="absolute inset-0">
@@ -26,7 +29,7 @@ export default function Hero() {
           <div className="hero-brand-row">
             <span className="hero-brand-rule" aria-hidden />
             <div>
-              <p className="hero-eyebrow">UPSC · Free knowledge</p>
+              <p className="hero-eyebrow">Free knowledge</p>
               <p className="hero-brand">
                 Career <span>Prepp</span>
               </p>
@@ -34,25 +37,27 @@ export default function Hero() {
           </div>
 
           <h1 className="hero-headline">
-            Free Current Affairs for UPSC — Geography &amp; Mains.
+            Clear notes on the world around you.
           </h1>
 
           <p className="hero-support">
-            Open briefs that turn newspapers into exam notes: maps and
-            environment for Geography, analysis and examples for Mains. No
-            courses to buy.
+            Short, readable articles on geography, economy, polity, and today’s
+            headlines — useful whether you are preparing for something specific
+            or simply want to stay informed.
           </p>
 
           <div className="hero-actions">
-            <Link
-              href="#ca-geography"
-              className="hero-btn-primary footer-cta-shine"
-            >
-              Geography CA
-              <IconArrow className="ml-2 inline h-4 w-4" />
-            </Link>
-            <Link href="#ca-mains" className="hero-btn-ghost">
-              Mains CA
+            {latest && (
+              <Link
+                href={`/blog/${latest.slug}`}
+                className="hero-btn-primary footer-cta-shine"
+              >
+                Latest article
+                <IconArrow className="ml-2 inline h-4 w-4" />
+              </Link>
+            )}
+            <Link href="#blog" className="hero-btn-ghost">
+              Trending topics
               <span className="hero-btn-arrow" aria-hidden>
                 →
               </span>
@@ -62,9 +67,9 @@ export default function Hero() {
       </div>
 
       <div className="hero-footer-bar" aria-hidden>
-        <span>Raisina Hill · New Delhi</span>
+        <span>Knowledge first</span>
         <span className="hero-footer-dot" />
-        <span>Free forever</span>
+        <span>Free to read</span>
       </div>
 
       <a

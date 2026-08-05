@@ -4,7 +4,13 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
-type NavChild = { href: string; label: string; id: string };
+type NavChild = {
+  href: string;
+  label: string;
+  id: string;
+  /** Optional submenu group heading (e.g. Syllabus / Strategy). */
+  group?: string;
+};
 
 type NavLink = {
   href: string;
@@ -16,40 +22,119 @@ type NavLink = {
 
 const links: NavLink[] = [
   { href: "/", label: "Home", id: "home" },
+  { href: "/about", label: "About Us", id: "about" },
   {
-    href: "/#current-affairs",
+    href: "/current-affairs",
     label: "Current Affairs",
     id: "current-affairs",
     overviewLabel: "All Current Affairs",
     children: [
-      { href: "/#ca-geography", label: "Geography", id: "ca-geography" },
-      { href: "/#ca-mains", label: "Mains", id: "ca-mains" },
+      { href: "/current-affairs?stage=Prelims", label: "Prelims", id: "ca-prelims" },
+      { href: "/current-affairs?stage=Mains", label: "Mains", id: "ca-mains" },
     ],
   },
-  { href: "/about", label: "About Us", id: "about" },
   {
     href: "/#syllabus",
-    label: "Syllabus & Pattern",
+    label: "Syllabus & Strategy",
     id: "syllabus",
-    overviewLabel: "Exam Pattern Overview",
+    overviewLabel: "Syllabus & Strategy overview",
     children: [
-      { href: "/syllabus/gs-paper-1", label: "GS Paper 1", id: "gs-paper-1" },
-      { href: "/syllabus/gs-paper-2", label: "GS Paper 2", id: "gs-paper-2" },
-      { href: "/syllabus/gs-paper-3", label: "GS Paper 3", id: "gs-paper-3" },
-      { href: "/syllabus/gs-paper-4", label: "GS Paper 4", id: "gs-paper-4" },
-      { href: "/syllabus/ir", label: "IR", id: "ir" },
-      { href: "/syllabus/csat", label: "CSAT", id: "csat" },
-      { href: "/syllabus/economy", label: "Economy", id: "economy" },
-      { href: "/syllabus/environment", label: "Environment", id: "environment" },
-      { href: "/syllabus/geography", label: "Geography", id: "geography" },
       {
-        href: "/syllabus/science-tech",
-        label: "Science & Tech",
-        id: "science-tech",
+        href: "/syllabus",
+        label: "All syllabus",
+        id: "syl-all",
+        group: "Syllabus",
       },
-      { href: "/syllabus/history", label: "History", id: "history" },
+      {
+        href: "/syllabus/prelims",
+        label: "Prelims (GS + CSAT)",
+        id: "syl-prelims",
+        group: "Syllabus",
+      },
+      {
+        href: "/syllabus/gs-paper-1",
+        label: "GS Paper 1",
+        id: "gs-paper-1",
+        group: "Syllabus",
+      },
+      {
+        href: "/syllabus/gs-paper-2",
+        label: "GS Paper 2",
+        id: "gs-paper-2",
+        group: "Syllabus",
+      },
+      {
+        href: "/syllabus/gs-paper-3",
+        label: "GS Paper 3",
+        id: "gs-paper-3",
+        group: "Syllabus",
+      },
+      {
+        href: "/syllabus/gs-paper-4",
+        label: "GS Paper 4",
+        id: "gs-paper-4",
+        group: "Syllabus",
+      },
+      {
+        href: "/strategy",
+        label: "All strategy",
+        id: "strategy",
+        group: "Strategy",
+      },
+      {
+        href: "/strategy/prelims",
+        label: "Prelims",
+        id: "st-prelims",
+        group: "Strategy",
+      },
+      {
+        href: "/strategy/gs-paper-1",
+        label: "GS Paper 1",
+        id: "st-gs1",
+        group: "Strategy",
+      },
+      {
+        href: "/strategy/gs-paper-2",
+        label: "GS Paper 2",
+        id: "st-gs2",
+        group: "Strategy",
+      },
+      {
+        href: "/strategy/gs-paper-3",
+        label: "GS Paper 3",
+        id: "st-gs3",
+        group: "Strategy",
+      },
+      {
+        href: "/strategy/gs-paper-4",
+        label: "GS Paper 4",
+        id: "st-gs4",
+        group: "Strategy",
+      },
     ],
   },
+  {
+    href: "/geography",
+    label: "Geography",
+    id: "geography",
+    overviewLabel: "All Geography",
+    children: [
+      { href: "/geography?stage=Prelims", label: "Prelims", id: "geo-prelims" },
+      { href: "/geography?stage=Mains", label: "Mains", id: "geo-mains" },
+    ],
+  },
+  {
+    href: "/economy",
+    label: "Economy",
+    id: "economy",
+    overviewLabel: "All Economy",
+    children: [
+      { href: "/economy?stage=Prelims", label: "Prelims", id: "eco-prelims" },
+      { href: "/economy?stage=Mains", label: "Mains", id: "eco-mains" },
+    ],
+  },
+  { href: "/notifications", label: "Notifications", id: "notifications" },
+  { href: "/pyq", label: "PYQ", id: "pyq" },
   { href: "/blog", label: "Blog", id: "blog" },
   { href: "/contact", label: "Contact Us", id: "contact" },
 ];
@@ -63,47 +148,35 @@ export default function Header({ forceSolid = false }: HeaderProps) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpenId, setMobileOpenId] = useState<string | null>(null);
-  const [active, setActive] = useState(
-    pathname === "/about"
-      ? "about"
-      : pathname === "/contact"
-        ? "contact"
-        : pathname?.startsWith("/blog")
-          ? "blog"
-          : pathname?.startsWith("/syllabus")
-            ? "syllabus"
-            : "home",
-  );
+  const [active, setActive] = useState("home");
+
+  useEffect(() => {
+    const resolveActive = () => {
+      if (pathname === "/about") return "about";
+      if (pathname === "/contact") return "contact";
+      if (pathname?.startsWith("/blog")) return "blog";
+      if (pathname?.startsWith("/current-affairs")) return "current-affairs";
+      if (pathname?.startsWith("/geography")) return "geography";
+      if (pathname?.startsWith("/economy")) return "economy";
+      if (pathname?.startsWith("/notifications")) return "notifications";
+      if (pathname?.startsWith("/pyq")) return "pyq";
+      if (
+        pathname?.startsWith("/syllabus") ||
+        pathname?.startsWith("/strategy")
+      )
+        return "syllabus";
+      return "home";
+    };
+    setActive(resolveActive());
+  }, [pathname]);
 
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 16);
 
-      if (pathname === "/about") {
-        setActive("about");
-        return;
-      }
-
-      if (pathname === "/contact") {
-        setActive("contact");
-        return;
-      }
-
-      if (pathname?.startsWith("/blog")) {
-        setActive("blog");
-        return;
-      }
-
-      if (pathname?.startsWith("/syllabus")) {
-        setActive("syllabus");
-        return;
-      }
-
       if (pathname !== "/") return;
 
       const sections = [
-        "ca-geography",
-        "ca-mains",
         "current-affairs",
         "about",
         "syllabus",
@@ -115,10 +188,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
         const el = document.getElementById(id);
         if (!el) continue;
         if (el.getBoundingClientRect().top <= 120) {
-          current =
-            id === "ca-geography" || id === "ca-mains"
-              ? "current-affairs"
-              : id;
+          current = id;
         }
       }
       if (window.scrollY < 80) current = "home";
@@ -144,9 +214,21 @@ export default function Header({ forceSolid = false }: HeaderProps) {
     if (id === "about") return pathname === "/about";
     if (id === "contact") return pathname === "/contact";
     if (id === "blog") return Boolean(pathname?.startsWith("/blog"));
+    if (id === "current-affairs")
+      return (
+        Boolean(pathname?.startsWith("/current-affairs")) ||
+        (pathname === "/" && active === "current-affairs")
+      );
+    if (id === "geography")
+      return Boolean(pathname?.startsWith("/geography"));
+    if (id === "economy") return Boolean(pathname?.startsWith("/economy"));
+    if (id === "notifications")
+      return Boolean(pathname?.startsWith("/notifications"));
+    if (id === "pyq") return Boolean(pathname?.startsWith("/pyq"));
     if (id === "syllabus")
       return (
         Boolean(pathname?.startsWith("/syllabus")) ||
+        Boolean(pathname?.startsWith("/strategy")) ||
         (pathname === "/" && active === "syllabus")
       );
     if (id === "home") return pathname === "/" && active === "home";
@@ -203,7 +285,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-1 lg:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-0.5 xl:flex" aria-label="Primary">
           <ul className="flex items-center">
             {links.map((link) => {
               const isActive = linkActive(link.id);
@@ -211,10 +293,10 @@ export default function Header({ forceSolid = false }: HeaderProps) {
 
               if (hasChildren) {
                 return (
-                  <li key={link.href} className="group/menu relative">
+                  <li key={link.id} className="group/menu relative">
                     <Link
                       href={link.href}
-                      className={`header-nav-link relative inline-flex items-center gap-1.5 px-3.5 py-2 text-[13px] font-medium tracking-wide transition-all duration-300 ${navColor(isActive)}`}
+                      className={`header-nav-link relative inline-flex items-center gap-1 px-2.5 py-2 text-[12px] font-medium tracking-wide transition-all duration-300 xl:px-3 xl:text-[13px] ${navColor(isActive)}`}
                     >
                       <span>{link.label}</span>
                       <svg
@@ -232,7 +314,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
                         />
                       </svg>
                       <span
-                        className={`absolute inset-x-3.5 bottom-1 h-[1.5px] origin-center bg-blue transition-transform duration-300 ${
+                        className={`absolute inset-x-2.5 bottom-1 h-[1.5px] origin-center bg-blue transition-transform duration-300 xl:inset-x-3 ${
                           isActive
                             ? "scale-x-100"
                             : "scale-x-0 group-hover/menu:scale-x-100"
@@ -243,9 +325,9 @@ export default function Header({ forceSolid = false }: HeaderProps) {
 
                     <div
                       role="menu"
-                      className="header-submenu pointer-events-none invisible absolute left-0 top-full z-50 min-w-[13rem] -translate-y-1 pt-2 opacity-0 transition-all duration-200 group-hover/menu:pointer-events-auto group-hover/menu:visible group-hover/menu:translate-y-0 group-hover/menu:opacity-100 group-focus-within/menu:pointer-events-auto group-focus-within/menu:visible group-focus-within/menu:translate-y-0 group-focus-within/menu:opacity-100"
+                      className="header-submenu pointer-events-none invisible absolute left-0 top-full z-50 min-w-[14rem] -translate-y-1 pt-2 opacity-0 transition-all duration-200 group-hover/menu:pointer-events-auto group-hover/menu:visible group-hover/menu:translate-y-0 group-hover/menu:opacity-100 group-focus-within/menu:pointer-events-auto group-focus-within/menu:visible group-focus-within/menu:translate-y-0 group-focus-within/menu:opacity-100"
                     >
-                      <div className="border border-line bg-white py-2 shadow-[0_16px_40px_rgba(10,10,10,0.12)]">
+                      <div className="max-h-[70vh] overflow-y-auto border border-line bg-white py-2 shadow-[0_16px_40px_rgba(10,10,10,0.12)]">
                         <Link
                           href={link.href}
                           role="menuitem"
@@ -254,16 +336,27 @@ export default function Header({ forceSolid = false }: HeaderProps) {
                           {link.overviewLabel ?? link.label}
                         </Link>
                         <div className="my-1 border-t border-line" />
-                        {link.children!.map((child) => (
-                          <Link
-                            key={child.href}
-                            href={child.href}
-                            role="menuitem"
-                            className="block px-4 py-2.5 text-[13px] font-medium text-ink transition-colors hover:bg-surface hover:text-blue"
-                          >
-                            {child.label}
-                          </Link>
-                        ))}
+                        {link.children!.map((child, idx) => {
+                          const prevGroup = link.children![idx - 1]?.group;
+                          const showGroup =
+                            child.group && child.group !== prevGroup;
+                          return (
+                            <div key={child.id}>
+                              {showGroup && (
+                                <p className="px-4 pb-1 pt-3 text-[10px] font-semibold tracking-[0.16em] text-muted uppercase">
+                                  {child.group}
+                                </p>
+                              )}
+                              <Link
+                                href={child.href}
+                                role="menuitem"
+                                className="block px-4 py-2.5 text-[13px] font-medium text-ink transition-colors hover:bg-surface hover:text-blue"
+                              >
+                                {child.label}
+                              </Link>
+                            </div>
+                          );
+                        })}
                       </div>
                     </div>
                   </li>
@@ -271,14 +364,14 @@ export default function Header({ forceSolid = false }: HeaderProps) {
               }
 
               return (
-                <li key={link.href}>
+                <li key={link.id}>
                   <Link
                     href={link.href}
-                    className={`header-nav-link group relative inline-flex flex-col items-center px-3.5 py-2 text-[13px] font-medium tracking-wide transition-all duration-300 ${navColor(isActive)}`}
+                    className={`header-nav-link group relative inline-flex flex-col items-center px-2.5 py-2 text-[12px] font-medium tracking-wide transition-all duration-300 xl:px-3 xl:text-[13px] ${navColor(isActive)}`}
                   >
                     <span>{link.label}</span>
                     <span
-                      className={`absolute inset-x-3.5 bottom-1 h-[1.5px] origin-center bg-blue transition-transform duration-300 ${
+                      className={`absolute inset-x-2.5 bottom-1 h-[1.5px] origin-center bg-blue transition-transform duration-300 xl:inset-x-3 ${
                         isActive
                           ? "scale-x-100"
                           : "scale-x-0 group-hover:scale-x-100"
@@ -290,8 +383,6 @@ export default function Header({ forceSolid = false }: HeaderProps) {
               );
             })}
           </ul>
-
-       
         </nav>
 
         <button
@@ -299,7 +390,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className={`relative z-[110] flex h-10 w-10 flex-col items-center justify-center gap-[5px] lg:hidden ${
+          className={`relative z-[110] flex h-10 w-10 flex-col items-center justify-center gap-[5px] xl:hidden ${
             onLight ? "text-black" : "text-white"
           }`}
         >
@@ -322,7 +413,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
       </div>
 
       <div
-        className={`fixed inset-0 top-16 bg-black/45 transition-opacity duration-300 lg:hidden sm:top-[4.75rem] ${
+        className={`fixed inset-0 top-16 bg-black/45 transition-opacity duration-300 xl:hidden sm:top-[4.75rem] ${
           open
             ? "pointer-events-auto opacity-100"
             : "pointer-events-none opacity-0"
@@ -332,7 +423,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
       />
 
       <div
-        className={`absolute inset-x-0 top-full border-b border-line bg-white shadow-[0_24px_48px_rgba(10,10,10,0.1)] transition-all duration-300 lg:hidden ${
+        className={`absolute inset-x-0 top-full border-b border-line bg-white shadow-[0_24px_48px_rgba(10,10,10,0.1)] transition-all duration-300 xl:hidden ${
           open
             ? "visible translate-y-0 opacity-100"
             : "invisible -translate-y-2 opacity-0"
@@ -340,7 +431,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
         aria-hidden={!open}
       >
         <nav
-          className="mx-auto max-w-7xl px-6 py-5 lg:px-8"
+          className="mx-auto max-h-[calc(100dvh-5rem)] max-w-7xl overflow-y-auto px-6 py-5 lg:px-8"
           aria-label="Mobile"
         >
           <ul className="flex flex-col">
@@ -351,7 +442,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
 
               if (hasChildren) {
                 return (
-                  <li key={link.href} className="border-b border-line">
+                  <li key={link.id} className="border-b border-line">
                     <button
                       type="button"
                       aria-expanded={subOpen}
@@ -365,7 +456,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
                       }`}
                     >
                       <span className="text-[11px] tracking-wider text-muted">
-                        0{i + 1}
+                        {String(i + 1).padStart(2, "0")}
                       </span>
                       <span className="flex-1">{link.label}</span>
                       <svg
@@ -385,7 +476,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
                     </button>
                     <ul
                       className={`overflow-hidden bg-surface transition-all duration-200 ${
-                        subOpen ? "max-h-[28rem] pb-2" : "max-h-0"
+                        subOpen ? "max-h-[32rem] pb-2" : "max-h-0"
                       }`}
                     >
                       <li>
@@ -400,20 +491,30 @@ export default function Header({ forceSolid = false }: HeaderProps) {
                           {link.overviewLabel ?? link.label}
                         </Link>
                       </li>
-                      {link.children!.map((child) => (
-                        <li key={child.href}>
-                          <Link
-                            href={child.href}
-                            onClick={() => {
-                              setOpen(false);
-                              setMobileOpenId(null);
-                            }}
-                            className="block py-2.5 pl-12 pr-4 text-sm text-ink hover:text-blue"
-                          >
-                            {child.label}
-                          </Link>
-                        </li>
-                      ))}
+                      {link.children!.map((child, idx) => {
+                        const prevGroup = link.children![idx - 1]?.group;
+                        const showGroup =
+                          child.group && child.group !== prevGroup;
+                        return (
+                          <li key={child.id}>
+                            {showGroup && (
+                              <p className="pl-12 pr-4 pt-3 text-[10px] font-semibold tracking-[0.16em] text-muted uppercase">
+                                {child.group}
+                              </p>
+                            )}
+                            <Link
+                              href={child.href}
+                              onClick={() => {
+                                setOpen(false);
+                                setMobileOpenId(null);
+                              }}
+                              className="block py-2.5 pl-12 pr-4 text-sm text-ink hover:text-blue"
+                            >
+                              {child.label}
+                            </Link>
+                          </li>
+                        );
+                      })}
                     </ul>
                   </li>
                 );
@@ -421,7 +522,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
 
               return (
                 <li
-                  key={link.href}
+                  key={link.id}
                   className="border-b border-line last:border-0"
                 >
                   <Link
@@ -432,7 +533,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
                     }`}
                   >
                     <span className="text-[11px] tracking-wider text-muted">
-                      0{i + 1}
+                      {String(i + 1).padStart(2, "0")}
                     </span>
                     {link.label}
                   </Link>
@@ -441,7 +542,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
             })}
           </ul>
           <Link
-            href="/#current-affairs"
+            href="/current-affairs"
             onClick={() => setOpen(false)}
             className="header-cta footer-cta-shine mt-5 inline-flex w-full items-center justify-center bg-blue px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-hover"
           >

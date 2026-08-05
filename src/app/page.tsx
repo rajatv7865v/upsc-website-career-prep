@@ -3,14 +3,16 @@ import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
 import AboutIllustration from "@/components/AboutIllustration";
 import AnimatedIcon from "@/components/AnimatedIcon";
+import FeaturedArticles from "@/components/FeaturedArticles";
+import ExpandableArticleCards from "@/components/ExpandableArticleCards";
 import Image from "next/image";
 import Link from "next/link";
 import { blogPosts } from "@/data/blog";
+import { siteContact } from "@/data/site";
 import {
   IconArrow,
   IconBook,
   IconBriefcase,
-  IconBuilding,
   IconCalendar,
   IconCheck,
   IconClipboard,
@@ -30,20 +32,20 @@ import {
 
 const aboutPoints = [
   {
-    title: "Current affairs first",
-    text: "Free Geography and Mains current-affairs tracks — maps, environment, issues, and answer-ready arguments linked to the syllabus.",
+    title: "Current affairs, clearly written",
+    text: "Free notes on maps, environment, policy, and issues — written so any curious reader can follow along.",
     icon: IconNewspaper,
     variant: "pulse" as const,
   },
   {
-    title: "Syllabus-linked briefs",
-    text: "Every note tags to Prelims facts or Mains GS papers so newspaper reading becomes revision, not endless scrolling.",
+    title: "Organised by topic",
+    text: "Articles are tagged by subject and stage so you can browse what interests you — Geography, Economy, Polity, and more.",
     icon: IconCalendar,
     variant: "float" as const,
   },
   {
-    title: "Static + current together",
-    text: "Revision frameworks that pair NCERTs and standards with weekly current affairs — so both stay exam-ready.",
+    title: "Built to grow with time",
+    text: "Content is added and edited gradually. What you see today is a starting library, not a finished product.",
     icon: IconRefresh,
     variant: "spin" as const,
   },
@@ -51,119 +53,94 @@ const aboutPoints = [
 
 const whoWeHelp = [
   {
-    title: "First-time aspirants",
-    text: "Learn how to read the newspaper for UPSC, build Geography maps, and turn issues into Mains notes — free from day one.",
+    title: "Curious readers",
+    text: "Working professionals and general readers who want solid notes on public issues — without classroom jargon.",
     icon: IconUsers,
     variant: "bob" as const,
   },
   {
-    title: "Working professionals",
-    text: "Short weekly current-affairs loops: Geography facts + Mains analysis you can finish in limited hours.",
+    title: "Busy professionals",
+    text: "Short weekly reads you can finish in limited hours — maps, headlines, and clear takeaways.",
     icon: IconBriefcase,
     variant: "float" as const,
   },
   {
-    title: "Re-attempt candidates",
-    text: "Sharper current-affairs revision — what to keep, what to drop, and how to link issues to previous gaps.",
+    title: "Serious learners",
+    text: "If you later need deeper structure (stages, syllabus, strategy), those sections are there when you want them.",
     icon: IconCompass,
     variant: "orbit" as const,
   },
 ];
 
-const syllabusItems = [
-  {
-    title: "Prelims",
-    stage: "Stage 1 · Screening",
-    text: "Objective papers that shortlist candidates for Mains. Marks are not counted in the final rank — accuracy and elimination skills matter most.",
-    icon: IconClipboard,
-    variant: "bob" as const,
-    details: [
-      "GS Paper I — 200 marks · 2 hours · History, Polity, Economy, Geography, Environment, S&T, Current Affairs",
-      "CSAT (Paper II) — 200 marks · 2 hours · Qualifying (33%) · Comprehension, reasoning, numeracy",
-      "Negative marking: 1/3rd of marks allotted to a question",
-    ],
-  },
-  {
-    title: "Mains",
-    stage: "Stage 2 · Written exam",
-    text: "Nine descriptive papers. Essay, GS I–IV, and Optional decide your rank. Language papers are qualifying.",
-    icon: IconBook,
-    variant: "float" as const,
-    details: [
-      "Essay — 250 marks · one paper",
-      "GS I–IV — 250 marks each · Indian Heritage, Society, Governance, Ethics, Economy, Security, IR",
-      "Optional (2 papers) — 250 marks each · choose one subject carefully",
-      "Indian Language & English — qualifying · 300 marks each",
-    ],
-  },
-  {
-    title: "Interview",
-    stage: "Stage 3 · Personality Test",
-    text: "A board assesses suitability for public service — awareness, balance, honesty, and communication — not rote knowledge.",
-    icon: IconMic,
-    variant: "pulse" as const,
-    details: [
-      "275 marks · added to Mains for final ranking",
-      "DAF-based questions on background, hobbies, and optional",
-      "Current issues, ethics, and situational judgment",
-      "Mock boards help you stay calm and structured under pressure",
-    ],
-  },
-];
-
 const currentAffairs = [
   {
-    id: "ca-geography",
-    title: "Geography",
-    tag: "Free · Maps & environment",
-    text: "Physical, human, and environmental geography for Prelims and GS — maps, reports, climate, disasters, and India & world location facts.",
-    icon: IconGlobe,
-    variant: "spin" as const,
+    id: "ca-prelims",
+    title: "Stage · Foundation",
+    tag: "Free · Facts & places",
+    text: "Short notes on facts, schemes, locations, and reports. Subject tags also push notes into Geography, Economy, Polity, and IR.",
+    icon: IconClipboard,
+    variant: "bob" as const,
     topics: [
-      "Physical geography",
-      "Indian geography & mapping",
-      "Climate & monsoon",
-      "Environment & biodiversity",
-      "Disasters & resources",
+      "Location & map facts",
+      "Schemes & bodies",
+      "Environment reports",
+      "Polity & economy updates",
+      "Science & Tech briefs",
     ],
-    href: "/blog",
-    cta: "Browse Geography guides",
+    href: "/current-affairs?stage=Prelims",
+    cta: "Browse foundation notes",
   },
   {
     id: "ca-mains",
-    title: "Mains",
-    tag: "Free · Analysis & writing",
-    text: "Current affairs framed for Mains answers — issues, arguments, examples, and linkages across GS II, III, Essay, and Ethics.",
+    title: "Stage · Analysis",
+    tag: "Free · Issues & arguments",
+    text: "Current affairs framed as issues — stakeholders, both sides, and a clear way forward. Same notes appear under matching subject tabs.",
     icon: IconPen,
     variant: "wiggle" as const,
     topics: [
       "Issue → argument notes",
-      "GS II & III linkages",
-      "Essay-ready examples",
-      "Ethics case angles",
+      "Policy linkages",
+      "Reusable examples",
+      "Ethics angles",
       "Opinion frameworks",
     ],
-    href: "/blog",
-    cta: "Browse Mains guides",
+    href: "/current-affairs?stage=Mains",
+    cta: "Browse analysis notes",
   },
+];
+
+const syllabusLinks = [
+  { href: "/syllabus/prelims", label: "Prelims (GS + CSAT)" },
+  { href: "/syllabus/gs-paper-1", label: "GS Paper 1" },
+  { href: "/syllabus/gs-paper-2", label: "GS Paper 2" },
+  { href: "/syllabus/gs-paper-3", label: "GS Paper 3" },
+  { href: "/syllabus/gs-paper-4", label: "GS Paper 4" },
+];
+
+const strategyLinks = [
+  { href: "/strategy/prelims", label: "Prelims strategy" },
+  { href: "/strategy/gs-paper-1", label: "GS Paper 1 strategy" },
+  { href: "/strategy/gs-paper-2", label: "GS Paper 2 strategy" },
+  { href: "/strategy/gs-paper-3", label: "GS Paper 3 strategy" },
+  { href: "/strategy/gs-paper-4", label: "GS Paper 4 strategy" },
 ];
 
 const freeResources = [
   {
-    title: "Current Affairs · Geography",
-    tag: "Free · Maps & environment",
-    text: "Our core free track — physical & Indian geography, climate, biodiversity, disasters, and map-based current affairs.",
-    icon: IconGlobe,
-    variant: "spin" as const,
+    title: "Current Affairs · Prelims",
+    tag: "Free · Facts & maps",
+    text: "Prelims-tagged notes — location facts, schemes, environment, and reports that also land in subject tabs.",
+    icon: IconClipboard,
+    variant: "bob" as const,
     includes: [
-      "Weekly map & location briefs",
-      "Climate & environment updates",
-      "Disaster & resource notes",
-      "Prelims-ready fact lists",
-      "GS I / III linkages",
+      "Weekly fact briefs",
+      "Map & location updates",
+      "Scheme and body notes",
+      "Environment reports",
+      "Subject-tagged library",
     ],
-    href: "/#ca-geography",
-    cta: "Open Geography track",
+    href: "/current-affairs?stage=Prelims",
+    cta: "Open Prelims CA",
   },
   {
     title: "Current Affairs · Mains",
@@ -178,53 +155,53 @@ const freeResources = [
       "Essay & Ethics angles",
       "Monthly revise lists",
     ],
-    href: "/#ca-mains",
+    href: "/current-affairs?stage=Mains",
     cta: "Open Mains track",
   },
   {
-    title: "CA + static strategy",
-    tag: "Free · How to revise",
-    text: "Guides on newspaper reading, weekly CA loops, and pairing static subjects with current affairs without burnout.",
-    icon: IconNewspaper,
-    variant: "pulse" as const,
+    title: "Geography & Economy tabs",
+    tag: "Free · Subject hubs",
+    text: "Weak in one subject? Open Geography or Economy and read only those tagged current affairs.",
+    icon: IconGlobe,
+    variant: "spin" as const,
     includes: [
-      "Newspaper reading method",
-      "7-day CA + static rhythm",
-      "What to skip before Prelims",
-      "Answer writing with examples",
-      "Interview opinion building",
+      "Geography Prelims / Mains",
+      "Economy Prelims / Mains",
+      "Auto-populated from tags",
+      "Same article, multiple tabs",
+      "Daily revise or deep dive",
     ],
-    href: "/blog",
-    cta: "Browse CA articles",
+    href: "/geography",
+    cta: "Open Geography",
   },
 ];
 
 const approachSteps = [
   {
     number: "01",
-    title: "Read with tags",
-    text: "Use free newspaper methods: every item tagged to Geography CA or Mains CA — and to a GS paper.",
+    title: "Read with purpose",
+    text: "Pick what matters from the news — maps, schemes, debates — and save a short note you can revisit.",
     icon: IconSearch,
     variant: "bob" as const,
   },
   {
     number: "02",
-    title: "Build weekly CA loops",
-    text: "Maps and environment one day, issue-analysis another. Static subjects run parallel — never as a separate mountain.",
+    title: "Follow a light weekly rhythm",
+    text: "One day for places and environment, another for issues and arguments. Keep the habit small enough to stick.",
     icon: IconLayers,
     variant: "float" as const,
   },
   {
     number: "03",
-    title: "Write from current notes",
-    text: "Turn three issues a week into short answers. Examples from current affairs beat generic theory.",
+    title: "Write a few lines",
+    text: "Summarise an issue in your own words. Clear writing sharpens understanding for any reader.",
     icon: IconPen,
     variant: "wiggle" as const,
   },
   {
     number: "04",
-    title: "Revise CA before the exam",
-    text: "Short lists, map sheets, and monthly consolidations from our free guides — calm and selective.",
+    title: "Revisit what you saved",
+    text: "Short lists and tagged articles make revision calm — whether you browse for interest or prepare for something bigger.",
     icon: IconRefresh,
     variant: "spin" as const,
   },
@@ -232,23 +209,23 @@ const approachSteps = [
 
 const faqs = [
   {
-    q: "Is Career Prepp mainly about current affairs?",
-    a: "Yes. Our free library centres on Current Affairs — Geography and Mains tracks — plus strategy notes that link CA to static subjects. We do not sell courses.",
+    q: "Who is Career Prepp for?",
+    a: "Anyone who wants clear, free notes on current affairs and public life — including working professionals. Deeper structure is available if you need it later.",
     icon: IconNewspaper,
   },
   {
-    q: "What are the two Current Affairs options?",
-    a: "Geography (maps, environment, location facts) and Mains (analysis and answer-ready arguments). Both are free to browse and download.",
+    q: "Is this only for civil services?",
+    a: "No. Early on we keep the tone knowledge-first. Syllabus and strategy pages exist as a starting library and will grow over time.",
     icon: IconGlobe,
   },
   {
-    q: "How should I use Geography vs Mains CA?",
-    a: "Use Geography for Prelims facts and GS map/environment themes. Use Mains for editorials, issues, and examples you can write in GS II, III, Essay, and Ethics.",
+    q: "How are articles organised?",
+    a: "By topic (Geography, Economy, Polity, and more) and by stage when relevant. The same article can appear in the general feed and under a subject tab.",
     icon: IconPen,
   },
   {
-    q: "Do you cover only current affairs?",
-    a: "Current affairs is the core. We also publish free strategy, answer writing, CSAT, optional, and Interview notes that support CA-based preparation.",
+    q: "Do you sell courses?",
+    a: "No. The library is free to read. Suggest a topic anytime if something is missing.",
     icon: IconBook,
   },
 ];
@@ -272,18 +249,17 @@ export default function Home() {
                 <div className="section-head">
                   <p className="section-label">About Us</p>
                   <h2 className="section-title">
-                    Free current affairs for how UPSC actually asks.
+                    Knowledge-first notes on public life.
                   </h2>
                   <p className="section-text">
-                    Career Prepp is a free Civil Services library built around
-                    Current Affairs — Geography and Mains tracks — plus notes that
-                    connect newspapers to the syllabus, answer writing, and
-                    revision.
+                    Career Prepp publishes free, readable articles on current
+                    affairs — geography, economy, polity, and more — for curious
+                    readers as much as for serious learners.
                   </p>
                   <p className="mt-4 text-base leading-relaxed text-muted">
-                    Whether you are starting Prelims or writing Mains, use our
-                    open briefs to replace scattered scrolling with a weekly
-                    current-affairs system tagged to GS papers.
+                    The library grows gradually. Syllabus and strategy pages are
+                    a starting point and will be refined over time — they are
+                    not the whole face of the site.
                   </p>
                 </div>
 
@@ -372,50 +348,55 @@ export default function Home() {
             <div className="section-head section-head-dark">
               <p className="section-label">Current Affairs</p>
               <h2 className="section-title">
-                Two clear tracks — Geography and Mains.
+                Highlighted headings — expand to read.
               </h2>
               <p className="section-text">
-                Free current-affairs content split the way you revise: Geography
-                for maps, environment, and location facts; Mains for analysis
-                and answer-ready arguments.
+                Tap a heading to preview the note, then open the full article.
+                Browse by topic or by stage when you want more structure.
               </p>
             </div>
 
-            <div className="mt-12 grid gap-5 lg:grid-cols-2">
-              {currentAffairs.map((item, i) => (
-                <article
-                  key={item.title}
-                  id={item.id}
-                  className="cp-card cp-card-dark scroll-mt-28"
-                >
-                  <AnimatedIcon
-                    icon={item.icon}
-                    variant={item.variant}
-                    tone="dark"
-                    size="md"
-                    delay={i * 0.1}
-                  />
-                  <p className="mt-4 text-xs font-medium tracking-wide text-blue-soft">
-                    {item.tag}
-                  </p>
-                  <h3 className="cp-card-title !mt-2 text-xl">{item.title}</h3>
-                  <p className="cp-card-text">{item.text}</p>
-                  <ul className="mt-4 flex flex-wrap gap-2">
-                    {item.topics.map((topic) => (
-                      <li
-                        key={topic}
-                        className="border border-white/15 px-2.5 py-1 text-xs text-white/75"
-                      >
-                        {topic}
-                      </li>
-                    ))}
-                  </ul>
-                  <Link href={item.href} className="cp-card-link !text-blue-soft">
-                    {item.cta}
-                    <IconArrow className="h-4 w-4" />
+            <div className="mt-10 grid gap-8 lg:grid-cols-12 lg:gap-10">
+              <div className="lg:col-span-4 space-y-4">
+                {currentAffairs.map((item, i) => (
+                  <Link
+                    key={item.title}
+                    href={item.href}
+                    id={item.id}
+                    className="cp-card cp-card-dark scroll-mt-28 block !p-5"
+                  >
+                    <AnimatedIcon
+                      icon={item.icon}
+                      variant={item.variant}
+                      tone="dark"
+                      size="sm"
+                      delay={i * 0.1}
+                    />
+                    <p className="mt-3 text-xs font-medium tracking-wide text-blue-soft">
+                      {item.tag}
+                    </p>
+                    <h3 className="mt-1 text-lg font-semibold text-white">
+                      {item.title}
+                    </h3>
+                    <p className="mt-2 text-sm text-white/60">{item.text}</p>
+                    <span className="cp-card-link !text-blue-soft mt-3">
+                      {item.cta}
+                      <IconArrow className="h-4 w-4" />
+                    </span>
                   </Link>
-                </article>
-              ))}
+                ))}
+              </div>
+
+              <div className="lg:col-span-8">
+                <ExpandableArticleCards posts={blogPosts.slice(0, 5)} />
+                <Link
+                  href="/current-affairs"
+                  className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-blue-soft"
+                >
+                  Browse all Current Affairs
+                  <IconArrow className="h-4 w-4" />
+                </Link>
+              </div>
             </div>
           </div>
         </section>
@@ -427,64 +408,101 @@ export default function Home() {
         >
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="section-head section-head-dark">
-              <p className="section-label">Syllabus & Pattern</p>
+              <p className="section-label">Syllabus & Strategy</p>
               <h2 className="section-title">
-                UPSC Civil Services — three stages, one goal.
+                Structure when you need it — syllabus and strategy.
               </h2>
               <p className="section-text">
-                The exam selects officers for IAS, IPS, IFS, and other Group A /
-                B services. Understand each stage clearly before you plan your
-                year — marks, papers, and what truly decides your rank.
+                Official paper outlines and separate how-to guides. Useful if you
+                want depth later; everyday reading stays on Current Affairs and
+                the blog.
               </p>
             </div>
 
-            <div className="mt-12 grid gap-5 lg:grid-cols-3">
-              {syllabusItems.map((item, index) => (
-                <article
-                  key={item.title}
-                  className="stage-card"
-                  style={{ animationDelay: `${index * 0.12}s` }}
+            <div className="mt-12 grid gap-5 lg:grid-cols-2">
+              <article className="stage-card">
+                <div className="stage-card-top">
+                  <AnimatedIcon
+                    icon={IconBook}
+                    variant="float"
+                    tone="solid"
+                    size="lg"
+                  />
+                  <span className="stage-card-badge">Syllabus</span>
+                </div>
+                <h3 className="stage-card-title">Official syllabus text</h3>
+                <p className="stage-card-text">
+                  Plain wording from the public notification — a starting
+                  reference, not the final word.
+                </p>
+                <ul className="stage-card-list">
+                  {syllabusLinks.map((link) => (
+                    <li key={link.href}>
+                      <IconCheck className="ai-check" />
+                      <Link href={link.href} className="text-blue-soft hover:underline">
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  href="/syllabus"
+                  className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-blue-soft"
                 >
-                  <div className="stage-card-top">
-                    <AnimatedIcon
-                      icon={item.icon}
-                      variant={item.variant}
-                      tone="solid"
-                      size="lg"
-                      delay={index * 0.2}
-                    />
-                    <span className="stage-card-badge">{item.stage}</span>
-                  </div>
+                  All syllabus
+                  <IconArrow className="h-4 w-4" />
+                </Link>
+                <div className="stage-card-glow" aria-hidden />
+              </article>
 
-                  <h3 className="stage-card-title">{item.title}</h3>
-                  <p className="stage-card-text">{item.text}</p>
-
-                  <ul className="stage-card-list">
-                    {item.details.map((detail) => (
-                      <li key={detail}>
-                        <IconCheck className="ai-check" />
-                        {detail}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="stage-card-glow" aria-hidden />
-                </article>
-              ))}
+              <article className="stage-card">
+                <div className="stage-card-top">
+                  <AnimatedIcon
+                    icon={IconCompass}
+                    variant="orbit"
+                    tone="solid"
+                    size="lg"
+                    delay={0.15}
+                  />
+                  <span className="stage-card-badge">Strategy</span>
+                </div>
+                <h3 className="stage-card-title">Paper-wise strategy</h3>
+                <p className="stage-card-text">
+                  How to cover each paper — separate from the syllabus text.
+                </p>
+                <ul className="stage-card-list">
+                  {strategyLinks.map((link) => (
+                    <li key={link.href}>
+                      <IconCheck className="ai-check" />
+                      <Link href={link.href} className="text-blue-soft hover:underline">
+                        {link.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                <Link
+                  href="/strategy"
+                  className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-blue-soft"
+                >
+                  All strategy
+                  <IconArrow className="h-4 w-4" />
+                </Link>
+                <div className="stage-card-glow" aria-hidden />
+              </article>
             </div>
 
             <div className="stage-merit">
               <div>
                 <p className="stage-merit-title">
-                  Final merit = Mains (1750) + Interview (275)
+                  Syllabus tells you what. Strategy tells you how.
                 </p>
                 <p className="stage-merit-text">
-                  Prelims is qualifying for entry to Mains. Language papers in
-                  Mains are also qualifying. Plan your effort accordingly.
+                  Open either hub from the Syllabus &amp; Strategy menu — the
+                  two lists stay separate.
                 </p>
               </div>
-              <Link href="/syllabus/ir" className="stage-merit-link">
-                Open IR syllabus
+              <Link href="/syllabus" className="stage-merit-link">
+                Open syllabus hub
                 <IconArrow className="h-4 w-4" />
               </Link>
             </div>
@@ -500,8 +518,8 @@ export default function Home() {
                 Current affairs at the centre of every guide.
               </h2>
               <p className="section-text">
-                Geography CA, Mains CA, and strategy notes that teach you how to
-                revise newspapers with the syllabus — all free.
+                Topic hubs, stage filters, and strategy notes — free to browse as
+                the library grows.
               </p>
             </div>
 
@@ -549,11 +567,11 @@ export default function Home() {
             <div className="section-head">
               <p className="section-label">Our Approach</p>
               <h2 className="section-title">
-                A weekly Current Affairs system you can keep.
+                A light weekly habit you can keep.
               </h2>
               <p className="section-text">
-                Tag, loop, write, revise — four steps that keep newspapers useful
-                from Prelims to the Personality Test.
+                Read, tag, write a few lines, revisit — four steps that turn
+                headlines into useful notes.
               </p>
             </div>
 
@@ -580,63 +598,10 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Blog */}
+        {/* Blog / newspaper feature */}
         <section id="blog" className="scroll-mt-24 bg-white py-20 lg:py-28">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
-              <div className="section-head">
-                <p className="section-label">Blog</p>
-                <h2 className="section-title">
-                  Current affairs guides you can share and download.
-                </h2>
-                <p className="section-text">
-                  Newspaper methods, Geography briefs, Mains analysis, and more —
-                  free on the Blog.
-                </p>
-              </div>
-              <Link
-                href="/blog"
-                className="inline-flex shrink-0 items-center gap-2 text-sm font-medium text-blue"
-              >
-                View all articles
-                <IconArrow className="h-4 w-4" />
-              </Link>
-            </div>
-
-            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {blogPosts.slice(0, 6).map((post) => (
-                <Link
-                  key={post.slug}
-                  href={`/blog/${post.slug}`}
-                  className="blog-card group"
-                >
-                  <div className="blog-card-media">
-                    <Image
-                      src={post.image}
-                      alt={post.alt}
-                      fill
-                      quality={85}
-                      className="blog-card-image object-cover"
-                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    />
-                    <div className="blog-card-veil" aria-hidden />
-                    <span className="blog-card-category">{post.category}</span>
-                  </div>
-
-                  <div className="blog-card-body">
-                    <h3 className="blog-card-title">{post.title}</h3>
-                    <p className="blog-card-text">{post.excerpt}</p>
-                    <div className="blog-card-footer">
-                      <span className="blog-card-meta">{post.read}</span>
-                      <span className="blog-card-link">
-                        Read article
-                        <IconArrow className="h-4 w-4" />
-                      </span>
-                    </div>
-                  </div>
-                </Link>
-              ))}
-            </div>
+            <FeaturedArticles posts={blogPosts.slice(0, 5)} />
           </div>
         </section>
 
@@ -653,10 +618,10 @@ export default function Home() {
                 />
                 FAQs
               </p>
-              <h2 className="section-title">Common questions from aspirants.</h2>
+              <h2 className="section-title">Common questions.</h2>
               <p className="section-text">
-                Straight answers about our free content. Suggest a topic anytime
-                via Contact.
+                Straight answers about the library. Suggest a topic anytime via
+                Contact.
               </p>
             </div>
 
@@ -686,11 +651,11 @@ export default function Home() {
             <div className="section-head">
               <p className="section-label">Contact Us</p>
               <h2 className="section-title">
-                Need a current affairs topic covered?
+                Want a topic covered?
               </h2>
               <p className="section-text">
-                Suggest a Geography or Mains CA theme, report a gap, or ask how
-                to use our free briefs. We read every message.
+                Suggest an article idea, report a gap, or ask how to use the
+                library. We read every message.
               </p>
               <Link
                 href="/contact"
@@ -702,7 +667,7 @@ export default function Home() {
             </div>
 
             <div className="mt-12 grid gap-5 md:grid-cols-3">
-              <a href="mailto:hello@careerprepp.com" className="cp-card group">
+              <a href={`mailto:${siteContact.email}`} className="cp-card group">
                 <AnimatedIcon
                   icon={IconMail}
                   variant="bob"
@@ -711,7 +676,7 @@ export default function Home() {
                 />
                 <h3 className="cp-card-title">Email</h3>
                 <p className="cp-card-text">
-                  hello@careerprepp.com
+                  {siteContact.email}
                   <br />
                   We reply within 1 business day — content questions welcome.
                 </p>
@@ -721,7 +686,12 @@ export default function Home() {
                 </span>
               </a>
 
-              <a href="tel:+919876543210" className="cp-card group">
+              <a
+                href={siteContact.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cp-card group"
+              >
                 <AnimatedIcon
                   icon={IconPhone}
                   variant="pulse"
@@ -729,37 +699,42 @@ export default function Home() {
                   size="md"
                   delay={0.2}
                 />
-                <h3 className="cp-card-title">Phone / WhatsApp</h3>
+                <h3 className="cp-card-title">WhatsApp</h3>
                 <p className="cp-card-text">
-                  +91 98765 43210
+                  {siteContact.phoneDisplay}
                   <br />
                   Mon–Sat · 10:00 AM – 7:00 PM IST
                 </p>
                 <span className="cp-card-link">
-                  Say hello
+                  Chat on WhatsApp
                   <IconArrow className="h-4 w-4" />
                 </span>
               </a>
 
-              <article className="cp-card">
+              <a
+                href={siteContact.telegram}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cp-card group"
+              >
                 <AnimatedIcon
-                  icon={IconBuilding}
+                  icon={IconMic}
                   variant="float"
                   tone="light"
                   size="md"
                   delay={0.35}
                 />
-                <h3 className="cp-card-title">Content desk</h3>
+                <h3 className="cp-card-title">Telegram</h3>
                 <p className="cp-card-text">
-                  Suggest articles, report gaps, or share what helped your
-                  preparation.
+                  Join the Career Prepp channel for updates and notes.
                   <br />
-                  Based in New Delhi — serving aspirants across India online.
+                  Suggest topics anytime via the contact form.
                 </p>
-                <p className="mt-4 text-sm text-muted">
-                  Mention: stage · topic request · feedback
-                </p>
-              </article>
+                <span className="cp-card-link">
+                  Open Telegram
+                  <IconArrow className="h-4 w-4" />
+                </span>
+              </a>
             </div>
           </div>
         </section>

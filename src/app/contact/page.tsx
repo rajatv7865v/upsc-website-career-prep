@@ -7,7 +7,6 @@ import ContactForm from "@/components/ContactForm";
 import AnimatedIcon from "@/components/AnimatedIcon";
 import {
   IconArrow,
-  IconBuilding,
   IconCalendar,
   IconCheck,
   IconClipboard,
@@ -17,50 +16,58 @@ import {
   IconPhone,
   IconUsers,
 } from "@/components/Icons";
+import { siteContact } from "@/data/site";
 
 export const metadata: Metadata = {
   title: "Contact Us | Career Prepp",
   description:
-    "Contact Career Prepp with questions, feedback, or free content topic requests for UPSC Prelims, Mains, and Interview.",
+    "Contact Career Prepp with questions, feedback, or topic ideas for free knowledge articles.",
 };
 
 const channels = [
   {
     title: "Email",
-    detail: "hello@careerprepp.com",
+    detail: siteContact.email,
     note: "We reply within 1 business day — content questions welcome.",
-    href: "mailto:hello@careerprepp.com",
+    href: `mailto:${siteContact.email}`,
     icon: IconMail,
     variant: "bob" as const,
     tone: "solid" as const,
     cta: "Send an email",
   },
   {
-    title: "Phone / WhatsApp",
-    detail: "+91 98765 43210",
+    title: "WhatsApp",
+    detail: siteContact.phoneDisplay,
     note: "Mon–Sat · 10:00 AM – 7:00 PM IST",
-    href: "tel:+919876543210",
+    href: siteContact.whatsapp,
     icon: IconPhone,
     variant: "pulse" as const,
     tone: "light" as const,
-    cta: "Say hello",
+    cta: "Chat on WhatsApp",
   },
   {
-    title: "Content desk",
-    detail: "Topic requests & feedback",
-    note: "Suggest guides, report gaps, or share what helped you.",
-    href: "#message",
-    icon: IconBuilding,
+    title: "Telegram",
+    detail: "Career Prepp channel",
+    note: "Updates, notes, and quick questions.",
+    href: siteContact.telegram,
+    icon: IconMic,
     variant: "float" as const,
     tone: "light" as const,
-    cta: "Open the form",
+    cta: "Open Telegram",
   },
 ];
 
+const socialLinks = [
+  { label: "Instagram", href: siteContact.instagram },
+  { label: "YouTube", href: siteContact.youtube },
+  { label: "Telegram", href: siteContact.telegram },
+  { label: "WhatsApp", href: siteContact.whatsapp },
+];
+
 const tips = [
-  "Your stage — Prelims, Mains, Interview, or undecided",
+  "What you are reading for (general interest, or a specific stage)",
   "The topic or guide you need (or a correction you spotted)",
-  "Optional subject (if relevant) and what confused you",
+  "Any subject area that confused you",
   "Whether you want to suggest a new free article idea",
 ];
 
@@ -112,12 +119,11 @@ export default function ContactPage() {
           <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
             <p className="section-label">Contact Us</p>
             <h1 className="page-hero-title">
-              Suggest a Current Affairs topic — or ask how to revise.
+              Suggest a topic — or ask how to use the library.
             </h1>
             <p className="page-hero-text">
-              Career Prepp is a free Current Affairs library (Geography &amp;
-              Mains). Write with a topic idea, a correction, or a question about
-              our briefs.
+              Career Prepp is a free library of knowledge notes on current
+              affairs. Write with a topic idea, a correction, or a question.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <a
@@ -128,10 +134,12 @@ export default function ContactPage() {
                 <IconArrow className="h-4 w-4" />
               </a>
               <a
-                href="tel:+919876543210"
+                href={siteContact.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 border border-white/35 px-6 py-3.5 text-sm font-medium text-white transition-colors hover:border-white hover:bg-white/10"
               >
-                Call +91 98765 43210
+                WhatsApp {siteContact.phoneDisplay}
               </a>
             </div>
           </div>
@@ -163,6 +171,28 @@ export default function ContactPage() {
                     {item.cta}
                     <IconArrow className="h-4 w-4" />
                   </span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Social links — Instagram, YouTube, Telegram, WhatsApp (no LinkedIn, no address) */}
+        <section className="border-b border-line bg-surface py-12">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <p className="text-xs font-semibold tracking-[0.16em] text-muted uppercase">
+              Social
+            </p>
+            <div className="mt-4 flex flex-wrap gap-3">
+              {socialLinks.map((link) => (
+                <a
+                  key={link.label}
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex border border-line bg-white px-4 py-2.5 text-sm font-medium text-ink transition-colors hover:border-blue hover:text-blue"
+                >
+                  {link.label}
                 </a>
               ))}
             </div>

@@ -2,14 +2,14 @@ Summary
 
 ### Action Items
 
-- [ ]  Developer to restructure navigation tabs: Home, About Us, Current Affairs (Prelims/Mains), Geography (separate tab), Economy (separate tab)
-- [ ]  Developer to implement subject-wise tagging system for current affairs articles so they auto-populate into relevant tabs (e.g., polity, geography, economy, IR)
-- [ ]  Developer to rename "Pattern" section to "Syllabus and Strategy" and separate the two
-- [ ]  Developer to update syllabus pages with content copied directly from UPSC's official website (GS Paper 1, 2, 3, 4 + Prelims GS + CSAT)
-- [ ]  Developer to update article section label from "more guides for serious aspirants" to something simpler like "Top Articles" or "Trending Articles"
-- [ ]  Developer to add WhatsApp number and Telegram link to contact section; hide physical address field
-- [ ]  Developer to add a government exam notifications section with scraped/linked data
-- [ ]  Developer to add Previous Year Questions (PYQ) section with both scanned PDFs and text-based PDFs for Prelims and Mains
+- [x]  Developer to restructure navigation tabs: Home, About Us, Current Affairs (Prelims/Mains), Geography (separate tab), Economy (separate tab)
+- [x]  Developer to implement subject-wise tagging system for current affairs articles so they auto-populate into relevant tabs (e.g., polity, geography, economy, IR)
+- [x]  Developer to rename "Pattern" section to "Syllabus and Strategy" and separate the two
+- [x]  Developer to update syllabus pages with content copied directly from UPSC's official website (GS Paper 1, 2, 3, 4 + Prelims GS + CSAT)
+- [x]  Developer to update article section label from "more guides for serious aspirants" to something simpler like "Top Articles" or "Trending Articles"
+- [x]  Developer to add WhatsApp number and Telegram link to contact section; hide physical address field
+- [x]  Developer to add a government exam notifications section with scraped/linked data
+- [x]  Developer to add Previous Year Questions (PYQ) section with both scanned PDFs and text-based PDFs for Prelims and Mains
 - [ ]  Developer to share updated website with instructor in 2–3 days for review
 - [ ]  Instructor to provide GS paper subject-mapping to help developer correctly categorize syllabus content
 - [ ]  Instructor to test the website privately for 1–2 months before sharing with students

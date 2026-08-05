@@ -1,0 +1,193 @@
+/**
+ * Official UPSC CSE syllabus text (Civil Services Examination notification).
+ * Source: UPSC CSP notification — Section III: Syllabi for the Examination.
+ * Kept plain and close to the official wording.
+ */
+
+export type OfficialSyllabusBlock = {
+  title: string;
+  points: string[];
+  notes?: string[];
+};
+
+export type OfficialSyllabusPaper = {
+  slug: string;
+  label: string;
+  paperTitle: string;
+  subtitle: string;
+  sourceNote: string;
+  intro?: string[];
+  blocks: OfficialSyllabusBlock[];
+};
+
+export const officialSyllabusPapers: OfficialSyllabusPaper[] = [
+  {
+    slug: "prelims",
+    label: "Prelims",
+    paperTitle: "Preliminary Examination",
+    subtitle: "Paper I (General Studies) and Paper II (CSAT)",
+    sourceNote:
+      "Copied from the official UPSC Civil Services Examination syllabus.",
+    blocks: [
+      {
+        title: "Paper I - (200 marks) Duration: Two hours",
+        points: [
+          "Current events of national and international importance.",
+          "History of India and Indian National Movement.",
+          "Indian and World Geography-Physical, Social, Economic Geography of India and the World.",
+          "Indian Polity and Governance-Constitution, Political System, Panchayati Raj, Public Policy, Rights Issues, etc.",
+          "Economic and Social Development-Sustainable Development, Poverty, Inclusion, Demographics, Social Sector Initiatives, etc.",
+          "General issues on Environmental ecology, Bio-diversity and Climate Change - that do not require subject specialization.",
+          "General Science.",
+        ],
+      },
+      {
+        title: "Paper II-(200 marks) Duration: Two hours",
+        points: [
+          "Comprehension;",
+          "Interpersonal skills including communication skills;",
+          "Logical reasoning and analytical ability;",
+          "Decision making and problem solving;",
+          "General mental ability;",
+          "Basic numeracy (numbers and their relations, orders of magnitude, etc.) (Class X level), Data interpretation (charts, graphs, tables, data sufficiency etc. — Class X level);",
+        ],
+        notes: [
+          "Paper-II of the Civil Services (Preliminary) Examination will be a qualifying paper with minimum qualifying marks fixed at 33%.",
+          "The questions will be of multiple choice, objective type.",
+          "It is mandatory for the candidate to appear in both the Papers of Civil Services (Preliminary) Examination for the purpose of evaluation. Therefore a candidate will be disqualified in case he/she does not appear in both the papers of Civil Services (Preliminary) Examination.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "gs-paper-1",
+    label: "GS Paper 1",
+    paperTitle: "General Studies-I",
+    subtitle: "Indian Heritage and Culture, History and Geography of the World and Society",
+    sourceNote:
+      "Copied from the official UPSC Civil Services Examination syllabus (Main Examination — Paper-II).",
+    intro: [
+      "The nature and standard of questions in the General Studies papers will be such that a well-educated person will be able to answer them without any specialized study. The questions will be such as to test a candidate’s general awareness of a variety of subjects, which will have relevance for a career in Civil Services.",
+    ],
+    blocks: [
+      {
+        title: "General Studies-I: Indian Heritage and Culture, History and Geography of the World and Society",
+        points: [
+          "Indian culture will cover the salient aspects of Art Forms, literature and Architecture from ancient to modern times.",
+          "Modern Indian history from about the middle of the eighteenth century until the present- significant events, personalities, issues.",
+          "The Freedom Struggle — its various stages and important contributors/contributions from different parts of the country.",
+          "Post-independence consolidation and reorganization within the country.",
+          "History of the world will include events from 18th century such as industrial revolution, world wars, redrawal of national boundaries, colonization, decolonization, political philosophies like communism, capitalism, socialism etc.— their forms and effect on the society.",
+          "Salient features of Indian Society, Diversity of India.",
+          "Role of women and women’s organization, population and associated issues, poverty and developmental issues, urbanization, their problems and their remedies.",
+          "Effects of globalization on Indian society.",
+          "Social empowerment, communalism, regionalism & secularism.",
+          "Salient features of world’s physical geography.",
+          "Distribution of key natural resources across the world (including South Asia and the Indian sub continent); factors responsible for the location of primary, secondary, and tertiary sector industries in various parts of the world (including India).",
+          "Important Geophysical phenomena such as earthquakes, Tsunami, Volcanic activity, cyclone etc., geographical features and their location-changes in critical geographical features (including water-bodies and ice-caps) and in flora and fauna and the effects of such changes.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "gs-paper-2",
+    label: "GS Paper 2",
+    paperTitle: "General Studies-II",
+    subtitle: "Governance, Constitution, Polity, Social Justice and International relations",
+    sourceNote:
+      "Copied from the official UPSC Civil Services Examination syllabus (Main Examination — Paper-III).",
+    blocks: [
+      {
+        title: "General Studies-II: Governance, Constitution, Polity, Social Justice and International relations",
+        points: [
+          "Indian Constitution—historical underpinnings, evolution, features, amendments, significant provisions and basic structure.",
+          "Functions and responsibilities of the Union and the States, issues and challenges pertaining to the federal structure, devolution of powers and finances up to local levels and challenges therein.",
+          "Separation of powers between various organs dispute redressal mechanisms and institutions.",
+          "Comparison of the Indian constitutional scheme with that of other countries.",
+          "Parliament and State legislatures—structure, functioning, conduct of business, powers & privileges and issues arising out of these.",
+          "Structure, organization and functioning of the Executive and the Judiciary—Ministries and Departments of the Government; pressure groups and formal/informal associations and their role in the Polity.",
+          "Salient features of the Representation of People’s Act.",
+          "Appointment to various Constitutional posts, powers, functions and responsibilities of various Constitutional Bodies.",
+          "Statutory, regulatory and various quasi-judicial bodies.",
+          "Government policies and interventions for development in various sectors and issues arising out of their design and implementation.",
+          "Development processes and the development industry —the role of NGOs, SHGs, various groups and associations, donors, charities, institutional and other stakeholders.",
+          "Welfare schemes for vulnerable sections of the population by the Centre and States and the performance of these schemes; mechanisms, laws, institutions and Bodies constituted for the protection and betterment of these vulnerable sections.",
+          "Issues relating to development and management of Social Sector/Services relating to Health, Education, Human Resources.",
+          "Issues relating to poverty and hunger.",
+          "Important aspects of governance, transparency and accountability, e-governance- applications, models, successes, limitations, and potential; citizens charters, transparency & accountability and institutional and other measures.",
+          "Role of civil services in a democracy.",
+          "India and its neighborhood- relations.",
+          "Bilateral, regional and global groupings and agreements involving India and/or affecting India’s interests.",
+          "Effect of policies and politics of developed and developing countries on India’s interests, Indian diaspora.",
+          "Important International institutions, agencies and fora- their structure, mandate.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "gs-paper-3",
+    label: "GS Paper 3",
+    paperTitle: "General Studies-III",
+    subtitle:
+      "Technology, Economic Development, Bio diversity, Environment, Security and Disaster Management",
+    sourceNote:
+      "Copied from the official UPSC Civil Services Examination syllabus (Main Examination — Paper-IV).",
+    blocks: [
+      {
+        title: "General Studies-III: Technology, Economic Development, Bio diversity, Environment, Security and Disaster Management",
+        points: [
+          "Indian Economy and issues relating to planning, mobilization, of resources, growth, development and employment.",
+          "Inclusive growth and issues arising from it.",
+          "Government Budgeting.",
+          "Major crops-cropping patterns in various parts of the country, - different types of irrigation and irrigation systems storage, transport and marketing of agricultural produce and issues and related constraints; e-technology in the aid of farmers.",
+          "Issues related to direct and indirect farm subsidies and minimum support prices; Public Distribution System- objectives, functioning, limitations, revamping; issues of buffer stocks and food security; Technology missions; economics of animal-rearing.",
+          "Food processing and related industries in India- scope’ and significance, location, upstream and downstream requirements, supply chain management.",
+          "Land reforms in India.",
+          "Effects of liberalization on the economy, changes in industrial policy and their effects on industrial growth.",
+          "Infrastructure: Energy, Ports, Roads, Airports, Railways etc.",
+          "Investment models.",
+          "Science and Technology- developments and their applications and effects in everyday life.",
+          "Achievements of Indians in science & technology; indigenization of technology and developing new technology.",
+          "Awareness in the fields of IT, Space, Computers, robotics, nano-technology, bio-technology and issues relating to intellectual property rights.",
+          "Conservation, environmental pollution and degradation, environmental impact assessment.",
+          "Disaster and disaster management.",
+          "Linkages between development and spread of extremism.",
+          "Role of external state and non-state actors in creating challenges to internal security.",
+          "Challenges to internal security through communication networks, role of media and social networking sites in internal security challenges, basics of cyber security; money-laundering and its prevention.",
+          "Security challenges and their management in border areas - linkages of organized crime with terrorism.",
+          "Various Security forces and agencies and their mandate.",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "gs-paper-4",
+    label: "GS Paper 4",
+    paperTitle: "General Studies-IV",
+    subtitle: "Ethics, Integrity and Aptitude",
+    sourceNote:
+      "Copied from the official UPSC Civil Services Examination syllabus (Main Examination — Paper-V).",
+    intro: [
+      "This paper will include questions to test the candidates’ attitude and approach to issues relating to integrity, probity in public life and his problem solving approach to various issues and conflicts faced by him in dealing with society. Questions may utilise the case study approach to determine these aspects. The following broad areas will be covered:",
+    ],
+    blocks: [
+      {
+        title: "General Studies-IV: Ethics, Integrity and Aptitude",
+        points: [
+          "Ethics and Human Interface: Essence, determinants and consequences of Ethics in-human actions; dimensions of ethics; ethics - in private and public relationships. Human Values - lessons from the lives and teachings of great leaders, reformers and administrators; role of family society and educational institutions in inculcating values.",
+          "Attitude: content, structure, function; its influence and relation with thought and behaviour; moral and political attitudes; social influence and persuasion.",
+          "Aptitude and foundational values for Civil Service, integrity, impartiality and non-partisanship, objectivity, dedication to public service, empathy, tolerance and compassion towards the weaker-sections.",
+          "Emotional intelligence-concepts, and their utilities and application in administration and governance.",
+          "Contributions of moral thinkers and philosophers from India and world.",
+          "Public/Civil service values and Ethics in Public administration: Status and problems; ethical concerns and dilemmas in government and private institutions; laws, rules, regulations and conscience as sources of ethical guidance; accountability and ethical governance; strengthening of ethical and moral values in governance; ethical issues in international relations and funding; corporate governance.",
+          "Probity in Governance: Concept of public service; Philosophical basis of governance and probity; Information sharing and transparency in government, Right to Information, Codes of Ethics, Codes of Conduct, Citizen’s Charters, Work culture, Quality of service delivery, Utilization of public funds, challenges of corruption.",
+          "Case Studies on above issues.",
+        ],
+      },
+    ],
+  },
+];
+
+export function getOfficialSyllabus(slug: string) {
+  return officialSyllabusPapers.find((p) => p.slug === slug);
+}

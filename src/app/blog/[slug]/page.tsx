@@ -101,7 +101,7 @@ export default async function BlogArticlePage({ params }: PageProps) {
                         Career Prepp
                       </p>
                       <p className="text-xs text-white/60">
-                        Free Current Affairs for Civil Services
+                        Clear notes on current affairs
                       </p>
                     </div>
                   </div>
@@ -206,8 +206,8 @@ export default async function BlogArticlePage({ params }: PageProps) {
                 <div className="article-note">
                   <p className="article-rail-label">From Career Prepp</p>
                   <p className="mt-3 text-[15px] leading-relaxed text-muted">
-                    Free Current Affairs for Geography and Mains — maps,
-                    environment, and answer-ready analysis. No courses to buy.
+                    Free notes on geography, economy, polity, and current
+                    affairs — written to be readable. No courses to buy.
                   </p>
                   <Link href="/about" className="cp-card-link !mt-5">
                     About us
@@ -225,27 +225,33 @@ export default async function BlogArticlePage({ params }: PageProps) {
             </div>
           </div>
 
-          {/* Prev / next */}
-          <nav className="border-y border-line bg-surface">
+          {/* Prev / next — headings always visible */}
+          <nav className="border-y border-line bg-surface" aria-label="Article navigation">
             <div className="mx-auto grid max-w-7xl sm:grid-cols-2">
               {prev ? (
                 <Link href={`/blog/${prev.slug}`} className="article-adjacent">
-                  <span>Previous</span>
+                  <span>Previous article</span>
                   <strong>{prev.title}</strong>
                 </Link>
               ) : (
-                <div className="article-adjacent is-empty" />
+                <div className="article-adjacent is-empty">
+                  <span>Previous article</span>
+                  <strong className="!text-muted !font-medium">You are at the first article</strong>
+                </div>
               )}
               {next ? (
                 <Link
                   href={`/blog/${next.slug}`}
                   className="article-adjacent is-next"
                 >
-                  <span>Next</span>
+                  <span>Next article</span>
                   <strong>{next.title}</strong>
                 </Link>
               ) : (
-                <div className="article-adjacent is-empty" />
+                <div className="article-adjacent is-next is-empty">
+                  <span>Next article</span>
+                  <strong className="!text-muted !font-medium">You are at the latest article</strong>
+                </div>
               )}
             </div>
           </nav>
@@ -256,9 +262,9 @@ export default async function BlogArticlePage({ params }: PageProps) {
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
               <div>
-                <p className="section-label">Continue reading</p>
+                <p className="section-label">More to read</p>
                 <h2 className="mt-2 text-2xl font-semibold tracking-tight text-black sm:text-3xl">
-                  More guides for serious aspirants
+                  Top Articles
                 </h2>
               </div>
               <Link

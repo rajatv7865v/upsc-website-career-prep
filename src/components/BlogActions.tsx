@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { BlogPost } from "@/data/blog";
+import { siteContact } from "@/data/site";
 
 const FAV_KEY = "career-prepp-blog-favorites";
 
@@ -96,19 +97,11 @@ export default function BlogActions({ post, compact = false }: BlogActionsProps)
     );
   }
 
-  function shareLinkedIn() {
-    window.open(
-      `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(pageUrl)}`,
-      "_blank",
-      "noopener,noreferrer",
-    );
-  }
-
   function shareInstagram() {
     void navigator.clipboard.writeText(pageUrl).then(() => {
       setCopied(true);
       window.setTimeout(() => setCopied(false), 2500);
-      window.open("https://www.instagram.com/", "_blank", "noopener,noreferrer");
+      window.open(siteContact.instagram, "_blank", "noopener,noreferrer");
     });
   }
 
@@ -220,9 +213,6 @@ ${paragraphs}
             </button>
             <button type="button" role="menuitem" onClick={shareFacebook}>
               Facebook
-            </button>
-            <button type="button" role="menuitem" onClick={shareLinkedIn}>
-              LinkedIn
             </button>
             <button type="button" role="menuitem" onClick={copyLink}>
               {copied ? "Link copied" : "Copy link"}

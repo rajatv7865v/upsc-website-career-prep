@@ -24,31 +24,31 @@ import {
 export const metadata: Metadata = {
   title: "About Us | Career Prepp",
   description:
-    "Career Prepp publishes free UPSC Current Affairs — Geography and Mains tracks — plus syllabus-linked strategy for Prelims, Mains, and Interview.",
+    "Career Prepp publishes free, readable notes on current affairs and public life — for curious readers and serious learners alike.",
 };
 
 const values = [
   {
     title: "Clarity over clutter",
-    text: "We cut noise. Every free guide maps to the official syllabus and how marks are actually awarded.",
+    text: "We cut noise. Every note aims to explain an issue clearly — without classroom jargon.",
     icon: IconTarget,
     variant: "orbit" as const,
   },
   {
     title: "Writing as a habit",
-    text: "Knowledge becomes rank only when it is written under time. Our free notes make practice and self-correction concrete.",
+    text: "Understanding sticks when you put it in your own words. Our notes make that easy to practise.",
     icon: IconPen,
     variant: "wiggle" as const,
   },
   {
     title: "Honest guidance",
-    text: "Open articles on what works and what does not — attempt history, optional fit, and weekly hours included.",
+    text: "Open articles on what works and what does not — including for people with limited study hours.",
     icon: IconCompass,
     variant: "float" as const,
   },
   {
-    title: "Revision with intent",
-    text: "Static and current affairs revised together in short cycles so Prelims facts and Mains analysis stay connected.",
+    title: "A library that grows",
+    text: "Content is added and edited over time. What you see today is a starting point, not a finished product.",
     icon: IconRefresh,
     variant: "spin" as const,
   },
@@ -57,71 +57,71 @@ const values = [
 const journey = [
   {
     number: "01",
-    title: "Start with your stage",
-    text: "Use free checklists on background, attempt year, optional, and study hours to set a realistic weekly plan.",
+    title: "Start with curiosity",
+    text: "Browse Current Affairs by topic — geography, economy, polity — and save what helps you.",
     icon: IconSearch,
   },
   {
     number: "02",
-    title: "Map the syllabus",
-    text: "Free monthly and weekly targets for GS, CSAT, Essay, and Optional so effort stays focused, not scattered.",
+    title: "Add structure when you need it",
+    text: "Syllabus and strategy pages are there if you want deeper structure later. They are a starting reference.",
     icon: IconCalendar,
   },
   {
     number: "03",
     title: "Build depth & writing",
-    text: "Standard sources first, then free answer-writing frameworks and self-evaluation rubrics.",
+    text: "Read standard sources, then use short notes and writing frameworks to make ideas stick.",
     icon: IconLayers,
   },
   {
     number: "04",
-    title: "Refine for the board",
-    text: "From Prelims accuracy to Mains copies to Interview DAF — free notes for one continuous journey.",
+    title: "Keep the habit light",
+    text: "A weekly rhythm you can keep beats bursts of panic reading — whether for interest or for an exam later.",
     icon: IconMic,
   },
 ];
 
 const audiences = [
   {
-    title: "First-time aspirants",
-    text: "A calm foundation from NCERTs to advanced notes, with free CSAT and optional orientation guides.",
+    title: "Curious readers",
+    text: "IT professionals and general readers who want solid notes on public issues — without heavy exam branding.",
     icon: IconUsers,
   },
   {
     title: "Working professionals",
-    text: "Time-efficient weekly plans for limited hours — priority topics and weekend revision checklists.",
+    text: "Time-efficient weekly reads for limited hours — priority topics and short revisable notes.",
     icon: IconBriefcase,
   },
   {
-    title: "Re-attempt candidates",
-    text: "Gap-analysis frameworks, writing upgrades, and sharper Prelims–Mains balance guides.",
+    title: "Serious learners",
+    text: "If you need stages, syllabus, or strategy later, those sections are available and will keep improving.",
     icon: IconCompass,
   },
 ];
 
 const pillars = [
   {
-    title: "Prelims readiness",
-    text: "Free topic maps, PYQ lists, error-notebook templates, and current affairs tagged to static topics.",
-    points: ["GS Paper I coverage notes", "CSAT habit building", "PYQ-led revision"],
+    title: "Current affairs",
+    text: "Free topic maps and notes on places, policy, economy, and everyday science in the news.",
+    points: ["Subject-tagged articles", "Stage filters when useful", "Short revisable briefs"],
   },
   {
-    title: "Mains excellence",
-    text: "Timed writing frameworks, Essay themes, GS structures, and optional strategy — all free to read.",
-    points: ["Answer structure templates", "Self-evaluation rubrics", "Value-addition drills"],
+    title: "Clear writing",
+    text: "Issue notes, examples, and simple structures you can reuse when explaining an idea.",
+    points: ["Issue → argument notes", "Examples from the news", "Light writing drills"],
   },
   {
-    title: "Interview presence",
-    text: "DAF self-review prompts, mock-board tips, and opinion-building notes on national issues.",
-    points: ["Board-day checklists", "Current affairs polish", "Communication tips"],
+    title: "Optional depth",
+    text: "Syllabus text and paper-wise strategy — kept separate, and treated as a living starting library.",
+    points: ["Official syllabus wording", "Paper-wise strategy", "Updated over time"],
   },
 ];
 
 const beliefs = [
-  "UPSC rewards clarity of thought more than volume of notes.",
-  "Current affairs must sit on a static foundation — not as a separate mountain.",
-  "Self-feedback works when it is specific: demand of the question, structure, examples.",
-  "Consistency beats intensity. A weekly system you can keep will outrun bursts of panic study.",
+  "Clarity of thought matters more than volume of notes.",
+  "Current affairs should sit on a solid foundation — not as a separate mountain.",
+  "Self-feedback works when it is specific: what is the issue, who is involved, what follows.",
+  "Consistency beats intensity. A weekly habit you can keep will outrun bursts of panic reading.",
 ];
 
 export default function AboutPage() {
@@ -149,12 +149,12 @@ export default function AboutPage() {
           <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
             <p className="section-label">About Us</p>
             <h1 className="page-hero-title">
-              Free Current Affairs built for how UPSC asks.
+              Knowledge-first notes on public life.
             </h1>
             <p className="page-hero-text">
-              Career Prepp centres on open Current Affairs — Geography and Mains
-              — so newspapers become syllabus notes, not endless scrolling. No
-              courses to buy.
+              Career Prepp centres on open Current Affairs — clear articles on
+              geography, economy, polity, and today’s issues. Built for curious
+              readers; deeper structure is available when you want it.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
               <Link
@@ -180,20 +180,19 @@ export default function AboutPage() {
             <div className="lg:col-span-6">
               <p className="section-label">Our story</p>
               <h2 className="section-title">
-                Built for aspirants who want structure without noise.
+                Built for readers who want clarity without noise.
               </h2>
               <p className="section-text">
-                Preparing for the Union Public Service Commission is a long
-                journey. Many aspirants do not fail for lack of effort — they
-                struggle because effort is unfocused: too many sources, too
-                little writing, and current affairs that never connect to the
-                syllabus.
+                Staying informed should not feel like drowning in sources. Many
+                people struggle not for lack of effort — but because reading is
+                unfocused: too many tabs, too little writing, and notes that
+                never get revisited.
               </p>
               <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
                 Career Prepp was created to fix that — with free Current Affairs
-                at the centre. Geography briefs for maps and environment; Mains
-                notes for issues and arguments. Our guides help you choose what
-                to note, how to tag it to GS papers, and how to revise weekly.
+                at the centre. Short articles on places, policy, and issues.
+                Deeper structure (syllabus, strategy) is available when you want
+                it, and will keep improving as content grows.
               </p>
 
               <ul className="mt-8 space-y-3">
@@ -214,8 +213,7 @@ export default function AboutPage() {
                 <AboutIllustration />
               </div>
               <p className="mt-3 text-xs tracking-wide text-muted">
-                सत्यमेव जयते — the spirit of public service that guides Civil
-                Services preparation.
+                Clear notes on public life — for curious minds first.
               </p>
             </div>
           </div>
@@ -292,11 +290,11 @@ export default function AboutPage() {
             <div className="section-head">
               <p className="section-label">Who we write for</p>
               <h2 className="section-title">
-                Designed for different starting points — same exam.
+                Designed for different starting points.
               </h2>
               <p className="section-text">
-                Hours and history differ. The free syllabus map stays honest for
-                everyone.
+                Hours and backgrounds differ. The library stays open and honest
+                for everyone.
               </p>
             </div>
 
@@ -319,7 +317,7 @@ export default function AboutPage() {
             <div className="mt-16 section-head">
               <p className="section-label">What you get — free</p>
               <h2 className="section-title">
-                Stage-ready guides for Prelims, Mains, and Interview.
+                Articles, clarity, and optional depth.
               </h2>
             </div>
 
@@ -360,13 +358,13 @@ export default function AboutPage() {
                   <p className="section-label !mt-0">Our promise</p>
                 </div>
                 <h2 className="mt-4 text-2xl font-semibold tracking-tight text-black sm:text-3xl">
-                  Public service begins with disciplined preparation.
+                  Understanding begins with disciplined reading.
                 </h2>
                 <p className="mt-4 text-base leading-relaxed text-muted sm:text-lg">
                   We do not sell courses or shortcuts. We publish free habits —
-                  reading with a purpose, writing every week, and revising what
-                  the exam actually asks. That is how Career Prepp stands with
-                  you from the first NCERT to the final board.
+                  reading with a purpose, writing a few lines, and revisiting
+                  what matters. That is how Career Prepp grows with you as the
+                  library expands.
                 </p>
               </div>
               <div className="flex flex-col gap-3 sm:flex-row lg:flex-col">
@@ -381,7 +379,7 @@ export default function AboutPage() {
                   href="/#syllabus"
                   className="inline-flex items-center justify-center gap-2 border border-black px-6 py-4 text-sm font-medium text-black transition-colors hover:bg-black hover:text-white"
                 >
-                  Explore syllabus & pattern
+                  Explore Syllabus & Strategy
                 </Link>
               </div>
             </div>
