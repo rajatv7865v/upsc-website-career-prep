@@ -5,238 +5,203 @@ import { notFound } from "next/navigation";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import BlogActions from "@/components/BlogActions";
-import AnimatedIcon from "@/components/AnimatedIcon";
-import { blogPosts, getPostBySlug } from "@/data/blog";
-import { IconArrow, IconBook, IconCheck } from "@/components/Icons";
+import RelatedArticles, {
+  ArticleRelatedRail,
+  subjectHubHref,
+} from "@/components/RelatedArticles";
+import {
+  getAllArticles,
+  getPostBySlug,
+  getRelatedPosts,
+} from "@/lib/articles";
+import { IconArrow } from "@/components/Icons";
+
+export const revalidate = 60;
 
 type PageProps = {
   params: Promise<{ slug: string }>;
 };
 
 export async function generateStaticParams() {
-  return blogPosts.map((post) => ({ slug: post.slug }));
+  const slugs = await getAllArticles().then((posts) =>
+    posts.map((post) => ({ slug: post.slug })),
+  );
+  return slugs;
 }
 
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post) return { title: "Article | Career Prepp" };
   return {
-    title: `${post.title} | Career Prepp Blog`,
+    title: `${post.title} | Career Prepp`,
     description: post.excerpt,
   };
 }
 
 export default async function BlogArticlePage({ params }: PageProps) {
   const { slug } = await params;
-  const post = getPostBySlug(slug);
+  const post = await getPostBySlug(slug);
   if (!post) notFound();
 
   const [lead, ...rest] = post.content;
-  const takeaways = rest.slice(0, 3).map((p) => {
-    const sentence = p.split(". ")[0];
-    return sentence.endsWith(".") ? sentence : `${sentence}.`;
-  });
+  const hasRichHtml = Boolean(post.htmlContent?.trim());
 
-  const related = [
-    ...blogPosts.filter(
-      (p) => p.slug !== post.slug && p.category === post.category,
-    ),
-    ...blogPosts.filter(
-      (p) => p.slug !== post.slug && p.category !== post.category,
-    ),
-  ].slice(0, 3);
+  const related = await getRelatedPosts(post, 4);
 
-  const index = blogPosts.findIndex((p) => p.slug === post.slug);
-  const prev = index > 0 ? blogPosts[index - 1] : null;
+  const allArticles = await getAllArticles();
+  const index = allArticles.findIndex((p) => p.slug === post.slug);
+  const prev = index > 0 ? allArticles[index - 1] : null;
   const next =
-    index >= 0 && index < blogPosts.length - 1 ? blogPosts[index + 1] : null;
+    index >= 0 && index < allArticles.length - 1
+      ? allArticles[index + 1]
+      : null;
+
+  const rubric = [
+    post.subjects[0] ?? post.category,
+    post.stage === "Both" ? "Prelims · Mains" : post.stage,
+  ].join(" · ");
 
   return (
     <>
-      <Header />
+      <Header forceSolid />
 
-      <main className="flex-1">
-        <article>
-          {/* Hero */}
-          <header className="article-hero relative overflow-hidden bg-black">
-            <div className="absolute inset-0">
-              <Image
-                src={post.image}
-                alt={post.alt}
-                fill
-                priority
-                quality={92}
-                className="article-hero-image object-cover"
-                sizes="100vw"
-              />
-              <div className="article-hero-veil" />
-              <div className="article-hero-grain" aria-hidden />
-            </div>
-
-            <div className="relative z-10 mx-auto flex min-h-[78svh] max-w-7xl flex-col justify-end px-6 pb-16 pt-32 sm:pb-20 sm:pt-36 lg:px-8 lg:pb-24">
-              <div className="max-w-3xl">
-                <Link href="/blog" className="article-back">
-                  <span aria-hidden>←</span> Back to Blog
-                </Link>
-
-                <div className="article-meta-row mt-8">
-                  <span className="article-badge">{post.category}</span>
-                  <span className="article-meta-dot" aria-hidden />
-                  <span>{post.date}</span>
-                  <span className="article-meta-dot" aria-hidden />
-                  <span>{post.read}</span>
-                </div>
-
-                <h1 className="article-title">{post.title}</h1>
-                <p className="article-deck">{post.excerpt}</p>
-
-                <div className="mt-8 flex flex-wrap items-center gap-4">
-                  <div className="article-byline">
-                    <span className="article-byline-mark" aria-hidden />
-                    <div>
-                      <p className="text-sm font-semibold text-white">
-                        Career Prepp
-                      </p>
-                      <p className="text-xs text-white/60">
-                        Clear notes on current affairs
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="mt-8">
-                  <BlogActions post={post} />
-                </div>
-              </div>
-            </div>
-          </header>
-
-          {/* Body */}
-          <div className="article-body-wrap bg-white">
-            <div className="mx-auto grid max-w-7xl gap-12 px-6 py-20 lg:grid-cols-12 lg:gap-16 lg:px-8 lg:py-28">
-              {/* Sticky rail */}
-              <aside className="hidden lg:col-span-3 lg:block">
-                <div className="article-rail">
-                  <p className="article-rail-label">In this guide</p>
-                  <ul className="article-rail-list">
-                    {takeaways.map((item, i) => (
-                      <li key={item}>
-                        <span>0{i + 1}</span>
-                        {item.length > 72 ? `${item.slice(0, 72)}…` : item}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="article-rail-actions">
-                    <p className="article-rail-label">Actions</p>
-                    <BlogActions post={post} compact />
-                  </div>
-
-                  <Link href="/#current-affairs" className="article-rail-cta">
-                    Current Affairs tracks
-                    <IconArrow className="h-4 w-4" />
-                  </Link>
-                </div>
-              </aside>
-
-              {/* Content */}
-              <div className="lg:col-span-6">
-                <div className="article-featured">
-                  <Image
-                    src={post.image}
-                    alt={post.alt}
-                    fill
-                    quality={90}
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 100vw, 42vw"
-                  />
-                  <div className="article-featured-caption">
-                    <AnimatedIcon
-                      icon={IconBook}
-                      variant="float"
-                      tone="ghost"
-                      size="sm"
-                    />
-                    <span>{post.alt}</span>
-                  </div>
-                </div>
-
-                <p className="article-lead">{lead}</p>
-
-                <div className="article-prose">
-                  {rest.map((paragraph, i) => (
-                    <p key={`${i}-${paragraph.slice(0, 24)}`}>{paragraph}</p>
-                  ))}
-                </div>
-
-                <div className="article-takeaways">
-                  <div className="article-takeaways-head">
-                    <span className="article-takeaways-rule" aria-hidden />
-                    <h2>Key takeaways</h2>
-                  </div>
-                  <ul>
-                    {takeaways.map((item) => (
-                      <li key={item}>
-                        <IconCheck className="ai-check" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="article-share-panel">
-                  <div>
-                    <p className="text-sm font-semibold text-black">
-                      Keep this guide handy
-                    </p>
-                    <p className="mt-1 text-sm text-muted">
-                      Favourite it, download the Word file, or share with your
-                      study group.
-                    </p>
-                  </div>
-                  <BlogActions post={post} />
-                </div>
-              </div>
-
-              {/* End note */}
-              <div className="lg:col-span-3">
-                <div className="article-note">
-                  <p className="article-rail-label">From Career Prepp</p>
-                  <p className="mt-3 text-[15px] leading-relaxed text-muted">
-                    Free notes on geography, economy, polity, and current
-                    affairs — written to be readable. No courses to buy.
-                  </p>
-                  <Link href="/about" className="cp-card-link !mt-5">
-                    About us
-                    <IconArrow className="h-4 w-4" />
-                  </Link>
-                  <Link
-                    href="/#current-affairs"
-                    className="mt-3 inline-flex w-full items-center justify-center gap-2 bg-blue px-4 py-3 text-sm font-medium text-white hover:bg-blue-hover"
-                  >
-                    Explore Current Affairs
-                    <IconArrow className="h-4 w-4" />
-                  </Link>
-                </div>
-              </div>
+      <main className="flex-1 bg-white">
+        <article className="article-page">
+          <div className="article-edition-bar">
+            <div className="article-shell article-shell-wide article-edition-inner">
+              <Link href="/" className="article-edition-back">
+                <span aria-hidden>←</span> Latest articles
+              </Link>
+              <p className="article-edition-brand">Career Prepp</p>
             </div>
           </div>
 
-          {/* Prev / next — headings always visible */}
-          <nav className="border-y border-line bg-surface" aria-label="Article navigation">
-            <div className="mx-auto grid max-w-7xl sm:grid-cols-2">
+          <div className="article-shell article-shell-wide article-page-layout">
+            <div className="article-page-grid">
+              <div className="article-page-main">
+                <header className="article-page-header">
+                  <p className="article-page-rubric">{rubric}</p>
+                  <h1 className="article-page-title">{post.title}</h1>
+                  <p className="article-page-deck">{post.excerpt}</p>
+
+                  <div className="article-page-meta-row">
+                    <div className="article-page-meta">
+                      <span>{post.date}</span>
+                      <span className="article-page-meta-dot" aria-hidden />
+                      <span>{post.read}</span>
+                    </div>
+                    <div className="article-page-tags">
+                      {post.subjects.map((subject) => (
+                        <Link
+                          key={subject}
+                          href={subjectHubHref(subject)}
+                          className="article-page-tag"
+                        >
+                          {subject}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                </header>
+
+                <figure className="article-page-figure">
+                  <div className="article-page-figure-media">
+                    <Image
+                      src={post.image}
+                      alt={post.alt}
+                      fill
+                      priority
+                      quality={92}
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 920px"
+                      unoptimized={post.image.startsWith("/uploads/")}
+                    />
+                  </div>
+                  {post.alt && (
+                    <figcaption className="article-page-caption">
+                      {post.alt}
+                    </figcaption>
+                  )}
+                </figure>
+
+                <div className="article-page-body">
+                  {hasRichHtml ? (
+                    <div
+                      className="article-page-html"
+                      dangerouslySetInnerHTML={{ __html: post.htmlContent! }}
+                    />
+                  ) : (
+                    <>
+                      <p className="article-page-lead">{lead}</p>
+                      <div className="article-page-prose">
+                        {rest.map((paragraph, i) => (
+                          <p key={`${i}-${paragraph.slice(0, 24)}`}>
+                            {paragraph}
+                          </p>
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </div>
+
+                <footer className="article-page-footer">
+                  <div className="article-page-footer-box">
+                    <p className="article-page-footer-label">Share & save</p>
+                    <BlogActions post={post} />
+                  </div>
+
+                  {post.subjects[0] && (
+                    <Link
+                      href={subjectHubHref(post.subjects[0])}
+                      className="article-page-subject-link"
+                    >
+                      More on {post.subjects[0]}
+                      <IconArrow className="h-4 w-4" />
+                    </Link>
+                  )}
+                </footer>
+              </div>
+
+              {related.length > 0 && (
+                <aside className="article-page-aside" aria-label="Related">
+                  <ArticleRelatedRail posts={related} />
+                  {post.subjects[0] && (
+                    <div className="article-page-aside-box">
+                      <p className="article-related-rail-label">Subject</p>
+                      <p className="article-page-aside-text">
+                        Explore more {post.subjects[0]} coverage for Prelims and
+                        Mains.
+                      </p>
+                      <Link
+                        href={subjectHubHref(post.subjects[0])}
+                        className="article-page-aside-link"
+                      >
+                        {post.subjects[0]} hub
+                        <IconArrow className="h-4 w-4" />
+                      </Link>
+                    </div>
+                  )}
+                </aside>
+              )}
+            </div>
+          </div>
+
+          <nav className="article-page-nav" aria-label="Article navigation">
+            <div className="article-shell article-shell-wide article-page-nav-grid">
               {prev ? (
                 <Link href={`/blog/${prev.slug}`} className="article-adjacent">
-                  <span>Previous article</span>
+                  <span>Previous</span>
                   <strong>{prev.title}</strong>
                 </Link>
               ) : (
                 <div className="article-adjacent is-empty">
-                  <span>Previous article</span>
-                  <strong className="!text-muted !font-medium">You are at the first article</strong>
+                  <span>Previous</span>
+                  <strong className="!font-medium !text-muted">
+                    First article
+                  </strong>
                 </div>
               )}
               {next ? (
@@ -244,68 +209,28 @@ export default async function BlogArticlePage({ params }: PageProps) {
                   href={`/blog/${next.slug}`}
                   className="article-adjacent is-next"
                 >
-                  <span>Next article</span>
+                  <span>Next</span>
                   <strong>{next.title}</strong>
                 </Link>
               ) : (
                 <div className="article-adjacent is-next is-empty">
-                  <span>Next article</span>
-                  <strong className="!text-muted !font-medium">You are at the latest article</strong>
+                  <span>Next</span>
+                  <strong className="!font-medium !text-muted">
+                    Latest article
+                  </strong>
                 </div>
               )}
             </div>
           </nav>
         </article>
 
-        {/* Related */}
-        <section className="bg-white py-20 lg:py-28">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-              <div>
-                <p className="section-label">More to read</p>
-                <h2 className="mt-2 text-2xl font-semibold tracking-tight text-black sm:text-3xl">
-                  Top Articles
-                </h2>
-              </div>
-              <Link
-                href="/blog"
-                className="inline-flex items-center gap-2 text-sm font-medium text-blue"
-              >
-                View all articles
-                <IconArrow className="h-4 w-4" />
-              </Link>
+        {related.length > 0 && (
+          <section className="article-related-wrap">
+            <div className="article-shell article-shell-wide">
+              <RelatedArticles posts={related} />
             </div>
-
-            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {related.map((item) => (
-                <Link
-                  key={item.slug}
-                  href={`/blog/${item.slug}`}
-                  className="blog-card group"
-                >
-                  <div className="blog-card-media">
-                    <Image
-                      src={item.image}
-                      alt={item.alt}
-                      fill
-                      className="blog-card-image object-cover"
-                      sizes="(max-width: 1024px) 50vw, 33vw"
-                    />
-                    <div className="blog-card-veil" aria-hidden />
-                    <span className="blog-card-category">{item.category}</span>
-                  </div>
-                  <div className="blog-card-body">
-                    <p className="text-xs text-muted">
-                      {item.date} · {item.read}
-                    </p>
-                    <h3 className="blog-card-title mt-2">{item.title}</h3>
-                    <p className="blog-card-text line-clamp-2">{item.excerpt}</p>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </section>
+          </section>
+        )}
       </main>
 
       <Footer />

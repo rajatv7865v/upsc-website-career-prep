@@ -13,123 +13,115 @@ type Props = {
 export default function FeaturedArticles({ posts }: Props) {
   const [lead, second, ...rest] = posts;
   const side = rest.slice(0, 3);
-  const trending = Array.from(
-    new Set(posts.flatMap((p) => p.subjects).filter(Boolean)),
-  ).slice(0, 6);
-
   if (!lead) return null;
 
+  const editionDate = lead.date;
+
   return (
-    <div>
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <p className="section-label">Latest & trending</p>
-          <h2 className="section-title">Top stories this week</h2>
+    <div className="articles-featured">
+      <header className="articles-masthead">
+        <div className="articles-masthead-left">
+          <span className="articles-masthead-rule" aria-hidden />
+          <div>
+            <p className="articles-masthead-label">Today&apos;s edition</p>
+            <p className="articles-masthead-date">{editionDate}</p>
+          </div>
         </div>
-        <div className="flex flex-wrap gap-3">
+        <div className="articles-masthead-right">
+          <p className="articles-masthead-tagline">Free · Knowledge-first · Updated weekly</p>
           <Link
             href={`/blog/${lead.slug}`}
-            className="inline-flex items-center gap-2 bg-blue px-5 py-3 text-sm font-medium text-white hover:bg-blue-hover"
+            className="articles-masthead-cta"
           >
-            Latest article
+            Read lead story
             <IconArrow className="h-4 w-4" />
           </Link>
-          <Link
-            href="/blog"
-            className="inline-flex items-center gap-2 border border-black px-5 py-3 text-sm font-medium text-black hover:bg-black hover:text-white"
-          >
-            All articles
-          </Link>
         </div>
+      </header>
+
+      <div className="articles-intro">
+        <h2 className="articles-intro-title">Latest articles</h2>
+        <p className="articles-intro-text">
+          Clear notes on geography, economy, polity, and the day&apos;s issues —
+          open any headline below.
+        </p>
       </div>
 
-      {trending.length > 0 && (
-        <div className="mt-6 flex flex-wrap items-center gap-2">
-          <span className="text-xs font-semibold tracking-[0.14em] text-muted uppercase">
-            Trending topics
-          </span>
-          {trending.map((topic) => (
-            <Link
-              key={topic}
-              href={`/current-affairs?subject=${encodeURIComponent(topic)}`}
-              className="border border-line px-2.5 py-1 text-xs font-medium text-ink transition-colors hover:border-blue hover:text-blue"
-            >
-              {topic}
-            </Link>
-          ))}
-        </div>
-      )}
-
-      <div className="news-grid mt-10">
-        <Link href={`/blog/${lead.slug}`} className="news-lead group">
-          <div className="news-lead-media">
+      <div className="news-grid news-grid-premium">
+        <Link href={`/blog/${lead.slug}`} className="news-lead news-lead-premium group">
+          <div className="news-lead-media news-lead-media-premium">
             <Image
               src={lead.image}
               alt={lead.alt}
               fill
               priority
-              quality={90}
-              className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+              quality={92}
+              className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
               sizes="(max-width: 1024px) 100vw, 66vw"
             />
-            <div className="news-lead-veil" aria-hidden />
-            <span className="news-badge">{lead.stage === "Both" ? lead.category : lead.stage}</span>
+            <div className="news-lead-veil news-lead-veil-premium" aria-hidden />
+            <div className="news-lead-overlay">
+              <span className="news-badge news-badge-premium">
+                {lead.subjects[0] ?? lead.category}
+              </span>
+              <p className="news-lead-meta">
+                {lead.date} · {lead.read}
+              </p>
+              <h3 className="news-lead-title news-lead-title-premium">{lead.title}</h3>
+            </div>
           </div>
-          <div className="news-lead-body">
-            <p className="text-xs text-muted">
-              {lead.date} · {lead.read}
-            </p>
-            <h3 className="news-lead-title">{lead.title}</h3>
-            <p className="mt-3 text-sm leading-relaxed text-muted sm:text-base">
-              {lead.excerpt}
-            </p>
+          <div className="news-lead-body news-lead-body-premium">
+            <p className="news-lead-excerpt">{lead.excerpt}</p>
+            <span className="news-lead-read">
+              Read full article
+              <IconArrow className="h-4 w-4" />
+            </span>
           </div>
         </Link>
 
-        <div className="news-side">
+        <div className="news-side news-side-premium">
           {second && (
-            <Link href={`/blog/${second.slug}`} className="news-side-feature group">
+            <Link href={`/blog/${second.slug}`} className="news-side-feature news-side-feature-premium group">
               <div className="relative aspect-[16/10] overflow-hidden">
                 <Image
                   src={second.image}
                   alt={second.alt}
                   fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                  className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                   sizes="(max-width: 1024px) 100vw, 33vw"
                 />
+                <div className="news-side-feature-veil" aria-hidden />
               </div>
-              <div className="p-4">
-                <p className="text-[10px] font-medium tracking-wide text-blue uppercase">
-                  {second.subjects[0] ?? second.category}
+              <div className="news-side-feature-body">
+                <p className="news-side-feature-meta">
+                  {second.stage === "Both" ? "Prelims · Mains" : second.stage}
                 </p>
-                <h3 className="mt-1 text-base font-semibold leading-snug text-black group-hover:text-blue">
-                  {second.title}
-                </h3>
+                <h3 className="news-side-feature-title">{second.title}</h3>
               </div>
             </Link>
           )}
 
-          <ul className="news-side-list">
-            {side.map((post) => (
+          <ul className="news-side-list news-side-list-premium">
+            {side.map((post, i) => (
               <li key={post.slug}>
-                <Link href={`/blog/${post.slug}`} className="news-side-item group">
-                  <div className="relative h-16 w-16 shrink-0 overflow-hidden sm:h-14 sm:w-14">
+                <Link href={`/blog/${post.slug}`} className="news-side-item news-side-item-premium group">
+                  <span className="news-side-index">{String(i + 1).padStart(2, "0")}</span>
+                  <div className="relative h-[4.5rem] w-[4.5rem] shrink-0 overflow-hidden sm:h-16 sm:w-16">
                     <Image
                       src={post.image}
                       alt=""
                       fill
-                      className="object-cover"
-                      sizes="56px"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      sizes="64px"
                     />
                   </div>
-                  <div className="min-w-0">
-                    <p className="text-[10px] font-medium tracking-wide text-muted uppercase">
-                      {post.subjects[0] ?? post.category}
+                  <div className="min-w-0 flex-1">
+                    <p className="news-side-item-meta">
+                      {post.subjects[0] ?? post.category} · {post.read}
                     </p>
-                    <h3 className="mt-0.5 text-sm font-semibold leading-snug text-black group-hover:text-blue">
-                      {post.title}
-                    </h3>
+                    <h3 className="news-side-item-title">{post.title}</h3>
                   </div>
+                  <IconArrow className="news-side-item-arrow h-4 w-4 shrink-0" />
                 </Link>
               </li>
             ))}

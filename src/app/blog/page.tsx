@@ -1,10 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { Suspense } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import BlogList from "@/components/BlogList";
+import { BlogIndexList } from "@/components/SubjectArticlesClient";
 import { IconArrow } from "@/components/Icons";
+import { getAllArticles } from "@/lib/articles";
 
 export const metadata: Metadata = {
   title: "Blog | Career Prepp",
@@ -12,7 +14,9 @@ export const metadata: Metadata = {
     "Free UPSC Current Affairs guides — Geography, Mains analysis, newspaper methods, and strategy from Career Prepp.",
 };
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const posts = await getAllArticles();
+
   return (
     <>
       <Header />
@@ -65,7 +69,9 @@ export default function BlogPage() {
           className="scroll-mt-28 bg-surface py-20 lg:py-28"
         >
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <BlogList />
+            <Suspense fallback={<p className="text-muted">Loading articles…</p>}>
+              <BlogIndexList posts={posts} />
+            </Suspense>
           </div>
         </section>
       </main>

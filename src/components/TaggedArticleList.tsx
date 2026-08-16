@@ -7,8 +7,8 @@ import Link from "next/link";
 import {
   type BlogPost,
   type SubjectTag,
-  filterPosts,
 } from "@/data/blog";
+import { filterPosts } from "@/lib/article-filters";
 import BlogActions, { useFavoriteSlugs } from "@/components/BlogActions";
 import { IconArrow } from "@/components/Icons";
 
@@ -33,6 +33,7 @@ const SUBJECT_HUBS: Record<string, string> = {
 };
 
 type Props = {
+  posts: BlogPost[];
   /** Lock list to one subject (Geography / Economy / Polity hubs). */
   lockedSubject?: SubjectTag | string;
   /** Show subject filter row (Current Affairs hub). */
@@ -41,6 +42,7 @@ type Props = {
 };
 
 export default function TaggedArticleList({
+  posts,
   lockedSubject,
   showSubjectFilter = false,
   emptyHint = "No articles match these filters yet. Check back as new notes are tagged.",
@@ -90,8 +92,8 @@ export default function TaggedArticleList({
     ? String(lockedSubject)
     : subjectFilter;
 
-  const posts = useMemo(() => {
-    let list = filterPosts({
+  const postsFiltered = useMemo(() => {
+    let list = filterPosts(posts, {
       stage: stage === "All" ? null : stage,
       subject: activeSubject === "All" ? null : activeSubject,
     });
@@ -99,7 +101,7 @@ export default function TaggedArticleList({
       list = list.filter((p) => favorites.includes(p.slug));
     }
     return list;
-  }, [stage, activeSubject, showFavourites, favorites]);
+  }, [posts, stage, activeSubject, showFavourites, favorites]);
 
   function onStage(s: "All" | "Prelims" | "Mains") {
     setShowFavourites(false);
@@ -189,7 +191,7 @@ export default function TaggedArticleList({
         )}
       </div>
 
-      {posts.length === 0 ? (
+      {postsFiltered.length === 0 ? (
         <div className="mt-10 border border-line bg-white p-10 text-center">
           <p className="text-lg font-semibold text-black">
             {showFavourites ? "No saved articles yet" : "No articles found"}
@@ -209,7 +211,7 @@ export default function TaggedArticleList({
         </div>
       ) : (
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {posts.map((post) => (
+          {postsFiltered.map((post) => (
             <ArticleCard key={post.slug} post={post} />
           ))}
         </div>
@@ -277,14 +279,5 @@ function ArticleCard({ post }: { post: BlogPost }) {
         </div>
       </div>
     </article>
-  );
-}
-
-export function BlogIndexList() {
-  return (
-    <TaggedArticleList
-      showSubjectFilter
-      emptyHint="Open any article and tap Favourite to save it here — or reset filters."
-    />
   );
 }

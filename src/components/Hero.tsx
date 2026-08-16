@@ -1,13 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
 import { IconArrow } from "@/components/Icons";
-import { blogPosts } from "@/data/blog";
+import type { BlogPost } from "@/data/blog";
 
-export default function Hero() {
-  const latest = blogPosts[0];
+type Props = {
+  latest?: BlogPost | null;
+};
+
+export default function Hero({ latest }: Props) {
 
   return (
-    <section className="hero relative min-h-[100svh] overflow-hidden bg-black">
+    <section className="hero relative min-h-[82svh] overflow-hidden bg-black lg:min-h-[76svh]">
       <div className="absolute inset-0">
         <Image
           src="https://images.unsplash.com/photo-1666272506564-f9a8a9f667ab?auto=format&fit=crop&w=2400&h=1350&q=90"
@@ -24,12 +27,11 @@ export default function Hero() {
         <div className="hero-frame absolute inset-0" aria-hidden />
       </div>
 
-      <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-7xl flex-col justify-end px-6 pb-24 pt-32 sm:pb-28 lg:justify-center lg:px-8 lg:pb-32 lg:pt-28">
+      <div className="relative z-10 mx-auto flex min-h-[82svh] max-w-7xl flex-col justify-end px-6 pb-20 pt-32 sm:pb-24 lg:min-h-[76svh] lg:justify-center lg:px-8 lg:pb-28 lg:pt-28">
         <div className="hero-content max-w-3xl">
           <div className="hero-brand-row">
             <span className="hero-brand-rule" aria-hidden />
             <div>
-              <p className="hero-eyebrow">Free knowledge</p>
               <p className="hero-brand">
                 Career <span>Prepp</span>
               </p>
@@ -56,8 +58,8 @@ export default function Hero() {
                 <IconArrow className="ml-2 inline h-4 w-4" />
               </Link>
             )}
-            <Link href="#blog" className="hero-btn-ghost">
-              Trending topics
+            <Link href="#articles" className="hero-btn-ghost">
+              Latest articles
               <span className="hero-btn-arrow" aria-hidden>
                 →
               </span>
@@ -73,9 +75,9 @@ export default function Hero() {
       </div>
 
       <a
-        href="#current-affairs"
+        href="#articles"
         className="hero-scroll"
-        aria-label="Scroll to Current Affairs"
+        aria-label="Scroll to latest articles"
       >
         <span className="hero-scroll-line" />
       </a>

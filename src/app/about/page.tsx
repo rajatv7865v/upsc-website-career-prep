@@ -117,6 +117,31 @@ const pillars = [
   },
 ];
 
+const leadership = [
+  {
+    role: "Founding Director",
+    name: "Er. Sitendar Kumar",
+    initials: "SK",
+    qualifications: ["B.Tech (Electrical) — Kurukshetra University"],
+  },
+  {
+    role: "Director",
+    name: "Soni",
+    initials: "S",
+    qualifications: [
+      "M.A. (Public Administration) — Panjab University",
+      "M.A. (Sociology) — Panjab University",
+      "Ph.D Scholar (Public Administration)",
+    ],
+  },
+  {
+    role: "Additional Director",
+    name: "Pratyush Agnihotri",
+    initials: "PA",
+    qualifications: ["LL.B., LL.M. — Delhi University"],
+  },
+];
+
 const beliefs = [
   "Clarity of thought matters more than volume of notes.",
   "Current affairs should sit on a solid foundation — not as a separate mountain.",
@@ -243,6 +268,55 @@ export default function AboutPage() {
                   />
                   <h3 className="cp-card-title text-xl">{item.title}</h3>
                   <p className="cp-card-text">{item.text}</p>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Leadership */}
+        <section className="border-y border-line bg-white py-20 lg:py-28">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="section-head">
+              <p className="section-label">Our team</p>
+              <h2 className="section-title">The people behind Career Prepp.</h2>
+              <p className="section-text">
+                A small team from engineering, public administration, and law —
+                shaping how the library is written and edited.
+              </p>
+            </div>
+
+            <div className="mt-12 grid gap-5 md:grid-cols-3">
+              {leadership.map((person) => (
+                <article key={person.name} className="cp-card">
+                  <div className="flex items-center gap-4">
+                    <span
+                      className="flex h-14 w-14 shrink-0 items-center justify-center bg-blue text-lg font-semibold tracking-wide text-white"
+                      aria-hidden
+                    >
+                      {person.initials}
+                    </span>
+                    <div className="min-w-0">
+                      <p className="text-xs font-medium uppercase tracking-[0.16em] text-blue">
+                        {person.role}
+                      </p>
+                      <h3 className="mt-1 text-lg font-semibold tracking-tight text-black">
+                        {person.name}
+                      </h3>
+                    </div>
+                  </div>
+
+                  <ul className="mt-5 space-y-2.5 border-t border-line pt-4">
+                    {person.qualifications.map((line) => (
+                      <li
+                        key={line}
+                        className="flex gap-2.5 text-sm leading-relaxed text-muted"
+                      >
+                        <IconCheck className="ai-check" />
+                        {line}
+                      </li>
+                    ))}
+                  </ul>
                 </article>
               ))}
             </div>

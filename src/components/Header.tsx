@@ -176,23 +176,8 @@ export default function Header({ forceSolid = false }: HeaderProps) {
 
       if (pathname !== "/") return;
 
-      const sections = [
-        "current-affairs",
-        "about",
-        "syllabus",
-        "contact",
-        "blog",
-      ];
-      let current = "home";
-      for (const id of sections) {
-        const el = document.getElementById(id);
-        if (!el) continue;
-        if (el.getBoundingClientRect().top <= 120) {
-          current = id;
-        }
-      }
-      if (window.scrollY < 80) current = "home";
-      setActive(current);
+      setActive("home");
+      return;
     };
 
     onScroll();

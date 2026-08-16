@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SubjectArticlesClient from "@/components/SubjectArticlesClient";
-import Link from "next/link";
+import { getAllArticles } from "@/lib/articles";
 
 export const metadata: Metadata = {
   title: "Current Affairs | Career Prepp",
@@ -10,7 +11,9 @@ export const metadata: Metadata = {
     "Knowledge-first current affairs — filter by topic or stage. Notes also appear under Geography, Economy, Polity, IR, and Environment.",
 };
 
-export default function CurrentAffairsPage() {
+export default async function CurrentAffairsPage() {
+  const posts = await getAllArticles();
+
   return (
     <>
       <Header forceSolid />
@@ -63,7 +66,7 @@ export default function CurrentAffairsPage() {
 
         <section className="bg-surface py-14 lg:py-20">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <SubjectArticlesClient showSubjectFilter />
+            <SubjectArticlesClient posts={posts} showSubjectFilter />
           </div>
         </section>
       </main>

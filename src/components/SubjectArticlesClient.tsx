@@ -2,29 +2,38 @@
 
 import { Suspense } from "react";
 import TaggedArticleList from "@/components/TaggedArticleList";
-import type { SubjectTag } from "@/data/blog";
+import type { BlogPost, SubjectTag } from "@/data/blog";
 
 type Props = {
-  /** When set, only that subject’s tagged articles show (Geography / Economy / Polity hubs). */
+  posts: BlogPost[];
   subject?: SubjectTag;
-  /** Current Affairs hub: show subject filter chips. */
   showSubjectFilter?: boolean;
 };
 
-function ArticlesInner({ subject, showSubjectFilter }: Props) {
+function ArticlesInner({ posts, subject, showSubjectFilter }: Props) {
   return (
     <TaggedArticleList
+      posts={posts}
       lockedSubject={subject}
       showSubjectFilter={showSubjectFilter}
     />
   );
 }
 
-/** Wrap in Suspense — reads searchParams for stage/subject. */
 export default function SubjectArticlesClient(props: Props) {
   return (
     <Suspense fallback={<p className="text-muted">Loading articles…</p>}>
       <ArticlesInner {...props} />
     </Suspense>
+  );
+}
+
+export function BlogIndexList({ posts }: { posts: BlogPost[] }) {
+  return (
+    <TaggedArticleList
+      posts={posts}
+      showSubjectFilter
+      emptyHint="Open any article and tap Favourite to save it here — or reset filters."
+    />
   );
 }
