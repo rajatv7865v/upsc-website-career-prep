@@ -54,15 +54,38 @@ export default function Hero({ latest }: Props) {
                 href={`/blog/${latest.slug}`}
                 className="hero-btn-primary footer-cta-shine"
               >
-                Latest article
+                Read latest article
                 <IconArrow className="ml-2 inline h-4 w-4" />
               </Link>
             )}
-            <Link href="#articles" className="hero-btn-ghost">
-              Latest articles
+            <Link href="#latest-articles" className="hero-btn-ghost">
+              Explore library
               <span className="hero-btn-arrow" aria-hidden>
                 →
               </span>
+            </Link>
+          </div>
+
+          {/* Quick Section Anchor Pills */}
+          <div className="mt-8 flex flex-wrap items-center gap-2 pt-2 border-t border-white/10 text-xs">
+            <span className="text-white/60 font-medium">Quick jump:</span>
+            <Link
+              href="#latest-articles"
+              className="rounded-full bg-white/10 px-3 py-1 text-white/90 backdrop-blur-xs transition-colors hover:bg-white/20 hover:text-white"
+            >
+              Latest articles
+            </Link>
+            <Link
+              href="#trending-articles"
+              className="rounded-full bg-amber-500/20 px-3 py-1 text-amber-300 backdrop-blur-xs transition-colors hover:bg-amber-500/30 hover:text-amber-200"
+            >
+              🔥 Trending
+            </Link>
+            <Link
+              href="#favourite-articles"
+              className="rounded-full bg-blue-500/20 px-3 py-1 text-blue-200 backdrop-blur-xs transition-colors hover:bg-blue-500/30 hover:text-white"
+            >
+              ⭐ Favourites
             </Link>
           </div>
         </div>
@@ -75,7 +98,7 @@ export default function Hero({ latest }: Props) {
       </div>
 
       <a
-        href="#articles"
+        href="#latest-articles"
         className="hero-scroll"
         aria-label="Scroll to latest articles"
       >

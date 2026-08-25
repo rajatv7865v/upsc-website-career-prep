@@ -9,6 +9,7 @@ const SUBJECT_HUBS: Partial<Record<string, string>> = {
   Polity: "/polity",
   IR: "/ir",
   Environment: "/environment",
+  "Science & Tech": "/science-tech",
 };
 
 type Props = {

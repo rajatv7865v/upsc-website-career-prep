@@ -24,117 +24,81 @@ const links: NavLink[] = [
   { href: "/", label: "Home", id: "home" },
   { href: "/about", label: "About Us", id: "about" },
   {
-    href: "/current-affairs",
-    label: "Current Affairs",
-    id: "current-affairs",
-    overviewLabel: "All Current Affairs",
-    children: [
-      { href: "/current-affairs?stage=Prelims", label: "Prelims", id: "ca-prelims" },
-      { href: "/current-affairs?stage=Mains", label: "Mains", id: "ca-mains" },
-    ],
-  },
-  {
-    href: "/#syllabus",
-    label: "Syllabus & Strategy",
-    id: "syllabus",
-    overviewLabel: "Syllabus & Strategy overview",
-    children: [
-      {
-        href: "/syllabus",
-        label: "All syllabus",
-        id: "syl-all",
-        group: "Syllabus",
-      },
-      {
-        href: "/syllabus/prelims",
-        label: "Prelims (GS + CSAT)",
-        id: "syl-prelims",
-        group: "Syllabus",
-      },
-      {
-        href: "/syllabus/gs-paper-1",
-        label: "GS Paper 1",
-        id: "gs-paper-1",
-        group: "Syllabus",
-      },
-      {
-        href: "/syllabus/gs-paper-2",
-        label: "GS Paper 2",
-        id: "gs-paper-2",
-        group: "Syllabus",
-      },
-      {
-        href: "/syllabus/gs-paper-3",
-        label: "GS Paper 3",
-        id: "gs-paper-3",
-        group: "Syllabus",
-      },
-      {
-        href: "/syllabus/gs-paper-4",
-        label: "GS Paper 4",
-        id: "gs-paper-4",
-        group: "Syllabus",
-      },
-      {
-        href: "/strategy",
-        label: "All strategy",
-        id: "strategy",
-        group: "Strategy",
-      },
-      {
-        href: "/strategy/prelims",
-        label: "Prelims",
-        id: "st-prelims",
-        group: "Strategy",
-      },
-      {
-        href: "/strategy/gs-paper-1",
-        label: "GS Paper 1",
-        id: "st-gs1",
-        group: "Strategy",
-      },
-      {
-        href: "/strategy/gs-paper-2",
-        label: "GS Paper 2",
-        id: "st-gs2",
-        group: "Strategy",
-      },
-      {
-        href: "/strategy/gs-paper-3",
-        label: "GS Paper 3",
-        id: "st-gs3",
-        group: "Strategy",
-      },
-      {
-        href: "/strategy/gs-paper-4",
-        label: "GS Paper 4",
-        id: "st-gs4",
-        group: "Strategy",
-      },
-    ],
-  },
-  {
     href: "/geography",
     label: "Geography",
     id: "geography",
     overviewLabel: "All Geography",
     children: [
-      { href: "/geography?stage=Prelims", label: "Prelims", id: "geo-prelims" },
-      { href: "/geography?stage=Mains", label: "Mains", id: "geo-mains" },
+      { href: "/geography?stage=Prelims", label: "Prelims", id: "geo-prelims", group: "Exam Stages" },
+      { href: "/geography?stage=Mains", label: "Mains", id: "geo-mains", group: "Exam Stages" },
     ],
   },
   {
-    href: "/economy",
-    label: "Economy",
-    id: "economy",
-    overviewLabel: "All Economy",
+    href: "/environment",
+    label: "Environment",
+    id: "environment",
+    overviewLabel: "All Environment",
     children: [
-      { href: "/economy?stage=Prelims", label: "Prelims", id: "eco-prelims" },
-      { href: "/economy?stage=Mains", label: "Mains", id: "eco-mains" },
+      { href: "/environment?stage=Prelims", label: "Prelims", id: "env-prelims", group: "Exam Stages" },
+      { href: "/environment?stage=Mains", label: "Mains", id: "env-mains", group: "Exam Stages" },
     ],
   },
-  { href: "/notifications", label: "Notifications", id: "notifications" },
-  { href: "/pyq", label: "PYQ", id: "pyq" },
+  {
+    href: "/science-tech",
+    label: "Science & Tech",
+    id: "science-tech",
+    overviewLabel: "All Science & Technology",
+    children: [
+      {
+        href: "/science-tech/biotechnology",
+        label: "Biotechnology & Bioinformatics",
+        id: "st-biotech",
+        group: "Biotechnology",
+      },
+      {
+        href: "/science-tech/biotechnology#recombinant-dna",
+        label: "Recombinant DNA & Gene Cloning",
+        id: "st-dna",
+        group: "Biotechnology",
+      },
+      {
+        href: "/science-tech/biotechnology#bioinformatics",
+        label: "Bioinformatics Interdisciplinary Hub",
+        id: "st-bioinformatics",
+        group: "Biotechnology",
+      },
+      {
+        href: "/science-tech/nanotechnology",
+        label: "Nanotechnology & 2D Materials",
+        id: "st-nanotech",
+        group: "Nanotechnology",
+      },
+      {
+        href: "/science-tech/nanotechnology#materials",
+        label: "Graphene, CNTs & MXenes",
+        id: "st-materials",
+        group: "Nanotechnology",
+      },
+      {
+        href: "/science-tech/nanotechnology#pyqs",
+        label: "Nanotech UPSC PYQs (2014-2022)",
+        id: "st-nanotech-pyqs",
+        group: "Nanotechnology",
+      },
+      {
+        href: "/science-tech?stage=Prelims",
+        label: "Prelims High-Yield Topics",
+        id: "st-prelims",
+        group: "Exam Stages",
+      },
+      {
+        href: "/science-tech?stage=Mains",
+        label: "Mains (GS Paper 3)",
+        id: "st-mains",
+        group: "Exam Stages",
+      },
+    ],
+  },
   { href: "/blog", label: "Blog", id: "blog" },
   { href: "/contact", label: "Contact Us", id: "contact" },
 ];
@@ -155,16 +119,9 @@ export default function Header({ forceSolid = false }: HeaderProps) {
       if (pathname === "/about") return "about";
       if (pathname === "/contact") return "contact";
       if (pathname?.startsWith("/blog")) return "blog";
-      if (pathname?.startsWith("/current-affairs")) return "current-affairs";
       if (pathname?.startsWith("/geography")) return "geography";
-      if (pathname?.startsWith("/economy")) return "economy";
-      if (pathname?.startsWith("/notifications")) return "notifications";
-      if (pathname?.startsWith("/pyq")) return "pyq";
-      if (
-        pathname?.startsWith("/syllabus") ||
-        pathname?.startsWith("/strategy")
-      )
-        return "syllabus";
+      if (pathname?.startsWith("/environment")) return "environment";
+      if (pathname?.startsWith("/science-tech")) return "science-tech";
       return "home";
     };
     setActive(resolveActive());
@@ -199,23 +156,9 @@ export default function Header({ forceSolid = false }: HeaderProps) {
     if (id === "about") return pathname === "/about";
     if (id === "contact") return pathname === "/contact";
     if (id === "blog") return Boolean(pathname?.startsWith("/blog"));
-    if (id === "current-affairs")
-      return (
-        Boolean(pathname?.startsWith("/current-affairs")) ||
-        (pathname === "/" && active === "current-affairs")
-      );
-    if (id === "geography")
-      return Boolean(pathname?.startsWith("/geography"));
-    if (id === "economy") return Boolean(pathname?.startsWith("/economy"));
-    if (id === "notifications")
-      return Boolean(pathname?.startsWith("/notifications"));
-    if (id === "pyq") return Boolean(pathname?.startsWith("/pyq"));
-    if (id === "syllabus")
-      return (
-        Boolean(pathname?.startsWith("/syllabus")) ||
-        Boolean(pathname?.startsWith("/strategy")) ||
-        (pathname === "/" && active === "syllabus")
-      );
+    if (id === "geography") return Boolean(pathname?.startsWith("/geography"));
+    if (id === "environment") return Boolean(pathname?.startsWith("/environment"));
+    if (id === "science-tech") return Boolean(pathname?.startsWith("/science-tech"));
     if (id === "home") return pathname === "/" && active === "home";
     return pathname === "/" && active === id;
   }
@@ -231,16 +174,14 @@ export default function Header({ forceSolid = false }: HeaderProps) {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-[100] transition-[background-color,border-color,box-shadow,backdrop-filter,color] duration-300 ${
-        onLight
-          ? "border-b border-line bg-white/95 shadow-[0_8px_30px_rgba(10,10,10,0.06)] backdrop-blur-md"
-          : "border-b border-white/10 bg-black/55 shadow-[0_8px_30px_rgba(0,0,0,0.25)] backdrop-blur-md"
-      }`}
+      className={`fixed inset-x-0 top-0 z-[100] transition-[background-color,border-color,box-shadow,backdrop-filter,color] duration-300 ${onLight
+        ? "border-b border-line bg-white/95 shadow-[0_8px_30px_rgba(10,10,10,0.06)] backdrop-blur-md"
+        : "border-b border-white/10 bg-black/55 shadow-[0_8px_30px_rgba(0,0,0,0.25)] backdrop-blur-md"
+        }`}
     >
       <div
-        className={`absolute inset-x-0 top-0 h-[2px] origin-center bg-gradient-to-r from-transparent via-blue to-transparent transition-transform duration-500 ${
-          onLight ? "scale-x-100" : "scale-x-100 opacity-80"
-        }`}
+        className={`absolute inset-x-0 top-0 h-[2px] origin-center bg-gradient-to-r from-transparent via-blue to-transparent transition-transform duration-500 ${onLight ? "scale-x-100" : "scale-x-100 opacity-80"
+          }`}
         aria-hidden
       />
 
@@ -255,15 +196,13 @@ export default function Header({ forceSolid = false }: HeaderProps) {
             aria-hidden
           />
           <span
-            className={`text-[1.05rem] font-semibold tracking-tight transition-colors duration-300 sm:text-lg ${
-              onLight ? "text-black" : "text-white"
-            }`}
+            className={`text-[1.05rem] font-semibold tracking-tight transition-colors duration-300 sm:text-lg ${onLight ? "text-black" : "text-white"
+              }`}
           >
             Career{" "}
             <span
-              className={`transition-colors duration-300 ${
-                onLight ? "text-blue" : "text-blue-soft"
-              }`}
+              className={`transition-colors duration-300 ${onLight ? "text-blue" : "text-blue-soft"
+                }`}
             >
               Prepp
             </span>
@@ -299,11 +238,10 @@ export default function Header({ forceSolid = false }: HeaderProps) {
                         />
                       </svg>
                       <span
-                        className={`absolute inset-x-2.5 bottom-1 h-[1.5px] origin-center bg-blue transition-transform duration-300 xl:inset-x-3 ${
-                          isActive
-                            ? "scale-x-100"
-                            : "scale-x-0 group-hover/menu:scale-x-100"
-                        }`}
+                        className={`absolute inset-x-2.5 bottom-1 h-[1.5px] origin-center bg-blue transition-transform duration-300 xl:inset-x-3 ${isActive
+                          ? "scale-x-100"
+                          : "scale-x-0 group-hover/menu:scale-x-100"
+                          }`}
                         aria-hidden
                       />
                     </Link>
@@ -356,11 +294,10 @@ export default function Header({ forceSolid = false }: HeaderProps) {
                   >
                     <span>{link.label}</span>
                     <span
-                      className={`absolute inset-x-2.5 bottom-1 h-[1.5px] origin-center bg-blue transition-transform duration-300 xl:inset-x-3 ${
-                        isActive
-                          ? "scale-x-100"
-                          : "scale-x-0 group-hover:scale-x-100"
-                      }`}
+                      className={`absolute inset-x-2.5 bottom-1 h-[1.5px] origin-center bg-blue transition-transform duration-300 xl:inset-x-3 ${isActive
+                        ? "scale-x-100"
+                        : "scale-x-0 group-hover:scale-x-100"
+                        }`}
                       aria-hidden
                     />
                   </Link>
@@ -375,44 +312,38 @@ export default function Header({ forceSolid = false }: HeaderProps) {
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className={`relative z-[110] flex h-10 w-10 flex-col items-center justify-center gap-[5px] xl:hidden ${
-            onLight ? "text-black" : "text-white"
-          }`}
+          className={`relative z-[110] flex h-10 w-10 flex-col items-center justify-center gap-[5px] xl:hidden ${onLight ? "text-black" : "text-white"
+            }`}
         >
           <span
-            className={`block h-[1.5px] w-[18px] rounded-full bg-current transition-transform duration-300 ${
-              open ? "translate-y-[6.5px] rotate-45" : ""
-            }`}
+            className={`block h-[1.5px] w-[18px] rounded-full bg-current transition-transform duration-300 ${open ? "translate-y-[6.5px] rotate-45" : ""
+              }`}
           />
           <span
-            className={`block h-[1.5px] w-[18px] rounded-full bg-current transition-all duration-300 ${
-              open ? "scale-x-0 opacity-0" : ""
-            }`}
+            className={`block h-[1.5px] w-[18px] rounded-full bg-current transition-all duration-300 ${open ? "scale-x-0 opacity-0" : ""
+              }`}
           />
           <span
-            className={`block h-[1.5px] w-[18px] rounded-full bg-current transition-transform duration-300 ${
-              open ? "-translate-y-[6.5px] -rotate-45" : ""
-            }`}
+            className={`block h-[1.5px] w-[18px] rounded-full bg-current transition-transform duration-300 ${open ? "-translate-y-[6.5px] -rotate-45" : ""
+              }`}
           />
         </button>
       </div>
 
       <div
-        className={`fixed inset-0 top-16 bg-black/45 transition-opacity duration-300 xl:hidden sm:top-[4.75rem] ${
-          open
-            ? "pointer-events-auto opacity-100"
-            : "pointer-events-none opacity-0"
-        }`}
+        className={`fixed inset-0 top-16 bg-black/45 transition-opacity duration-300 xl:hidden sm:top-[4.75rem] ${open
+          ? "pointer-events-auto opacity-100"
+          : "pointer-events-none opacity-0"
+          }`}
         onClick={() => setOpen(false)}
         aria-hidden={!open}
       />
 
       <div
-        className={`absolute inset-x-0 top-full border-b border-line bg-white shadow-[0_24px_48px_rgba(10,10,10,0.1)] transition-all duration-300 xl:hidden ${
-          open
-            ? "visible translate-y-0 opacity-100"
-            : "invisible -translate-y-2 opacity-0"
-        }`}
+        className={`absolute inset-x-0 top-full border-b border-line bg-white shadow-[0_24px_48px_rgba(10,10,10,0.1)] transition-all duration-300 xl:hidden ${open
+          ? "visible translate-y-0 opacity-100"
+          : "invisible -translate-y-2 opacity-0"
+          }`}
         aria-hidden={!open}
       >
         <nav
@@ -436,9 +367,8 @@ export default function Header({ forceSolid = false }: HeaderProps) {
                           id === link.id ? null : link.id,
                         )
                       }
-                      className={`flex w-full items-center gap-4 py-3.5 text-left text-[15px] font-medium transition-colors duration-200 ${
-                        isActive ? "text-blue" : "text-ink"
-                      }`}
+                      className={`flex w-full items-center gap-4 py-3.5 text-left text-[15px] font-medium transition-colors duration-200 ${isActive ? "text-blue" : "text-ink"
+                        }`}
                     >
                       <span className="text-[11px] tracking-wider text-muted">
                         {String(i + 1).padStart(2, "0")}
@@ -460,9 +390,8 @@ export default function Header({ forceSolid = false }: HeaderProps) {
                       </svg>
                     </button>
                     <ul
-                      className={`overflow-hidden bg-surface transition-all duration-200 ${
-                        subOpen ? "max-h-[32rem] pb-2" : "max-h-0"
-                      }`}
+                      className={`overflow-hidden bg-surface transition-all duration-200 ${subOpen ? "max-h-[32rem] pb-2" : "max-h-0"
+                        }`}
                     >
                       <li>
                         <Link
@@ -513,9 +442,8 @@ export default function Header({ forceSolid = false }: HeaderProps) {
                   <Link
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className={`flex items-center gap-4 py-3.5 text-[15px] font-medium transition-colors duration-200 ${
-                      isActive ? "text-blue" : "text-ink hover:text-blue"
-                    }`}
+                    className={`flex items-center gap-4 py-3.5 text-[15px] font-medium transition-colors duration-200 ${isActive ? "text-blue" : "text-ink hover:text-blue"
+                      }`}
                   >
                     <span className="text-[11px] tracking-wider text-muted">
                       {String(i + 1).padStart(2, "0")}

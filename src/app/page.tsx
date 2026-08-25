@@ -1,8 +1,9 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Hero from "@/components/Hero";
-import FeaturedArticles from "@/components/FeaturedArticles";
-import ExpandableArticleCards from "@/components/ExpandableArticleCards";
+import LatestArticlesSection from "@/components/LatestArticlesSection";
+import TrendingArticlesSection from "@/components/TrendingArticlesSection";
+import FavouriteArticlesSection from "@/components/FavouriteArticlesSection";
 import HomeFaqSection from "@/components/HomeFaqSection";
 import AnimatedIcon from "@/components/AnimatedIcon";
 import Link from "next/link";
@@ -66,17 +67,31 @@ const aboutHighlights = [
 ];
 
 const subjectLinks = [
+  { href: "/science-tech", label: "Science & Tech", note: "Biotechnology, AI, Space & Defense" },
+  { href: "/science-tech/biotechnology", label: "Biotechnology Hub", note: "Genomics, rDNA & Bioinformatics" },
   { href: "/geography", label: "Geography", note: "Maps, climate & places" },
-  { href: "/economy", label: "Economy", note: "Policy, schemes & data" },
+  { href: "/environment", label: "Environment", note: "Ecology, biodiversity & climate" },
   { href: "/polity", label: "Polity", note: "Institutions & Constitution" },
-  { href: "/environment", label: "Environment", note: "Reports & ecology" },
   { href: "/ir", label: "International Relations", note: "World affairs & India" },
-  { href: "/current-affairs", label: "All Current Affairs", note: "Full archive" },
 ];
 
 export default async function Home() {
   const articles = await getAllArticles();
-  const featured = articles.slice(0, 5);
+
+  // 1. Latest Articles (freshly published)
+  const latestArticles = articles.slice(0, 5);
+
+  // 2. Trending Articles (high-engagement / popular topics)
+  const trendingArticles =
+    articles.length >= 3
+      ? [articles[1], articles[2], articles[0], ...articles.slice(3)].filter(Boolean).slice(0, 3)
+      : articles;
+
+  // 3. Favourite Articles (curated foundational must-reads)
+  const favouriteArticles =
+    articles.length >= 4
+      ? [articles[2], articles[3], articles[0], ...articles.slice(4)].filter(Boolean).slice(0, 3)
+      : articles;
 
   return (
     <>
@@ -85,12 +100,14 @@ export default async function Home() {
       <main className="flex-1">
         <Hero latest={articles[0] ?? null} />
 
-        <section id="articles" className="articles-premium scroll-mt-24">
-          <div className="mx-auto max-w-7xl px-6 py-16 lg:px-8 lg:py-24">
-            <FeaturedArticles posts={featured} />
-            <ExpandableArticleCards posts={articles} />
-          </div>
-        </section>
+        {/* Section 1: Latest Articles */}
+        <LatestArticlesSection posts={latestArticles} />
+
+        {/* Section 2: Trending Articles */}
+        <TrendingArticlesSection posts={trendingArticles} />
+
+        {/* Section 3: Favourite Articles */}
+        <FavouriteArticlesSection posts={favouriteArticles} />
 
         {/* About — what Career Prepp offers */}
         <section

@@ -2080,6 +2080,137 @@ body {
   background: var(--blue-tint);
 }
 
+/* ========== ESA-Inspired Article Layout Classes ========== */
+.esa-feature-hero {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  max-height: 32rem;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 1px solid var(--line);
+  background: #0a0a0a;
+}
+
+@media (min-width: 640px) {
+  .esa-feature-hero {
+    aspect-ratio: 21 / 9;
+  }
+}
+
+@media (min-width: 1024px) {
+  .esa-feature-hero {
+    max-height: 34rem;
+    border-radius: 1.25rem;
+  }
+}
+
+.esa-pillar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--blue);
+  background: var(--blue-tint);
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  border: 1px solid var(--blue-tint-line);
+}
+
+.esa-heading-main {
+  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  color: #0a0a0a;
+}
+
+.esa-breadcrumbs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--muted);
+  padding-top: 1rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.esa-breadcrumbs a {
+  color: var(--muted);
+  transition: color 0.15s ease;
+}
+
+.esa-breadcrumbs a:hover {
+  color: var(--blue);
+  text-decoration: underline;
+}
+
+.esa-abstract {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding: 1.75rem 2rem;
+  background: #f8fafc;
+  border-left: 4px solid var(--blue);
+  border-radius: 0 1rem 1rem 0;
+  font-size: clamp(1.1rem, 2.2vw, 1.25rem);
+  line-height: 1.75;
+  color: #1e293b;
+  font-weight: 450;
+}
+
+.esa-content-prose {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  color: #1a1a1a;
+}
+
+.esa-content-prose p {
+  margin-bottom: 1.5rem;
+}
+
+.esa-content-prose h2 {
+  margin-top: 2.75rem;
+  margin-bottom: 1rem;
+  font-size: 1.65rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #0a0a0a;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.esa-content-prose h3 {
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #0a0a0a;
+}
+
+.esa-content-prose blockquote {
+  margin: 2rem 0;
+  padding: 1.25rem 1.75rem;
+  border-left: 3px solid #0b3d91;
+  background: #f0f4f9;
+  border-radius: 0 0.75rem 0.75rem 0;
+  font-style: italic;
+  color: #1e293b;
+}
+
+.esa-sidebar-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
 .article-page-figure {
   margin-top: 2rem;
 }
