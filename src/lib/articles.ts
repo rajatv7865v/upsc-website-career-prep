@@ -96,7 +96,8 @@ async function getMongoArticles(): Promise<AdminArticle[]> {
       .sort({ createdAt: -1 })
       .toArray();
     return docs.map(mapDocument);
-  } catch {
+  } catch (error) {
+    console.error("MongoDB articles fetch failed:", error);
     return [];
   }
 }
