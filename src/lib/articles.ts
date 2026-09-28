@@ -13,6 +13,7 @@ import {
   slugify,
 } from "@/lib/html";
 import { scoreRelatedPosts } from "@/lib/article-filters";
+import { defaultArticles } from "@/data/default-articles";
 
 export type ArticleDocument = {
   slug: string;
@@ -102,10 +103,16 @@ async function getMongoArticles(): Promise<AdminArticle[]> {
   }
 }
 
-/** All articles from MongoDB (newest first). */
+/** All articles from MongoDB (newest first), falling back to curated default articles. */
 export async function getAllArticles(): Promise<BlogPost[]> {
   const mongo = await getMongoArticles();
-  return mongo.map(toBlogPost);
+  if (mongo.length > 0) {
+    const mongoPosts = mongo.map(toBlogPost);
+    const existingSlugs = new Set(mongoPosts.map((p) => p.slug));
+    const supplemental = defaultArticles.filter((p) => !existingSlugs.has(p.slug));
+    return [...mongoPosts, ...supplemental];
+  }
+  return defaultArticles;
 }
 
 export async function getPostBySlug(slug: string) {
@@ -132,7 +139,15 @@ export async function getAllSlugs() {
 }
 
 export async function listAdminArticles() {
-  return getMongoArticles();
+  const mongo = await getMongoArticles();
+  if (mongo.length > 0) return mongo;
+  return defaultArticles.map((article, idx) => ({
+    ...article,
+    id: `default-${idx}`,
+    htmlContent: article.content.map((p) => `<p>${p}</p>`).join(""),
+    createdAt: new Date(article.date).toISOString(),
+    updatedAt: new Date(article.date).toISOString(),
+  }));
 }
 
 export async function createArticle(input: CreateArticleInput) {

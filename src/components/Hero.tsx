@@ -38,6 +38,20 @@ export default function Hero({ latest }: Props) {
             </div>
           </div>
 
+          {latest && (
+            <Link
+              href={`/blog/${latest.slug}`}
+              className="group mb-5 inline-flex max-w-full items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1 text-xs text-white/90 backdrop-blur-xs transition-colors hover:border-white/40 hover:bg-white/15"
+            >
+              <span className="flex h-2 w-2 shrink-0 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="shrink-0 font-semibold text-white">Latest article:</span>
+              <span className="truncate text-white/80 group-hover:text-white">
+                {latest.title}
+              </span>
+              <IconArrow className="h-3 w-3 shrink-0 text-white/60 transition-transform group-hover:translate-x-0.5" />
+            </Link>
+          )}
+
           <h1 className="hero-headline">
             Simple notes to understand the world around you.
           </h1>
