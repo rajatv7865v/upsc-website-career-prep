@@ -1,6 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
-import Link from "next/link";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SubjectArticlesClient from "@/components/SubjectArticlesClient";
@@ -32,7 +30,7 @@ export default async function SubjectHubPage({
   return (
     <>
       <Header forceSolid />
-      <main className="flex-1">
+      <main className="flex-1 pt-16 sm:pt-[4.75rem]">
         <section className="border-b border-line bg-black py-16 lg:py-20">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <p className="section-label !text-blue-soft">{title}</p>

@@ -41,12 +41,17 @@
 
 html {
   scroll-behavior: smooth;
+  max-width: 100%;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
   background: var(--white);
   color: var(--black);
   font-family: var(--font-sans);
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 @keyframes fade-up {
@@ -267,8 +272,8 @@ body {
 
 .hero-headline {
   margin-top: 1.75rem;
-  max-width: 20ch;
-  font-size: clamp(1.45rem, 3vw, 2.15rem);
+  max-width: min(100%, 32ch);
+  font-size: clamp(1.45rem, 3.2vw, 2.25rem);
   font-weight: 500;
   line-height: 1.28;
   letter-spacing: -0.025em;
@@ -278,7 +283,7 @@ body {
 
 .hero-support {
   margin-top: 1.2rem;
-  max-width: 34rem;
+  max-width: 36rem;
   font-size: clamp(1rem, 1.45vw, 1.125rem);
   font-weight: 400;
   line-height: 1.75;
@@ -320,6 +325,20 @@ body {
   gap: 0.85rem;
   margin-top: 2rem;
   animation-delay: 0.42s;
+}
+
+@media (max-width: 480px) {
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+  }
+  .hero-actions .hero-btn-primary,
+  .hero-actions .hero-btn-ghost {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
 }
 
 .hero-btn-primary {
@@ -2151,16 +2170,25 @@ body {
 }
 
 .esa-abstract {
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  padding: 1.75rem 2rem;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding: 1.25rem 1.25rem;
   background: #f8fafc;
   border-left: 4px solid var(--blue);
   border-radius: 0 1rem 1rem 0;
-  font-size: clamp(1.1rem, 2.2vw, 1.25rem);
-  line-height: 1.75;
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.7;
   color: #1e293b;
   font-weight: 450;
+}
+
+@media (min-width: 640px) {
+  .esa-abstract {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    padding: 1.75rem 2rem;
+    line-height: 1.75;
+  }
 }
 
 .esa-content-prose {
@@ -3578,42 +3606,64 @@ body {
 .faq-section-actions {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 0.65rem;
   flex-shrink: 0;
+}
+
+@media (max-width: 520px) {
+  .faq-section-actions {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: 100%;
+    gap: 0.5rem;
+  }
 }
 
 .faq-action {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
-  padding: 0.7rem 1.15rem;
+  padding: 0.65rem 1rem;
   font-size: 0.8125rem;
   font-weight: 500;
   letter-spacing: 0.02em;
+  border-radius: 4px;
   transition:
-    background-color 0.25s ease,
-    color 0.25s ease,
-    border-color 0.25s ease;
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.faq-action:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
 }
 
 .faq-action-outline {
-  border: 1px solid var(--black);
+  border: 1px solid var(--line);
   color: var(--black);
   background: #fff;
 }
 
 .faq-action-outline:hover {
-  background: var(--black);
-  color: #fff;
+  border-color: var(--black);
+  background: #fafafa;
+  color: var(--black);
 }
 
 .faq-action-solid {
   background: var(--blue);
   color: #fff;
+  border: 1px solid var(--blue);
 }
 
 .faq-action-solid:hover {
   background: var(--blue-hover);
+  border-color: var(--blue-hover);
 }
 
 .faq-list {
@@ -3706,12 +3756,12 @@ body {
 }
 
 .faq-panel {
-  padding: 0 0.25rem 1.25rem 3.6rem;
+  padding: 0 0.25rem 1.25rem 1rem;
 }
 
 @media (min-width: 640px) {
   .faq-panel {
-    padding: 0 0.5rem 1.35rem 4.9rem;
+    padding: 0 0.5rem 1.35rem 4.5rem;
   }
 }
 
@@ -3775,12 +3825,20 @@ body {
   background: #fff;
   padding: 0.85rem 1rem;
   font-family: inherit;
-  font-size: 0.9375rem;
+  font-size: 1rem;
   color: var(--black);
   outline: none;
   transition:
     border-color 0.2s ease,
     box-shadow 0.2s ease;
+}
+
+@media (min-width: 640px) {
+  .contact-form input,
+  .contact-form select,
+  .contact-form textarea {
+    font-size: 0.9375rem;
+  }
 }
 
 .contact-form input::placeholder,

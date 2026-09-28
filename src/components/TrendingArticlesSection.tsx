@@ -15,7 +15,7 @@ export default function TrendingArticlesSection({ posts }: Props) {
       id="trending-articles"
       className="scroll-mt-24 border-y border-line bg-gradient-to-b from-[#fafbfc] to-white py-16 lg:py-24"
     >
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between mb-12">
           <div>
@@ -88,7 +88,7 @@ export default function TrendingArticlesSection({ posts }: Props) {
                 </Link>
 
                 {/* Card Body */}
-                <div className="flex flex-1 flex-col p-6">
+                <div className="flex flex-1 flex-col p-4 sm:p-6">
                   <div className="flex items-center gap-2 text-xs font-medium text-muted mb-2.5">
                     <span>{post.date}</span>
                     <span>•</span>

@@ -59,8 +59,17 @@ export function EsaArticleMetaStats({ post }: Props) {
   });
 
   useEffect(() => {
-    setViews(getInitialCount(post.slug, 2450));
-    setLikes(getInitialLikes(post.slug, 54));
+    const sync = () => {
+      setViews(getInitialCount(post.slug, 2450));
+      setLikes(getInitialLikes(post.slug, 54));
+    };
+    sync();
+    window.addEventListener("storage", sync);
+    window.addEventListener("cp-likes-changed", sync);
+    return () => {
+      window.removeEventListener("storage", sync);
+      window.removeEventListener("cp-likes-changed", sync);
+    };
   }, [post.slug]);
 
   const handleLike = () => {
@@ -72,11 +81,12 @@ export function EsaArticleMetaStats({ post }: Props) {
         `${LIKES_KEY_PREFIX}${post.slug}`,
         JSON.stringify({ count: nextCount, liked: nextLiked }),
       );
+      window.dispatchEvent(new Event("cp-likes-changed"));
     } catch {}
   };
 
   return (
-    <div className="flex flex-wrap items-center gap-y-2 gap-x-5 text-sm font-medium text-muted">
+    <div className="flex flex-wrap items-center gap-y-2 gap-x-3 sm:gap-x-5 text-xs sm:text-sm font-medium text-muted">
       {/* Date */}
       <span className="flex items-center gap-1.5 text-ink">
         <svg className="h-4 w-4 text-muted" viewBox="0 0 24 24" fill="none" aria-hidden>
@@ -104,7 +114,7 @@ export function EsaArticleMetaStats({ post }: Props) {
       <button
         type="button"
         onClick={handleLike}
-        className={`group flex items-center gap-1.5 rounded-full px-3 py-0.5 text-sm transition-all cursor-pointer ${
+        className={`group flex items-center gap-1.5 rounded-full px-2.5 sm:px-3 py-0.5 text-xs sm:text-sm transition-all cursor-pointer ${
           likes.liked
             ? "bg-rose-50 text-rose-600 font-semibold border border-rose-200"
             : "hover:bg-gray-100 text-muted hover:text-ink border border-transparent"
@@ -149,11 +159,22 @@ export function EsaArticleSidebarActions({ post }: Props) {
   });
 
   useEffect(() => {
-    try {
-      const favs = JSON.parse(localStorage.getItem(FAV_KEY) || "[]");
-      setFavorite(favs.includes(post.slug));
-    } catch {}
-    setLikes(getInitialLikes(post.slug, 54));
+    const sync = () => {
+      try {
+        const favs = JSON.parse(localStorage.getItem(FAV_KEY) || "[]");
+        setFavorite(favs.includes(post.slug));
+      } catch {}
+      setLikes(getInitialLikes(post.slug, 54));
+    };
+    sync();
+    window.addEventListener("storage", sync);
+    window.addEventListener("cp-favorites-changed", sync);
+    window.addEventListener("cp-likes-changed", sync);
+    return () => {
+      window.removeEventListener("storage", sync);
+      window.removeEventListener("cp-favorites-changed", sync);
+      window.removeEventListener("cp-likes-changed", sync);
+    };
   }, [post.slug]);
 
   const toggleFavorite = () => {
@@ -175,6 +196,7 @@ export function EsaArticleSidebarActions({ post }: Props) {
         `${LIKES_KEY_PREFIX}${post.slug}`,
         JSON.stringify({ count: nextCount, liked: nextLiked }),
       );
+      window.dispatchEvent(new Event("cp-likes-changed"));
     } catch {}
   };
 
@@ -257,18 +279,18 @@ ${paragraphs}
   return (
     <div className="space-y-4">
       {/* Primary Interaction Buttons */}
-      <div className="grid grid-cols-2 gap-2.5">
+      <div className="grid grid-cols-2 gap-2">
         <button
           type="button"
           onClick={handleLike}
-          className={`flex items-center justify-center gap-2 rounded-xl border py-2.5 px-3 text-xs font-semibold transition-all cursor-pointer shadow-2xs ${
+          className={`flex items-center justify-center gap-1.5 sm:gap-2 rounded-xl border py-2.5 px-2 sm:px-3 text-xs font-semibold transition-all cursor-pointer shadow-2xs ${
             likes.liked
               ? "border-rose-300 bg-rose-50 text-rose-600"
               : "border-line bg-white text-ink hover:bg-gray-50 hover:border-gray-300"
           }`}
         >
           <svg
-            className={`h-4 w-4 ${likes.liked ? "fill-rose-500 text-rose-500" : "text-muted"}`}
+            className={`h-4 w-4 shrink-0 ${likes.liked ? "fill-rose-500 text-rose-500" : "text-muted"}`}
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -276,20 +298,20 @@ ${paragraphs}
           >
             <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
           </svg>
-          <span>{likes.liked ? "Liked" : "Like"} ({likes.count})</span>
+          <span className="truncate">{likes.liked ? "Liked" : "Like"} ({likes.count})</span>
         </button>
 
         <button
           type="button"
           onClick={toggleFavorite}
-          className={`flex items-center justify-center gap-2 rounded-xl border py-2.5 px-3 text-xs font-semibold transition-all cursor-pointer shadow-2xs ${
+          className={`flex items-center justify-center gap-1.5 sm:gap-2 rounded-xl border py-2.5 px-2 sm:px-3 text-xs font-semibold transition-all cursor-pointer shadow-2xs ${
             favorite
               ? "border-amber-300 bg-amber-50 text-amber-800"
               : "border-line bg-white text-ink hover:bg-gray-50 hover:border-gray-300"
           }`}
         >
-          <IconBookmark className={`h-4 w-4 ${favorite ? "fill-amber-400 text-amber-600" : "text-muted"}`} />
-          <span>{favorite ? "Saved" : "Save Note"}</span>
+          <IconBookmark className={`h-4 w-4 shrink-0 ${favorite ? "fill-amber-400 text-amber-600" : "text-muted"}`} />
+          <span className="truncate">{favorite ? "Saved" : "Save Note"}</span>
         </button>
       </div>
 
@@ -298,50 +320,50 @@ ${paragraphs}
         <button
           type="button"
           onClick={downloadWord}
-          className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg border border-line bg-white py-2 px-3 text-xs font-medium text-muted hover:text-ink hover:border-black/20 hover:bg-gray-50 transition-colors"
+          className="flex-1 inline-flex items-center justify-center gap-1.5 sm:gap-2 rounded-lg border border-line bg-white py-2 px-2 sm:px-3 text-xs font-medium text-muted hover:text-ink hover:border-black/20 hover:bg-gray-50 transition-colors"
           title="Download as Word Doc"
         >
-          <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+          <svg className="h-3.5 w-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
             <path d="M12 4v10m0 0 4-4m-4 4-4-4M5 18h14" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
-          Export .DOC
+          <span className="truncate">Export .DOC</span>
         </button>
 
         <button
           type="button"
           onClick={copyLink}
-          className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg border border-line bg-white py-2 px-3 text-xs font-medium text-muted hover:text-ink hover:border-black/20 hover:bg-gray-50 transition-colors"
+          className="flex-1 inline-flex items-center justify-center gap-1.5 sm:gap-2 rounded-lg border border-line bg-white py-2 px-2 sm:px-3 text-xs font-medium text-muted hover:text-ink hover:border-black/20 hover:bg-gray-50 transition-colors"
         >
-          <svg className="h-3.5 w-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+          <svg className="h-3.5 w-3.5 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
             <rect x="9" y="9" width="13" height="13" rx="2" strokeLinecap="round" strokeLinejoin="round" />
             <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
-          {copied ? "Copied!" : "Copy Link"}
+          <span className="truncate">{copied ? "Copied!" : "Copy Link"}</span>
         </button>
       </div>
 
       {/* Social Share Bar */}
       <div className="pt-2 border-t border-line/60">
         <p className="text-[11px] font-semibold uppercase tracking-wider text-muted mb-2">Share analysis</p>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2">
           <button
             type="button"
             onClick={shareWhatsApp}
-            className="flex-1 rounded-lg bg-[#25D366]/10 text-[#128C7E] hover:bg-[#25D366]/20 py-1.5 px-2 text-xs font-semibold transition-colors text-center"
+            className="flex-1 rounded-lg bg-[#25D366]/10 text-[#128C7E] hover:bg-[#25D366]/20 py-1.5 px-1 sm:px-2 text-[11px] sm:text-xs font-semibold transition-colors text-center truncate"
           >
             WhatsApp
           </button>
           <button
             type="button"
             onClick={shareTelegram}
-            className="flex-1 rounded-lg bg-[#0088cc]/10 text-[#0088cc] hover:bg-[#0088cc]/20 py-1.5 px-2 text-xs font-semibold transition-colors text-center"
+            className="flex-1 rounded-lg bg-[#0088cc]/10 text-[#0088cc] hover:bg-[#0088cc]/20 py-1.5 px-1 sm:px-2 text-[11px] sm:text-xs font-semibold transition-colors text-center truncate"
           >
             Telegram
           </button>
           <button
             type="button"
             onClick={shareTwitter}
-            className="flex-1 rounded-lg bg-black/5 text-black hover:bg-black/10 py-1.5 px-2 text-xs font-semibold transition-colors text-center"
+            className="flex-1 rounded-lg bg-black/5 text-black hover:bg-black/10 py-1.5 px-1 sm:px-2 text-[11px] sm:text-xs font-semibold transition-colors text-center truncate"
           >
             X / Twitter
           </button>

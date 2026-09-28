@@ -12,7 +12,7 @@ import {
   htmlToParagraphs,
   slugify,
 } from "@/lib/html";
-import { filterPosts, scoreRelatedPosts } from "@/lib/article-filters";
+import { scoreRelatedPosts } from "@/lib/article-filters";
 
 export type ArticleDocument = {
   slug: string;

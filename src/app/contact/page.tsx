@@ -10,11 +10,14 @@ import {
   IconCalendar,
   IconCheck,
   IconClipboard,
+  IconInstagram,
   IconMail,
   IconMic,
   IconPen,
-  IconPhone,
+  IconTelegram,
   IconUsers,
+  IconWhatsApp,
+  IconYouTube,
 } from "@/components/Icons";
 import { siteContact } from "@/data/site";
 
@@ -40,7 +43,7 @@ const channels = [
     detail: siteContact.phoneDisplay,
     note: "Mon–Sat · 10:00 AM – 7:00 PM IST",
     href: siteContact.whatsapp,
-    icon: IconPhone,
+    icon: IconWhatsApp,
     variant: "pulse" as const,
     tone: "light" as const,
     cta: "Chat on WhatsApp",
@@ -50,7 +53,7 @@ const channels = [
     detail: "Career Prepp channel",
     note: "Updates, notes, and quick questions.",
     href: siteContact.telegram,
-    icon: IconMic,
+    icon: IconTelegram,
     variant: "float" as const,
     tone: "light" as const,
     cta: "Open Telegram",
@@ -58,10 +61,30 @@ const channels = [
 ];
 
 const socialLinks = [
-  { label: "Instagram", href: siteContact.instagram },
-  { label: "YouTube", href: siteContact.youtube },
-  { label: "Telegram", href: siteContact.telegram },
-  { label: "WhatsApp", href: siteContact.whatsapp },
+  {
+    label: "Instagram",
+    href: siteContact.instagram,
+    icon: IconInstagram,
+    color: "text-[#E4405F]",
+  },
+  {
+    label: "YouTube",
+    href: siteContact.youtube,
+    icon: IconYouTube,
+    color: "text-[#FF0000]",
+  },
+  {
+    label: "Telegram",
+    href: siteContact.telegram,
+    icon: IconTelegram,
+    color: "text-[#229ED9]",
+  },
+  {
+    label: "WhatsApp",
+    href: siteContact.whatsapp,
+    icon: IconWhatsApp,
+    color: "text-[#25D366]",
+  },
 ];
 
 const tips = [
@@ -184,17 +207,21 @@ export default function ContactPage() {
               Social
             </p>
             <div className="mt-4 flex flex-wrap gap-3">
-              {socialLinks.map((link) => (
-                <a
-                  key={link.label}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex border border-line bg-white px-4 py-2.5 text-sm font-medium text-ink transition-colors hover:border-blue hover:text-blue"
-                >
-                  {link.label}
-                </a>
-              ))}
+              {socialLinks.map((link) => {
+                const Icon = link.icon;
+                return (
+                  <a
+                    key={link.label}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 border border-line bg-white px-4 py-2.5 text-sm font-medium text-ink transition-all hover:border-black hover:shadow-xs"
+                  >
+                    <Icon className={`h-4 w-4 shrink-0 ${link.color}`} />
+                    <span>{link.label}</span>
+                  </a>
+                );
+              })}
             </div>
           </div>
         </section>

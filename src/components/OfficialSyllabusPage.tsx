@@ -46,7 +46,7 @@ export default function OfficialSyllabusPage({
   return (
     <>
       <Header forceSolid />
-      <main className="flex-1 bg-white">
+      <main className="flex-1 bg-white pt-16 sm:pt-[4.75rem]">
         <article className="mx-auto max-w-3xl px-6 py-16 lg:px-8 lg:py-20">
           <p className="text-sm text-muted">Syllabus</p>
           <h1 className="mt-2 text-2xl font-semibold tracking-tight text-black sm:text-3xl">

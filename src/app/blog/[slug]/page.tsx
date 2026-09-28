@@ -74,10 +74,10 @@ export default async function BlogArticlePage({ params }: PageProps) {
     <>
       <Header forceSolid />
 
-      <main className="flex-1 bg-white mt-16">
+      <main className="flex-1 bg-white mt-16 sm:mt-[4.75rem]">
         <article className="article-page pb-20">
           {/* Top Feature Hero Banner with approx 14px top margin & container framing */}
-          <div className="mx-auto max-w-7xl px-6 lg:px-8 mt-[14px]">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-[14px]">
             <section className="esa-feature-hero relative w-full overflow-hidden rounded-2xl border border-line bg-black group shadow-xs">
               <Image
                 src={post.image}
@@ -107,7 +107,7 @@ export default async function BlogArticlePage({ params }: PageProps) {
           </div>
 
           {/* Article Header & Breadcrumbs Shell */}
-          <div className="mx-auto max-w-7xl px-6 lg:px-8 pt-8">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8">
             {/* Header Block */}
             <header className="pb-8">
               {/* Pillar & Stage Row */}
@@ -155,7 +155,7 @@ export default async function BlogArticlePage({ params }: PageProps) {
                   {primarySubject}
                 </Link>
                 <span className="text-slate-300" aria-hidden>/</span>
-                <span className="text-ink font-medium truncate max-w-xs sm:max-w-md">
+                <span className="text-ink font-medium truncate max-w-[11rem] sm:max-w-md">
                   {post.title}
                 </span>
               </nav>

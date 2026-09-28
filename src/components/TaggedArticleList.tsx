@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState, useEffect } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -55,25 +55,17 @@ export default function TaggedArticleList({
   const stageFromUrl = searchParams.get("stage");
   const subjectFromUrl = searchParams.get("subject");
 
-  const initialStage =
+  const stage: "All" | "Prelims" | "Mains" =
     stageFromUrl === "Prelims" || stageFromUrl === "Mains"
       ? stageFromUrl
       : "All";
-  const initialSubject = lockedSubject
+  const activeSubject = lockedSubject
     ? String(lockedSubject)
     : subjectFromUrl && subjectFromUrl !== "All"
       ? subjectFromUrl
       : "All";
 
-  const [stage, setStage] = useState<"All" | "Prelims" | "Mains">(initialStage);
-  const [subjectFilter, setSubjectFilter] = useState(initialSubject);
   const [showFavourites, setShowFavourites] = useState(false);
-
-  // Keep state in sync when nav links change ?stage= / ?subject=
-  useEffect(() => {
-    setStage(initialStage);
-    if (!lockedSubject) setSubjectFilter(initialSubject);
-  }, [initialStage, initialSubject, lockedSubject]);
 
   const syncUrl = useCallback(
     (nextStage: string, nextSubject: string) => {
@@ -88,10 +80,6 @@ export default function TaggedArticleList({
     [lockedSubject, pathname, router],
   );
 
-  const activeSubject = lockedSubject
-    ? String(lockedSubject)
-    : subjectFilter;
-
   const postsFiltered = useMemo(() => {
     let list = filterPosts(posts, {
       stage: stage === "All" ? null : stage,
@@ -105,13 +93,11 @@ export default function TaggedArticleList({
 
   function onStage(s: "All" | "Prelims" | "Mains") {
     setShowFavourites(false);
-    setStage(s);
-    syncUrl(s, subjectFilter);
+    syncUrl(s, activeSubject);
   }
 
   function onSubject(s: string) {
     setShowFavourites(false);
-    setSubjectFilter(s);
     syncUrl(stage, s);
   }
 
@@ -155,20 +141,20 @@ export default function TaggedArticleList({
                   key={s}
                   type="button"
                   onClick={() => onSubject(s)}
-                  className={`blog-filter-chip ${!showFavourites && subjectFilter === s ? "is-active" : ""}`}
+                  className={`blog-filter-chip ${!showFavourites && activeSubject === s ? "is-active" : ""}`}
                 >
                   {s === "All" ? "All subjects" : s}
                 </button>
               ))}
             </div>
-            {subjectFilter !== "All" && SUBJECT_HUBS[subjectFilter] && (
+            {activeSubject !== "All" && SUBJECT_HUBS[activeSubject] && (
               <p className="mt-3 text-sm text-muted">
-                Weak in {subjectFilter}? Open the dedicated{" "}
+                Weak in {activeSubject}? Open the dedicated{" "}
                 <Link
-                  href={`${SUBJECT_HUBS[subjectFilter]}${stage !== "All" ? `?stage=${stage}` : ""}`}
+                  href={`${SUBJECT_HUBS[activeSubject]}${stage !== "All" ? `?stage=${stage}` : ""}`}
                   className="font-medium text-blue"
                 >
-                  {subjectFilter} tab
+                  {activeSubject} tab
                 </Link>{" "}
                 for the same tagged articles.
               </p>

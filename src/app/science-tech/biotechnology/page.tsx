@@ -15,21 +15,12 @@ export const metadata: Metadata = {
 
 export default async function BiotechnologyPage() {
   const posts = await getAllArticles();
-  // Filter for Science & Tech / Biotech articles
-  const biotechPosts = posts.filter(
-    (p) =>
-      p.subjects.includes("Science & Tech") ||
-      p.category.toLowerCase().includes("biotech") ||
-      p.category.toLowerCase().includes("science") ||
-      p.title.toLowerCase().includes("gene") ||
-      p.title.toLowerCase().includes("bio"),
-  );
 
   return (
     <>
       <Header forceSolid />
 
-      <main className="flex-1 bg-white">
+      <main className="flex-1 bg-white pt-16 sm:pt-[4.75rem]">
         {/* Hero Section */}
         <section className="border-b border-line bg-gradient-to-b from-[#0a1128] via-[#001f54] to-[#034078] text-white py-16 lg:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(59,130,246,0.3),transparent_60%)] pointer-events-none" />

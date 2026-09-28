@@ -4,7 +4,6 @@ const uri = process.env.MONGODB_URI;
 const dbName = process.env.MONGODB_DB ?? "career_prep";
 
 declare global {
-  // eslint-disable-next-line no-var
   var _mongoClientPromise: Promise<MongoClient> | undefined;
 }
 

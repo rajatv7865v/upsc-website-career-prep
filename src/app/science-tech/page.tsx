@@ -4,7 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import SubjectArticlesClient from "@/components/SubjectArticlesClient";
 import { getAllArticles } from "@/lib/articles";
-import { IconArrow, IconBook, IconGlobe } from "@/components/Icons";
+import { IconArrow } from "@/components/Icons";
 
 export const metadata: Metadata = {
   title: "Science & Technology | Career Prepp",
@@ -54,7 +54,7 @@ export default async function ScienceTechPage() {
     <>
       <Header forceSolid />
 
-      <main className="flex-1 bg-white">
+      <main className="flex-1 bg-white pt-16 sm:pt-[4.75rem]">
         {/* Hero Header */}
         <section className="border-b border-line bg-gradient-to-b from-[#080e21] to-[#0d1b3e] text-white py-16 lg:py-20">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">

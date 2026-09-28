@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { IconBook, IconGlobe, IconTarget, IconArrow } from "@/components/Icons";
+import { IconBook, IconTarget } from "@/components/Icons";
 
 const disciplines = [
   {
@@ -122,11 +121,11 @@ export default function BiotechnologyVisualSection() {
           </h2>
         </div>
 
-        <div className="flex items-center rounded-xl bg-surface p-1 border border-line">
+        <div className="flex flex-wrap items-center rounded-xl bg-surface p-1 border border-line gap-1">
           <button
             type="button"
             onClick={() => setActiveTab("bioinformatics")}
-            className={`rounded-lg px-3.5 py-2 text-xs font-semibold transition-all cursor-pointer ${
+            className={`flex-1 sm:flex-initial text-center rounded-lg px-2.5 sm:px-3.5 py-2 text-xs font-semibold transition-all cursor-pointer ${
               activeTab === "bioinformatics"
                 ? "bg-white text-blue shadow-xs"
                 : "text-muted hover:text-ink"
@@ -137,7 +136,7 @@ export default function BiotechnologyVisualSection() {
           <button
             type="button"
             onClick={() => setActiveTab("recombinant")}
-            className={`rounded-lg px-3.5 py-2 text-xs font-semibold transition-all cursor-pointer ${
+            className={`flex-1 sm:flex-initial text-center rounded-lg px-2.5 sm:px-3.5 py-2 text-xs font-semibold transition-all cursor-pointer ${
               activeTab === "recombinant"
                 ? "bg-white text-blue shadow-xs"
                 : "text-muted hover:text-ink"
@@ -148,7 +147,7 @@ export default function BiotechnologyVisualSection() {
           <button
             type="button"
             onClick={() => setActiveTab("crispr")}
-            className={`rounded-lg px-3.5 py-2 text-xs font-semibold transition-all cursor-pointer ${
+            className={`flex-1 sm:flex-initial text-center rounded-lg px-2.5 sm:px-3.5 py-2 text-xs font-semibold transition-all cursor-pointer ${
               activeTab === "crispr"
                 ? "bg-white text-blue shadow-xs"
                 : "text-muted hover:text-ink"
@@ -163,20 +162,20 @@ export default function BiotechnologyVisualSection() {
       {activeTab === "bioinformatics" && (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           {/* Wheel Graphic Column (Col 7) */}
-          <div className="lg:col-span-7 flex flex-col items-center justify-center p-6 sm:p-10 rounded-3xl bg-gradient-to-br from-[#1e3a8a] via-[#0f2862] to-[#0a1945] text-white shadow-xl relative overflow-hidden">
+          <div className="lg:col-span-7 flex flex-col items-center justify-center p-4 sm:p-8 lg:p-10 rounded-3xl bg-gradient-to-br from-[#1e3a8a] via-[#0f2862] to-[#0a1945] text-white shadow-xl relative overflow-hidden">
             <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(59,130,246,0.25),transparent_70%)] pointer-events-none" />
 
             {/* Central Hub */}
-            <div className="relative z-10 flex flex-col items-center justify-center w-36 h-36 rounded-full bg-white text-black p-4 text-center shadow-2xl border-4 border-blue-soft/50 animate-fade-in">
-              <span className="text-2xl mb-0.5">🧬</span>
-              <span className="text-xs font-extrabold uppercase tracking-tight text-blue">
+            <div className="relative z-10 flex flex-col items-center justify-center w-28 h-28 sm:w-36 sm:h-36 rounded-full bg-white text-black p-3 sm:p-4 text-center shadow-2xl border-4 border-blue-soft/50 animate-fade-in">
+              <span className="text-xl sm:text-2xl mb-0.5">🧬</span>
+              <span className="text-[11px] sm:text-xs font-extrabold uppercase tracking-tight text-blue">
                 Bioinformatics
               </span>
-              <span className="text-[10px] text-muted font-medium mt-0.5">Interdisciplinary Core</span>
+              <span className="text-[9px] sm:text-[10px] text-muted font-medium mt-0.5">Interdisciplinary Core</span>
             </div>
 
             {/* Orbiting Satellite Nodes Grid */}
-            <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-3 w-full relative z-10">
+            <div className="mt-6 sm:mt-8 grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 w-full relative z-10">
               {disciplines.map((disc) => {
                 const isSelected = selectedDiscipline.id === disc.id;
                 return (

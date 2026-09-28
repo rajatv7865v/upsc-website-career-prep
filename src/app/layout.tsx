@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 
@@ -7,6 +7,13 @@ const poppins = Poppins({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#0b3d91",
+};
 
 export const metadata: Metadata = {
   title: "Career Prepp | Clear notes on current affairs & public life",
@@ -21,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${poppins.variable} h-full antialiased`} suppressHydrationWarning>
-      <body className="min-h-full flex flex-col font-sans bg-white text-black" suppressHydrationWarning>
+      <body className="min-h-full flex flex-col font-sans bg-white text-black overflow-x-hidden" suppressHydrationWarning>
         {children}
       </body>
     </html>

@@ -254,7 +254,7 @@ export default async function Home() {
                         .join("")
                         .slice(0, 2)}
                     </span>
-                    <div className="min-w-0">
+                    <div className="min-w-0 flex-1">
                       <p className="review-name">{review.name}</p>
                       <p className="review-role">{review.role}</p>
                     </div>

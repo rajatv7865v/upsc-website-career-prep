@@ -1,8 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import { IconBook, IconGlobe, IconTarget, IconArrow, IconCheck } from "@/components/Icons";
+import { IconBook, IconTarget } from "@/components/Icons";
 
 type DimensionItem = {
   id: string;
@@ -184,11 +183,11 @@ export default function NanotechnologyVisualSection() {
         </div>
 
         {/* Tab Controls */}
-        <div className="flex flex-wrap items-center rounded-xl bg-surface p-1 border border-line gap-1">
+        <div className="flex flex-nowrap sm:flex-wrap items-center rounded-xl bg-surface p-1 border border-line gap-1 overflow-x-auto max-w-full [-webkit-overflow-scrolling:touch]">
           <button
             type="button"
             onClick={() => setActiveTab("dimensions")}
-            className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer ${
+            className={`whitespace-nowrap shrink-0 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer ${
               activeTab === "dimensions"
                 ? "bg-white text-blue shadow-xs"
                 : "text-muted hover:text-ink"
@@ -199,7 +198,7 @@ export default function NanotechnologyVisualSection() {
           <button
             type="button"
             onClick={() => setActiveTab("materials")}
-            className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer ${
+            className={`whitespace-nowrap shrink-0 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer ${
               activeTab === "materials"
                 ? "bg-white text-blue shadow-xs"
                 : "text-muted hover:text-ink"
@@ -210,7 +209,7 @@ export default function NanotechnologyVisualSection() {
           <button
             type="button"
             onClick={() => setActiveTab("agri-food")}
-            className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer ${
+            className={`whitespace-nowrap shrink-0 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer ${
               activeTab === "agri-food"
                 ? "bg-white text-blue shadow-xs"
                 : "text-muted hover:text-ink"
@@ -221,7 +220,7 @@ export default function NanotechnologyVisualSection() {
           <button
             type="button"
             onClick={() => setActiveTab("india-initiatives")}
-            className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer ${
+            className={`whitespace-nowrap shrink-0 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer ${
               activeTab === "india-initiatives"
                 ? "bg-white text-blue shadow-xs"
                 : "text-muted hover:text-ink"
@@ -232,7 +231,7 @@ export default function NanotechnologyVisualSection() {
           <button
             type="button"
             onClick={() => setActiveTab("pyqs")}
-            className={`rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer ${
+            className={`whitespace-nowrap shrink-0 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer ${
               activeTab === "pyqs"
                 ? "bg-white text-blue shadow-xs"
                 : "text-muted hover:text-ink"
@@ -247,7 +246,7 @@ export default function NanotechnologyVisualSection() {
       {activeTab === "dimensions" && (
         <div className="space-y-8">
           {/* Dimensionality Selector Bar */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3">
             {dimensions.map((dim) => {
               const isSelected = selectedDim.id === dim.id;
               return (
@@ -255,7 +254,7 @@ export default function NanotechnologyVisualSection() {
                   key={dim.id}
                   type="button"
                   onClick={() => setSelectedDim(dim)}
-                  className={`p-4 rounded-2xl border text-left transition-all cursor-pointer ${
+                  className={`p-3 sm:p-4 rounded-xl sm:rounded-2xl border text-left transition-all cursor-pointer ${
                     isSelected
                       ? "bg-white border-blue shadow-md ring-2 ring-blue/15 scale-[1.02]"
                       : "bg-[#fafbfc] border-line hover:bg-white hover:border-slate-300"

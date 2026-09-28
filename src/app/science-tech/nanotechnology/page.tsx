@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import NanotechnologyVisualSection from "@/components/NanotechnologyVisualSection";
 import SubjectArticlesClient from "@/components/SubjectArticlesClient";
 import { getAllArticles } from "@/lib/articles";
-import { IconArrow, IconBook, IconGlobe, IconTarget } from "@/components/Icons";
+import { IconArrow } from "@/components/Icons";
 
 export const metadata: Metadata = {
   title: "Nanotechnology, Graphene & 2D Materials | Science & Tech | Career Prepp",
@@ -20,7 +20,7 @@ export default async function NanotechnologyPage() {
     <>
       <Header forceSolid />
 
-      <main className="flex-1 bg-white">
+      <main className="flex-1 bg-white pt-16 sm:pt-[4.75rem]">
         {/* Hero Header */}
         <section className="border-b border-line bg-gradient-to-b from-[#03071e] via-[#0f172a] to-[#1e293b] text-white py-16 lg:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(56,189,248,0.25),transparent_60%)] pointer-events-none" />

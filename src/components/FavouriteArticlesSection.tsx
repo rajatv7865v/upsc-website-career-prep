@@ -15,7 +15,7 @@ export default function FavouriteArticlesSection({ posts }: Props) {
       id="favourite-articles"
       className="scroll-mt-24 bg-white py-16 lg:py-24"
     >
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between mb-12">
           <div>
@@ -53,7 +53,7 @@ export default function FavouriteArticlesSection({ posts }: Props) {
             return (
               <article
                 key={post.slug}
-                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-line bg-[#fbfcfd] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-blue/30 hover:bg-white hover:shadow-xl"
+                className="group relative flex flex-col justify-between overflow-hidden rounded-2xl border border-line bg-[#fbfcfd] p-4 sm:p-6 transition-all duration-300 hover:-translate-y-1 hover:border-blue/30 hover:bg-white hover:shadow-xl"
               >
                 <div>
                   {/* Top Meta & Star Pill */}

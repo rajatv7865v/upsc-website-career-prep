@@ -39,13 +39,13 @@ export default function Hero({ latest }: Props) {
           </div>
 
           <h1 className="hero-headline">
-            Clear notes on the world around you.
+            Simple notes to understand the world around you.
           </h1>
 
           <p className="hero-support">
-            Short, readable articles on geography, economy, polity, and today’s
-            headlines — useful whether you are preparing for something specific
-            or simply want to stay informed.
+            Short, easy-to-read articles on geography, economy, polity, and
+            daily news — helpful whether you are preparing for exams or simply
+            want to stay informed.
           </p>
 
           <div className="hero-actions">

@@ -112,29 +112,20 @@ export default function Header({ forceSolid = false }: HeaderProps) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpenId, setMobileOpenId] = useState<string | null>(null);
-  const [active, setActive] = useState("home");
 
-  useEffect(() => {
-    const resolveActive = () => {
-      if (pathname === "/about") return "about";
-      if (pathname === "/contact") return "contact";
-      if (pathname?.startsWith("/blog")) return "blog";
-      if (pathname?.startsWith("/geography")) return "geography";
-      if (pathname?.startsWith("/environment")) return "environment";
-      if (pathname?.startsWith("/science-tech")) return "science-tech";
-      return "home";
-    };
-    setActive(resolveActive());
-  }, [pathname]);
+  const active = (() => {
+    if (pathname === "/about") return "about";
+    if (pathname === "/contact") return "contact";
+    if (pathname?.startsWith("/blog")) return "blog";
+    if (pathname?.startsWith("/geography")) return "geography";
+    if (pathname?.startsWith("/environment")) return "environment";
+    if (pathname?.startsWith("/science-tech")) return "science-tech";
+    return "home";
+  })();
 
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 16);
-
-      if (pathname !== "/") return;
-
-      setActive("home");
-      return;
     };
 
     onScroll();
@@ -185,7 +176,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
         aria-hidden
       />
 
-      <div className="relative mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-6 sm:h-[4.75rem] lg:px-8">
+      <div className="relative mx-auto flex h-16 max-w-7xl items-center justify-between gap-3 px-4 sm:h-[4.75rem] sm:gap-4 sm:px-6 lg:px-8">
         <Link
           href="/"
           onClick={() => setOpen(false)}
@@ -347,7 +338,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
         aria-hidden={!open}
       >
         <nav
-          className="mx-auto max-h-[calc(100dvh-5rem)] max-w-7xl overflow-y-auto px-6 py-5 lg:px-8"
+          className="mx-auto max-h-[calc(100dvh-5rem)] max-w-7xl overflow-y-auto overscroll-contain px-4 py-5 sm:px-6 lg:px-8 [-webkit-overflow-scrolling:touch]"
           aria-label="Mobile"
         >
           <ul className="flex flex-col">

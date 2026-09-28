@@ -252,12 +252,14 @@
 
 .admin-table-wrap {
   overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
   background: #fff;
   border: 1px solid var(--line);
 }
 
 .admin-table {
   width: 100%;
+  min-width: 580px;
   border-collapse: collapse;
 }
 

@@ -16,7 +16,7 @@ export default function LatestArticlesSection({ posts }: Props) {
 
   return (
     <section id="latest-articles" className="scroll-mt-24 bg-white py-16 lg:py-24">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Masthead Header */}
         <header className="articles-masthead mb-10">
           <div className="articles-masthead-left">
@@ -131,13 +131,13 @@ export default function LatestArticlesSection({ posts }: Props) {
                   <li key={post.slug}>
                     <Link href={`/blog/${post.slug}`} className="news-side-item news-side-item-premium group">
                       <span className="news-side-index">{String(i + 1).padStart(2, "0")}</span>
-                      <div className="relative h-[4.5rem] w-[4.5rem] shrink-0 overflow-hidden rounded-md sm:h-16 sm:w-16">
+                      <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-md sm:h-16 sm:w-16">
                         <Image
                           src={post.image}
                           alt=""
                           fill
                           className="object-cover transition-transform duration-500 group-hover:scale-105"
-                          sizes="64px"
+                          sizes="(max-width: 640px) 56px, 64px"
                         />
                       </div>
                       <div className="min-w-0 flex-1">

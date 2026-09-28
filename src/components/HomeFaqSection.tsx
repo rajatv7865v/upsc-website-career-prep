@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import type { ComponentType } from "react";
 import AnimatedIcon from "@/components/AnimatedIcon";
 import {
   IconBook,
@@ -10,18 +11,32 @@ import {
   IconCompass,
   IconGlobe,
   IconHelp,
+  IconInstagram,
   IconLayers,
-  IconMic,
   IconNewspaper,
   IconPen,
-  IconPhone,
   IconRefresh,
   IconSearch,
+  IconTelegram,
   IconUsers,
+  IconWhatsApp,
+  IconYouTube,
 } from "@/components/Icons";
 import { siteContact } from "@/data/site";
 
-const faqs = [
+type FaqItem = {
+  q: string;
+  a: string;
+  icon: ComponentType<{ className?: string }>;
+  socialLinks?: {
+    label: string;
+    href: string;
+    icon: ComponentType<{ className?: string }>;
+    color: string;
+  }[];
+};
+
+const faqs: FaqItem[] = [
   {
     q: "Who is Career Prepp for?",
     a: "Anyone who wants clear, free notes on current affairs — working professionals, curious readers, and serious exam aspirants alike.",
@@ -71,6 +86,20 @@ const faqs = [
     q: "Can I suggest a topic or report a gap?",
     a: "Yes. Use the Contact page, WhatsApp, or Telegram. We read every message and add notes based on what readers ask for.",
     icon: IconPen,
+    socialLinks: [
+      {
+        label: "WhatsApp us",
+        href: siteContact.whatsapp,
+        icon: IconWhatsApp,
+        color: "text-[#25D366]",
+      },
+      {
+        label: "Telegram",
+        href: siteContact.telegram,
+        icon: IconTelegram,
+        color: "text-[#229ED9]",
+      },
+    ],
   },
   {
     q: "Do you sell courses or paid batches?",
@@ -81,6 +110,32 @@ const faqs = [
     q: "How do I stay updated when a new article drops?",
     a: "Join our Telegram channel or follow on WhatsApp for alerts. You can also bookmark the home page and check the latest edition.",
     icon: IconCalendar,
+    socialLinks: [
+      {
+        label: "Telegram Channel",
+        href: siteContact.telegram,
+        icon: IconTelegram,
+        color: "text-[#229ED9]",
+      },
+      {
+        label: "WhatsApp Alerts",
+        href: siteContact.whatsapp,
+        icon: IconWhatsApp,
+        color: "text-[#25D366]",
+      },
+      {
+        label: "YouTube Notes",
+        href: siteContact.youtube,
+        icon: IconYouTube,
+        color: "text-[#FF0000]",
+      },
+      {
+        label: "Instagram",
+        href: siteContact.instagram,
+        icon: IconInstagram,
+        color: "text-[#E4405F]",
+      },
+    ],
   },
 ];
 
@@ -99,9 +154,9 @@ export default function HomeFaqSection() {
                 tone="light"
                 size="sm"
               />
-              FAQs
+              Common Questions
             </p>
-            <h2 className="section-title">Common questions.</h2>
+            <h2 className="section-title">Frequently Asked Questions (FAQs).</h2>
             <p className="section-text">
               Answers about reading, articles, subjects, and how Career Prepp
               fits into your routine — whether you prepare for an exam or read
@@ -114,19 +169,41 @@ export default function HomeFaqSection() {
               href={siteContact.telegram}
               target="_blank"
               rel="noopener noreferrer"
-              className="faq-action faq-action-outline"
+              className="faq-action faq-action-outline hover:!border-[#229ED9] hover:!text-[#229ED9]"
+              title="Join Career Prepp Telegram Channel"
             >
-              <IconMic className="h-4 w-4" />
-              Join Telegram
+              <IconTelegram className="h-4 w-4 shrink-0 text-[#229ED9]" />
+              <span>Join Telegram</span>
             </a>
             <a
               href={siteContact.whatsapp}
               target="_blank"
               rel="noopener noreferrer"
-              className="faq-action faq-action-solid"
+              className="faq-action faq-action-solid hover:!bg-[#22bf5b]"
+              title="Chat with us on WhatsApp"
             >
-              <IconPhone className="h-4 w-4" />
-              WhatsApp us
+              <IconWhatsApp className="h-4 w-4 shrink-0 text-white" />
+              <span>WhatsApp us</span>
+            </a>
+            <a
+              href={siteContact.youtube}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="faq-action faq-action-outline hover:!border-[#FF0000] hover:!text-[#FF0000]"
+              title="Watch video breakdowns on YouTube"
+            >
+              <IconYouTube className="h-4 w-4 shrink-0 text-[#FF0000]" />
+              <span>YouTube</span>
+            </a>
+            <a
+              href={siteContact.instagram}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="faq-action faq-action-outline hover:!border-[#E4405F] hover:!text-[#E4405F]"
+              title="Follow us on Instagram"
+            >
+              <IconInstagram className="h-4 w-4 shrink-0 text-[#E4405F]" />
+              <span>Instagram</span>
             </a>
           </div>
         </div>
@@ -158,6 +235,25 @@ export default function HomeFaqSection() {
 
                 <div className="faq-panel" hidden={!open}>
                   <p className="faq-answer">{item.a}</p>
+                  {item.socialLinks && (
+                    <div className="mt-3.5 flex flex-wrap items-center gap-2 pt-3 border-t border-line/60">
+                      <span className="text-xs font-semibold text-muted tracking-wider uppercase">
+                        Quick links:
+                      </span>
+                      {item.socialLinks.map((s) => (
+                        <a
+                          key={s.label}
+                          href={s.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center gap-1.5 rounded border border-line bg-surface px-2.5 py-1 text-xs font-medium text-ink transition-colors hover:border-black hover:bg-white"
+                        >
+                          <s.icon className={`h-3.5 w-3.5 shrink-0 ${s.color}`} />
+                          <span>{s.label}</span>
+                        </a>
+                      ))}
+                    </div>
+                  )}
                 </div>
               </article>
             );
