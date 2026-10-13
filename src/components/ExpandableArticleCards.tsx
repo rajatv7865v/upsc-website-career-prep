@@ -41,8 +41,6 @@ export default function ExpandableArticleCards({ posts }: Props) {
 
             <div className="blog-card-body">
               <p className="article-more-meta">
-                {post.stage === "Both" ? "Prelims · Mains" : post.stage}
-                <span aria-hidden> · </span>
                 {post.date} · {post.read}
               </p>
 

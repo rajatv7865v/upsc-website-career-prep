@@ -28,7 +28,7 @@ export default function FeaturedArticles({ posts }: Props) {
           </div>
         </div>
         <div className="articles-masthead-right">
-          <p className="articles-masthead-tagline">Free · Knowledge-first · Updated weekly</p>
+          <p className="articles-masthead-tagline">Free · In-depth notes · Updated weekly</p>
           <Link
             href={`/blog/${lead.slug}`}
             className="articles-masthead-cta"
@@ -42,7 +42,7 @@ export default function FeaturedArticles({ posts }: Props) {
       <div className="articles-intro">
         <h2 className="articles-intro-title">Latest articles</h2>
         <p className="articles-intro-text">
-          Clear notes on geography, economy, polity, and the day&apos;s issues —
+          Clear notes on geography, environment, science & tech, and the day&apos;s issues —
           open any headline below.
         </p>
       </div>

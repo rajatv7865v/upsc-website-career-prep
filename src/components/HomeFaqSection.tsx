@@ -49,12 +49,12 @@ const faqs: FaqItem[] = [
   },
   {
     q: "Why are all articles on the home page?",
-    a: "So you can start reading immediately — no digging through menus or filters. Subject tabs and stage filters are there when you want more structure.",
+    a: "So you can start reading immediately — no digging through menus or filters. Subject tabs and dedicated guides are there when you want more structure.",
     icon: IconSearch,
   },
   {
     q: "Is this only for civil services?",
-    a: "No. The tone is knowledge-first. Syllabus, strategy, PYQ, and notification pages exist if you want exam structure later.",
+    a: "No. The focus is clarity and deep understanding. Syllabus, strategy, PYQ, and notification pages exist if you want exam structure later.",
     icon: IconGlobe,
   },
   {
@@ -64,7 +64,7 @@ const faqs: FaqItem[] = [
   },
   {
     q: "How are articles organised?",
-    a: "By topic (Geography, Economy, Polity, and more) and by stage when relevant. The same note can appear on the home feed and under a subject tab.",
+    a: "By topic (Geography, Environment, Science & Tech, and more). The same note can appear on the home feed and under a subject tab.",
     icon: IconLayers,
   },
   {
@@ -144,7 +144,7 @@ export default function HomeFaqSection() {
 
   return (
     <section id="faqs" className="faq-section scroll-mt-24">
-      <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8 lg:py-28">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 py-16 sm:py-20 lg:px-8 lg:py-28">
         <div className="faq-section-head">
           <div className="faq-section-intro">
             <p className="section-label inline-flex items-center gap-2">

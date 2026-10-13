@@ -187,7 +187,7 @@ export default function NanotechnologyVisualSection() {
           <button
             type="button"
             onClick={() => setActiveTab("dimensions")}
-            className={`whitespace-nowrap shrink-0 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer ${
+            className={`whitespace-nowrap shrink-0 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer touch-manipulation ${
               activeTab === "dimensions"
                 ? "bg-white text-blue shadow-xs"
                 : "text-muted hover:text-ink"
@@ -198,7 +198,7 @@ export default function NanotechnologyVisualSection() {
           <button
             type="button"
             onClick={() => setActiveTab("materials")}
-            className={`whitespace-nowrap shrink-0 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer ${
+            className={`whitespace-nowrap shrink-0 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer touch-manipulation ${
               activeTab === "materials"
                 ? "bg-white text-blue shadow-xs"
                 : "text-muted hover:text-ink"
@@ -209,7 +209,7 @@ export default function NanotechnologyVisualSection() {
           <button
             type="button"
             onClick={() => setActiveTab("agri-food")}
-            className={`whitespace-nowrap shrink-0 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer ${
+            className={`whitespace-nowrap shrink-0 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer touch-manipulation ${
               activeTab === "agri-food"
                 ? "bg-white text-blue shadow-xs"
                 : "text-muted hover:text-ink"
@@ -220,7 +220,7 @@ export default function NanotechnologyVisualSection() {
           <button
             type="button"
             onClick={() => setActiveTab("india-initiatives")}
-            className={`whitespace-nowrap shrink-0 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer ${
+            className={`whitespace-nowrap shrink-0 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer touch-manipulation ${
               activeTab === "india-initiatives"
                 ? "bg-white text-blue shadow-xs"
                 : "text-muted hover:text-ink"
@@ -231,7 +231,7 @@ export default function NanotechnologyVisualSection() {
           <button
             type="button"
             onClick={() => setActiveTab("pyqs")}
-            className={`whitespace-nowrap shrink-0 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer ${
+            className={`whitespace-nowrap shrink-0 rounded-lg px-3 py-1.5 text-xs font-semibold transition-all cursor-pointer touch-manipulation ${
               activeTab === "pyqs"
                 ? "bg-white text-blue shadow-xs"
                 : "text-muted hover:text-ink"
@@ -518,7 +518,7 @@ export default function NanotechnologyVisualSection() {
       {/* TAB 5: UPSC PYQ PRACTICE LAB */}
       {activeTab === "pyqs" && (
         <div className="space-y-6">
-          <div className="flex items-center justify-between mb-2">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
             <div>
               <span className="text-xs font-bold uppercase tracking-wider text-blue">Past Year Questions</span>
               <h3 className="text-xl font-bold text-black mt-0.5">UPSC Civil Services Prelims PYQ Solver</h3>

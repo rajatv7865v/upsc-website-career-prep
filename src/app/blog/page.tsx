@@ -37,28 +37,28 @@ export default async function BlogPage() {
             <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/35" />
           </div>
 
-          <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <p className="section-label">Blog</p>
             <h1 className="page-hero-title">
-              Free Current Affairs guides for Geography & Mains.
+              Free Current Affairs guides for Geography &amp; Mains.
             </h1>
             <p className="page-hero-text">
               Newspaper methods, map briefs, Mains analysis, and revision
               rhythms — share, download as Word, and save favourites.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-col sm:flex-row flex-wrap gap-3">
               <a
                 href="#articles"
-                className="inline-flex items-center gap-2 bg-blue px-6 py-3.5 text-sm font-medium text-white transition-colors hover:bg-blue-hover"
+                className="inline-flex items-center justify-center gap-2 bg-blue px-6 py-3.5 text-sm font-medium text-white transition-colors hover:bg-blue-hover"
               >
                 Browse CA articles
                 <IconArrow className="h-4 w-4" />
               </a>
               <Link
                 href="/#current-affairs"
-                className="inline-flex items-center gap-2 border border-white/35 px-6 py-3.5 text-sm font-medium text-white transition-colors hover:border-white hover:bg-white/10"
+                className="inline-flex items-center justify-center gap-2 border border-white/35 px-6 py-3.5 text-sm font-medium text-white transition-colors hover:border-white hover:bg-white/10"
               >
-                Geography & Mains tracks
+                Geography &amp; Mains tracks
               </Link>
             </div>
           </div>
@@ -68,7 +68,7 @@ export default async function BlogPage() {
           id="articles"
           className="scroll-mt-28 bg-surface py-20 lg:py-28"
         >
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <Suspense fallback={<p className="text-muted">Loading articles…</p>}>
               <BlogIndexList posts={posts} />
             </Suspense>

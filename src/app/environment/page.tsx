@@ -14,7 +14,7 @@ export default function EnvironmentPage() {
       subject="Environment"
       title="Environment"
       headline="Environment current affairs — Prelims and Mains."
-      blurb="Articles tagged Environment appear here automatically and under Current Affairs when filtered by stage."
+      blurb="High-yield notes on ecology, biodiversity conservation, climate change conventions, and environmental governance for Prelims and Mains."
     />
   );
 }

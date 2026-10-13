@@ -104,7 +104,7 @@ export default function FavouriteArticlesSection({ posts }: Props) {
                 {/* Footer */}
                 <div className="mt-6 flex items-center justify-between border-t border-line/80 pt-4">
                   <span className="text-xs font-medium text-muted">
-                    {post.stage === "Both" ? "Prelims · Mains" : post.stage}
+                    {post.read}
                   </span>
                   <Link
                     href={`/blog/${post.slug}`}

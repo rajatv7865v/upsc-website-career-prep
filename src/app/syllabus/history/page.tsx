@@ -60,7 +60,7 @@ export default function HistorySyllabusPage() {
             <div className="gs1-hero-grain absolute inset-0" aria-hidden />
           </div>
 
-          <div className="relative z-10 mx-auto flex min-h-[88svh] max-w-7xl flex-col justify-end px-6 pb-16 pt-28 sm:pb-20 lg:min-h-[92svh] lg:justify-center lg:px-8 lg:pb-24 lg:pt-24">
+          <div className="relative z-10 mx-auto flex min-h-[88svh] max-w-7xl flex-col justify-end px-4 pb-16 pt-28 sm:px-6 sm:pb-20 lg:min-h-[92svh] lg:justify-center lg:px-8 lg:pb-24 lg:pt-24">
             <div className="gs1-hero-content max-w-3xl">
               <div className="hero-brand-row">
                 <span className="hero-brand-rule" aria-hidden />
@@ -114,7 +114,7 @@ export default function HistorySyllabusPage() {
         </section>
 
         <nav className="gs1-rail sticky top-16 z-30 border-b border-line bg-white/92 backdrop-blur-md sm:top-[4.75rem]">
-          <div className="mx-auto flex max-w-7xl items-center gap-3 overflow-x-auto px-6 py-3.5 lg:px-8">
+          <div className="mx-auto flex max-w-7xl items-center gap-3 overflow-x-auto px-4 sm:px-6 lg:px-8 py-3.5">
             <span className="shrink-0 text-[11px] font-medium tracking-[0.16em] text-blue uppercase">
               Sections
             </span>
@@ -138,7 +138,7 @@ export default function HistorySyllabusPage() {
           id="history-map"
           className="gs1-preview scroll-mt-36 border-b border-line bg-black py-20 lg:py-28"
         >
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
               <div className="section-head section-head-dark max-w-2xl">
                 <p className="section-label">Syllabus preview</p>
@@ -228,7 +228,7 @@ export default function HistorySyllabusPage() {
                 isAlt ? "bg-surface" : "bg-white"
               }`}
             >
-              <div className="mx-auto max-w-7xl px-6 lg:px-8">
+              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="gs1-chapter-head">
                   <div className="flex items-center gap-4">
                     <AnimatedIcon
@@ -305,7 +305,7 @@ export default function HistorySyllabusPage() {
         })}
 
         <section className="border-t border-line bg-black py-20 lg:py-28">
-          <div className="mx-auto flex max-w-7xl flex-col gap-8 px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+          <div className="mx-auto flex max-w-7xl flex-col gap-8 px-4 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
             <div className="section-head section-head-dark max-w-xl">
               <p className="section-label">Keep going</p>
               <h2 className="section-title">

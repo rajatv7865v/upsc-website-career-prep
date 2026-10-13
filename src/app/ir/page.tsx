@@ -14,7 +14,7 @@ export default function IrPage() {
       subject="IR"
       title="International Relations"
       headline="IR current affairs — Prelims and Mains."
-      blurb="Articles tagged IR appear here automatically and under Current Affairs when filtered by stage."
+      blurb="Comprehensive analysis of India's foreign policy, bilateral partnerships, multilateral groupings, and key global developments for civil services."
     />
   );
 }

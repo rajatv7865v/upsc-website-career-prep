@@ -15,26 +15,23 @@ import { IconArrow } from "@/components/Icons";
 const CA_SUBJECTS = [
   "All",
   "Geography",
-  "Economy",
-  "Polity",
-  "IR",
   "Environment",
   "Science & Tech",
+  "IR",
   "History",
 ] as const;
 
 /** Top-level subject hubs (also appear under Current Affairs when tagged). */
 const SUBJECT_HUBS: Record<string, string> = {
   Geography: "/geography",
-  Economy: "/economy",
-  Polity: "/polity",
-  IR: "/ir",
   Environment: "/environment",
+  "Science & Tech": "/science-tech",
+  IR: "/ir",
 };
 
 type Props = {
   posts: BlogPost[];
-  /** Lock list to one subject (Geography / Economy / Polity hubs). */
+  /** Lock list to one subject (Geography / Environment hubs). */
   lockedSubject?: SubjectTag | string;
   /** Show subject filter row (Current Affairs hub). */
   showSubjectFilter?: boolean;
@@ -68,16 +65,18 @@ export default function TaggedArticleList({
   const [showFavourites, setShowFavourites] = useState(false);
 
   const syncUrl = useCallback(
-    (nextStage: string, nextSubject: string) => {
+    (nextSubject: string) => {
       const params = new URLSearchParams();
-      if (nextStage !== "All") params.set("stage", nextStage);
+      if (stageFromUrl && stageFromUrl !== "All") {
+        params.set("stage", stageFromUrl);
+      }
       if (!lockedSubject && nextSubject !== "All") {
         params.set("subject", nextSubject);
       }
       const qs = params.toString();
       router.replace(qs ? `${pathname}?${qs}` : pathname, { scroll: false });
     },
-    [lockedSubject, pathname, router],
+    [lockedSubject, pathname, router, stageFromUrl],
   );
 
   const postsFiltered = useMemo(() => {
@@ -91,49 +90,18 @@ export default function TaggedArticleList({
     return list;
   }, [posts, stage, activeSubject, showFavourites, favorites]);
 
-  function onStage(s: "All" | "Prelims" | "Mains") {
-    setShowFavourites(false);
-    syncUrl(s, activeSubject);
-  }
-
   function onSubject(s: string) {
     setShowFavourites(false);
-    syncUrl(stage, s);
+    syncUrl(s);
   }
 
   return (
     <div>
       <div className="space-y-5">
-        <div>
-          <p className="mb-2 text-xs font-semibold tracking-[0.16em] text-muted uppercase">
-            Exam stage
-          </p>
-          <div className="blog-filters !mt-0">
-            {(["All", "Prelims", "Mains"] as const).map((s) => (
-              <button
-                key={s}
-                type="button"
-                onClick={() => onStage(s)}
-                className={`blog-filter-chip ${!showFavourites && stage === s ? "is-active" : ""}`}
-              >
-                {s === "All" ? "All stages" : s}
-              </button>
-            ))}
-            <button
-              type="button"
-              onClick={() => setShowFavourites(true)}
-              className={`blog-filter-chip ${showFavourites ? "is-active" : ""}`}
-            >
-              Favourites
-              {favorites.length > 0 ? ` (${favorites.length})` : ""}
-            </button>
-          </div>
-        </div>
-
         {showSubjectFilter && !lockedSubject && (
           <div>
             <p className="mb-2 text-xs font-semibold tracking-[0.16em] text-muted uppercase">
-              Subject
+              Topic
             </p>
             <div className="blog-filters !mt-0">
               {CA_SUBJECTS.map((s) => (
@@ -143,15 +111,23 @@ export default function TaggedArticleList({
                   onClick={() => onSubject(s)}
                   className={`blog-filter-chip ${!showFavourites && activeSubject === s ? "is-active" : ""}`}
                 >
-                  {s === "All" ? "All subjects" : s}
+                  {s === "All" ? "All topics" : s}
                 </button>
               ))}
+              <button
+                type="button"
+                onClick={() => setShowFavourites((prev) => !prev)}
+                className={`blog-filter-chip ${showFavourites ? "is-active" : ""}`}
+              >
+                Favourites
+                {favorites.length > 0 ? ` (${favorites.length})` : ""}
+              </button>
             </div>
             {activeSubject !== "All" && SUBJECT_HUBS[activeSubject] && (
               <p className="mt-3 text-sm text-muted">
                 Weak in {activeSubject}? Open the dedicated{" "}
                 <Link
-                  href={`${SUBJECT_HUBS[activeSubject]}${stage !== "All" ? `?stage=${stage}` : ""}`}
+                  href={SUBJECT_HUBS[activeSubject]}
                   className="font-medium text-blue"
                 >
                   {activeSubject} tab
@@ -163,17 +139,26 @@ export default function TaggedArticleList({
         )}
 
         {lockedSubject && (
-          <p className="text-sm text-muted">
-            Showing articles tagged <strong className="text-ink">{lockedSubject}</strong>.
-            The same notes also appear under{" "}
-            <Link
-              href={`/current-affairs${stage !== "All" ? `?stage=${stage}` : ""}`}
-              className="font-medium text-blue"
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <p className="text-sm text-muted">
+              Showing articles tagged <strong className="text-ink">{lockedSubject}</strong>.
+              The same notes also appear under{" "}
+              <Link
+                href="/current-affairs"
+                className="font-medium text-blue"
+              >
+                Current Affairs
+              </Link>.
+            </p>
+            <button
+              type="button"
+              onClick={() => setShowFavourites((prev) => !prev)}
+              className={`blog-filter-chip ${showFavourites ? "is-active" : ""}`}
             >
-              Current Affairs
-            </Link>{" "}
-            when you filter by stage.
-          </p>
+              Favourites
+              {favorites.length > 0 ? ` (${favorites.length})` : ""}
+            </button>
+          </div>
         )}
       </div>
 
@@ -187,8 +172,7 @@ export default function TaggedArticleList({
             type="button"
             onClick={() => {
               setShowFavourites(false);
-              onStage("All");
-              if (!lockedSubject) onSubject("All");
+              onSubject("All");
             }}
             className="mt-6 inline-flex bg-blue px-5 py-3 text-sm font-medium text-white hover:bg-blue-hover"
           >
@@ -220,7 +204,7 @@ function ArticleCard({ post }: { post: BlogPost }) {
         />
         <div className="blog-card-veil" aria-hidden />
         <span className="blog-card-category">
-          {post.stage === "Both" ? post.category : post.stage}
+          {post.subjects[0] ?? post.category}
         </span>
       </Link>
 

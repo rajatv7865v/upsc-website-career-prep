@@ -2,11 +2,9 @@ export type ExamStage = "Prelims" | "Mains" | "Both";
 
 export type SubjectTag =
   | "Geography"
-  | "Economy"
-  | "Polity"
-  | "IR"
   | "Environment"
   | "Science & Tech"
+  | "IR"
   | "History"
   | "Ethics"
   | "Strategy"
@@ -35,11 +33,9 @@ export type BlogPost = {
 
 export const SUBJECT_TAGS: SubjectTag[] = [
   "Geography",
-  "Economy",
-  "Polity",
-  "IR",
   "Environment",
   "Science & Tech",
+  "IR",
   "History",
   "Ethics",
   "Strategy",

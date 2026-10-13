@@ -28,7 +28,7 @@ export default function LatestArticlesSection({ posts }: Props) {
           </div>
           <div className="articles-masthead-right">
             <p className="articles-masthead-tagline hidden sm:block">
-              Free · Knowledge-first · Updated weekly
+              Free · In-depth notes · Updated weekly
             </p>
             <Link
               href="/current-affairs"

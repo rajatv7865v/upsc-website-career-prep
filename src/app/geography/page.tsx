@@ -13,8 +13,8 @@ export default function GeographyPage() {
     <SubjectHubPage
       subject="Geography"
       title="Geography"
-      headline="Geography current affairs — Prelims and Mains."
-      blurb="Articles tagged Geography appear here automatically. They also show under Current Affairs when you filter by Prelims or Mains."
+      headline="Geography — Prelims and Mains."
+      blurb="Explore in-depth physical and human geography notes, map-based case studies, climate systems, and high-yield location pointers structured for Prelims and Mains."
     />
   );
 }

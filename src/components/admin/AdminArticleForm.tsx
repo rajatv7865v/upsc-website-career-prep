@@ -13,9 +13,9 @@ export default function AdminArticleForm() {
   const [title, setTitle] = useState("");
   const [slug, setSlug] = useState("");
   const [excerpt, setExcerpt] = useState("");
-  const [category, setCategory] = useState<SubjectTag>("Polity");
+  const [category, setCategory] = useState<SubjectTag>("Geography");
   const [stage, setStage] = useState<ExamStage>("Prelims");
-  const [subjects, setSubjects] = useState<SubjectTag[]>(["Polity"]);
+  const [subjects, setSubjects] = useState<SubjectTag[]>(["Geography"]);
   const [image, setImage] = useState("");
   const [alt, setAlt] = useState("");
   const [htmlContent, setHtmlContent] = useState("<p></p>");

@@ -16,9 +16,9 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Career Prepp | Clear notes on current affairs & public life",
+  title: "Career Prepp | Clear notes on current affairs & civil services",
   description:
-    "Knowledge-first articles on geography, economy, polity, and current affairs — written for curious readers, not just exam classrooms.",
+    "Comprehensive articles and notes on current affairs, geography, environment, and science & technology — written for serious aspirants and curious learners.",
 };
 
 export default function RootLayout({

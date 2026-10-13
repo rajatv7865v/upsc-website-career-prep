@@ -5,11 +5,9 @@ import { IconArrow } from "@/components/Icons";
 
 const SUBJECT_HUBS: Partial<Record<string, string>> = {
   Geography: "/geography",
-  Economy: "/economy",
-  Polity: "/polity",
-  IR: "/ir",
   Environment: "/environment",
   "Science & Tech": "/science-tech",
+  IR: "/ir",
 };
 
 type Props = {

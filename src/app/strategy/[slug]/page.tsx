@@ -35,7 +35,7 @@ export default async function StrategyPaperPage({ params }: Props) {
       <Header forceSolid />
       <main className="flex-1 pt-16 sm:pt-[4.75rem]">
         <section className="border-b border-line bg-black py-16 lg:py-20">
-          <div className="mx-auto max-w-3xl px-6 lg:px-8">
+          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
             <p className="section-label !text-blue-soft">Strategy · {guide.paper}</p>
             <h1 className="mt-3 text-3xl font-semibold tracking-tight text-white sm:text-4xl">
               {guide.title}
@@ -52,7 +52,7 @@ export default async function StrategyPaperPage({ params }: Props) {
         </section>
 
         <section className="bg-white py-14 lg:py-20">
-          <div className="mx-auto max-w-3xl px-6 lg:px-8">
+          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
             <ul className="space-y-4">
               {guide.points.map((point) => (
                 <li

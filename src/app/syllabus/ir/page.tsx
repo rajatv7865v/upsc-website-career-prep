@@ -52,8 +52,8 @@ export default function IrSyllabusPage() {
             <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-black/35" />
           </div>
 
-          <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
-            <p className="section-label">Syllabus & Pattern · IR</p>
+          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <p className="section-label">Syllabus &amp; Pattern · IR</p>
             <h1 className="page-hero-title">
               International Relations — free syllabus map.
             </h1>
@@ -62,10 +62,10 @@ export default function IrSyllabusPage() {
               neighbourhood bilaterals, major powers, and multilateral
               institutions — ready for notes and revision.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-col sm:flex-row flex-wrap gap-3">
               <a
                 href="#ir-map"
-                className="inline-flex items-center gap-2 bg-blue px-6 py-3.5 text-sm font-medium text-white transition-colors hover:bg-blue-hover"
+                className="inline-flex items-center justify-center gap-2 bg-blue px-6 py-3.5 text-sm font-medium text-white transition-colors hover:bg-blue-hover"
               >
                 Browse syllabus map
                 <IconArrow className="h-4 w-4" />
@@ -73,7 +73,7 @@ export default function IrSyllabusPage() {
               <a
                 href="/file/IR-SYLLABUS.docx"
                 download
-                className="inline-flex items-center gap-2 border border-white/35 px-6 py-3.5 text-sm font-medium text-white transition-colors hover:border-white hover:bg-white/10"
+                className="inline-flex items-center justify-center gap-2 border border-white/35 px-6 py-3.5 text-sm font-medium text-white transition-colors hover:border-white hover:bg-white/10"
               >
                 Download Word file
               </a>
@@ -83,7 +83,7 @@ export default function IrSyllabusPage() {
 
         {/* Quick nav */}
         <section className="border-b border-line bg-white py-10">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex flex-wrap items-center gap-3">
               <span className="text-xs font-medium tracking-[0.14em] text-blue uppercase">
                 Jump to
@@ -106,7 +106,7 @@ export default function IrSyllabusPage() {
           id="ir-map"
           className="scroll-mt-28 border-b border-line bg-surface py-20 lg:py-28"
         >
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="section-head">
               <p className="section-label">Overview</p>
               <h2 className="section-title">
@@ -168,7 +168,7 @@ export default function IrSyllabusPage() {
                 isAlt ? "bg-surface" : "bg-white"
               }`}
             >
-              <div className="mx-auto max-w-7xl px-6 lg:px-8">
+              <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
                   <div className="section-head max-w-3xl">
                     <div className="flex items-center gap-3">

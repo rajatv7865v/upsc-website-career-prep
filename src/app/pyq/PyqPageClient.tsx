@@ -23,7 +23,7 @@ export default function PyqPageClient() {
       <Header forceSolid />
       <main className="flex-1 pt-16 sm:pt-[4.75rem]">
         <section className="border-b border-line bg-black py-16 lg:py-20">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <p className="section-label !text-blue-soft">Previous Year Questions</p>
             <h1 className="mt-3 max-w-2xl text-3xl font-semibold tracking-tight text-white sm:text-4xl">
               PYQ — Prelims and Mains.
@@ -36,7 +36,7 @@ export default function PyqPageClient() {
         </section>
 
         <section className="bg-surface py-14 lg:py-20">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="space-y-4">
               <div>
                 <p className="mb-2 text-xs font-semibold tracking-[0.16em] text-muted uppercase">
@@ -104,19 +104,19 @@ export default function PyqPageClient() {
                     {paper.note && (
                       <p className="mt-2 text-sm text-muted">{paper.note}</p>
                     )}
-                    <div className="mt-5 flex flex-wrap gap-3">
+                    <div className="mt-5 flex flex-col sm:flex-row flex-wrap gap-2.5 sm:gap-3">
                       {paper.scannedPdf ? (
                         <a
                           href={paper.scannedPdf}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 bg-blue px-4 py-2.5 text-sm font-medium text-white hover:bg-blue-hover"
+                          className="inline-flex min-h-[44px] w-full sm:w-auto items-center justify-center gap-2 bg-blue px-4 py-2.5 text-sm font-medium text-white hover:bg-blue-hover touch-manipulation"
                         >
                           Scanned PDF
                           <IconArrow className="h-3.5 w-3.5" />
                         </a>
                       ) : (
-                        <span className="inline-flex items-center border border-dashed border-line px-4 py-2.5 text-sm text-muted">
+                        <span className="inline-flex min-h-[44px] w-full sm:w-auto items-center justify-center border border-dashed border-line px-4 py-2.5 text-sm text-muted text-center">
                           Scanned PDF — upload soon
                         </span>
                       )}
@@ -125,13 +125,13 @@ export default function PyqPageClient() {
                           href={paper.textPdf}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-2 border border-black px-4 py-2.5 text-sm font-medium text-black hover:bg-black hover:text-white"
+                          className="inline-flex min-h-[44px] w-full sm:w-auto items-center justify-center gap-2 border border-black px-4 py-2.5 text-sm font-medium text-black hover:bg-black hover:text-white touch-manipulation"
                         >
                           Text PDF
                           <IconArrow className="h-3.5 w-3.5" />
                         </a>
                       ) : (
-                        <span className="inline-flex items-center border border-dashed border-line px-4 py-2.5 text-sm text-muted">
+                        <span className="inline-flex min-h-[44px] w-full sm:w-auto items-center justify-center border border-dashed border-line px-4 py-2.5 text-sm text-muted text-center">
                           Text PDF — upload soon
                         </span>
                       )}

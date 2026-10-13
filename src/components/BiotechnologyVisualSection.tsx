@@ -111,7 +111,7 @@ export default function BiotechnologyVisualSection() {
   return (
     <div className="w-full space-y-12">
       {/* Studio Header Tabs */}
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-b border-line pb-4">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-line pb-4">
         <div>
           <span className="inline-flex items-center gap-1.5 rounded-full bg-blue-tint px-3 py-1 text-xs font-bold uppercase tracking-wider text-blue border border-blue-tint-line">
             🔬 Interactive Biotech Studio
@@ -121,11 +121,11 @@ export default function BiotechnologyVisualSection() {
           </h2>
         </div>
 
-        <div className="flex flex-wrap items-center rounded-xl bg-surface p-1 border border-line gap-1">
+        <div className="flex flex-nowrap sm:flex-wrap items-center rounded-xl bg-surface p-1 border border-line gap-1 overflow-x-auto max-w-full [-webkit-overflow-scrolling:touch]">
           <button
             type="button"
             onClick={() => setActiveTab("bioinformatics")}
-            className={`flex-1 sm:flex-initial text-center rounded-lg px-2.5 sm:px-3.5 py-2 text-xs font-semibold transition-all cursor-pointer ${
+            className={`whitespace-nowrap shrink-0 flex-1 sm:flex-initial text-center rounded-lg px-2.5 sm:px-3.5 py-2 text-xs font-semibold transition-all cursor-pointer touch-manipulation ${
               activeTab === "bioinformatics"
                 ? "bg-white text-blue shadow-xs"
                 : "text-muted hover:text-ink"
@@ -136,7 +136,7 @@ export default function BiotechnologyVisualSection() {
           <button
             type="button"
             onClick={() => setActiveTab("recombinant")}
-            className={`flex-1 sm:flex-initial text-center rounded-lg px-2.5 sm:px-3.5 py-2 text-xs font-semibold transition-all cursor-pointer ${
+            className={`whitespace-nowrap shrink-0 flex-1 sm:flex-initial text-center rounded-lg px-2.5 sm:px-3.5 py-2 text-xs font-semibold transition-all cursor-pointer touch-manipulation ${
               activeTab === "recombinant"
                 ? "bg-white text-blue shadow-xs"
                 : "text-muted hover:text-ink"
@@ -147,7 +147,7 @@ export default function BiotechnologyVisualSection() {
           <button
             type="button"
             onClick={() => setActiveTab("crispr")}
-            className={`flex-1 sm:flex-initial text-center rounded-lg px-2.5 sm:px-3.5 py-2 text-xs font-semibold transition-all cursor-pointer ${
+            className={`whitespace-nowrap shrink-0 flex-1 sm:flex-initial text-center rounded-lg px-2.5 sm:px-3.5 py-2 text-xs font-semibold transition-all cursor-pointer touch-manipulation ${
               activeTab === "crispr"
                 ? "bg-white text-blue shadow-xs"
                 : "text-muted hover:text-ink"

@@ -34,7 +34,7 @@ const studentReviews = [
   {
     name: "Ananya Krishnan",
     role: "College student · Bengaluru",
-    text: "Polity and economy pieces read like a good magazine, not a textbook. Free, organised, and updated — that is rare.",
+    text: "The study guides and topic analyses read like a good magazine, not a textbook. Free, organised, and updated — that is rare.",
     tag: "Subject-wise reading",
   },
   {
@@ -54,7 +54,7 @@ const aboutHighlights = [
   },
   {
     title: "Organised by topic",
-    text: "Geography, Economy, Polity, and more — the same article appears where it belongs.",
+    text: "Geography, Environment, Science & Tech, and more — the same article appears where it belongs.",
     icon: IconGlobe,
     variant: "float" as const,
   },
@@ -71,7 +71,6 @@ const subjectLinks = [
   { href: "/science-tech/biotechnology", label: "Biotechnology Hub", note: "Genomics, rDNA & Bioinformatics" },
   { href: "/geography", label: "Geography", note: "Maps, climate & places" },
   { href: "/environment", label: "Environment", note: "Ecology, biodiversity & climate" },
-  { href: "/polity", label: "Polity", note: "Institutions & Constitution" },
   { href: "/ir", label: "International Relations", note: "World affairs & India" },
 ];
 
@@ -114,13 +113,13 @@ export default async function Home() {
           id="about"
           className="scroll-mt-24 border-y border-blue-tint-line bg-blue-tint py-20 lg:py-28"
         >
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid items-start gap-12 lg:grid-cols-12 lg:gap-16">
               <div className="lg:col-span-5">
                 <div className="section-head">
                   <p className="section-label">About Career Prepp</p>
                   <h2 className="section-title">
-                    Knowledge-first notes on public life.
+                    Clear, in-depth notes on current affairs & governance.
                   </h2>
                   <p className="section-text">
                     We publish free, readable articles on current affairs — for
@@ -132,7 +131,7 @@ export default async function Home() {
                   href="/about"
                   className="mt-8 inline-flex items-center gap-2 bg-blue px-6 py-3.5 text-sm font-medium text-white transition-colors hover:bg-blue-hover"
                 >
-                  Read full About Us
+                  About Us
                   <IconArrow className="h-4 w-4" />
                 </Link>
               </div>
@@ -158,7 +157,7 @@ export default async function Home() {
 
         {/* Browse by subject */}
         <section className="scroll-mt-24 bg-white py-20 lg:py-28">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
               <div className="section-head">
                 <p className="section-label">Browse by subject</p>
@@ -227,7 +226,7 @@ export default async function Home() {
           id="reviews"
           className="scroll-mt-24 border-y border-blue-tint-line bg-blue-tint py-20 lg:py-28"
         >
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col gap-6 sm:flex-row sm:items-end sm:justify-between">
               <div className="section-head">
                 <p className="section-label">Student reviews</p>

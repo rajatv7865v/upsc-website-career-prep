@@ -14,14 +14,8 @@ const explore = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About Us" },
   { href: "/geography", label: "Geography" },
-  { href: "/geography?stage=Prelims", label: "Geography Prelims", nested: true },
-  { href: "/geography?stage=Mains", label: "Geography Mains", nested: true },
   { href: "/environment", label: "Environment" },
-  { href: "/environment?stage=Prelims", label: "Environment Prelims", nested: true },
-  { href: "/environment?stage=Mains", label: "Environment Mains", nested: true },
   { href: "/science-tech", label: "Science & Tech" },
-  { href: "/science-tech/biotechnology", label: "Biotechnology & Bioinformatics", nested: true },
-  { href: "/science-tech/nanotechnology", label: "Nanotechnology & 2D Materials", nested: true },
   { href: "/science-tech?stage=Prelims", label: "Science & Tech Prelims", nested: true },
   { href: "/science-tech?stage=Mains", label: "Science & Tech Mains", nested: true },
 ];
@@ -60,7 +54,7 @@ export default function Footer() {
   return (
     <footer className="border-t border-line bg-black text-white">
       <div className="border-b border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-col gap-5 px-6 py-10 sm:flex-row sm:items-center sm:justify-between lg:px-8 lg:py-12">
+        <div className="mx-auto flex max-w-7xl flex-col gap-5 px-4 py-8 sm:px-6 sm:py-10 sm:flex-row sm:items-center sm:justify-between lg:px-8 lg:py-12">
           <div>
             <p className="text-xs font-medium tracking-[0.2em] text-blue uppercase">
               Career Prepp
@@ -69,25 +63,25 @@ export default function Footer() {
               Stay curious with free Current Affairs.
             </h2>
             <p className="mt-2 max-w-md text-sm leading-relaxed text-white/65">
-              Clear notes on geography, economy, polity, and today’s headlines.
+              Clear notes on geography, environment, science &amp; tech, and today’s headlines.
             </p>
           </div>
           <Link
             href="/current-affairs"
-            className="footer-cta-shine inline-flex shrink-0 items-center justify-center bg-blue px-7 py-3.5 text-sm font-medium text-white transition-colors duration-300 hover:bg-blue-hover"
+            className="footer-cta-shine inline-flex min-h-[44px] w-full sm:w-auto shrink-0 items-center justify-center bg-blue px-7 py-3 text-sm font-medium text-white transition-colors duration-300 hover:bg-blue-hover touch-manipulation"
           >
             Explore Current Affairs
           </Link>
         </div>
       </div>
 
-      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8 lg:px-8 lg:py-14">
+      <div className="mx-auto grid max-w-7xl gap-10 px-4 py-10 sm:px-6 sm:py-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8 lg:px-8 lg:py-14">
         <div className="sm:col-span-2 lg:col-span-1">
           <Link href="/" className="footer-brand text-xl font-semibold tracking-tight">
             Career <span className="footer-brand-mark text-blue">Prepp</span>
           </Link>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/60">
-            Free knowledge notes on current affairs and public life. The library
+            Free, comprehensive notes on current affairs and civil services. The library
             grows gradually.
           </p>
           <div className="mt-6 flex items-center gap-3">
@@ -102,7 +96,7 @@ export default function Footer() {
                     : undefined
                 }
                 aria-label={social.label}
-                className="footer-social flex h-10 w-10 items-center justify-center border border-white/20 text-white/80"
+                className="footer-social flex h-11 w-11 min-h-[44px] min-w-[44px] items-center justify-center border border-white/20 text-white/80 touch-manipulation"
               >
                 {social.icon}
               </a>
@@ -186,7 +180,7 @@ export default function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-6 py-5 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between lg:px-8">
+        <div className="mx-auto flex max-w-7xl flex-col gap-3 px-4 py-5 text-xs text-white/45 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8">
           <p>© {new Date().getFullYear()} Career Prepp. All rights reserved.</p>
           <div className="flex gap-5">
             <Link href="#" className="footer-link">

@@ -3,7 +3,12 @@
 import { useState, type FormEvent } from "react";
 import { IconArrow } from "@/components/Icons";
 
-const stages = ["Prelims", "Mains", "Interview", "General / undecided"];
+const targetExams = [
+  "UPSC CSE 2025",
+  "UPSC CSE 2026",
+  "State PCS",
+  "General Studies / Research",
+];
 const reasons = [
   "Question about a guide",
   "Topic / article request",
@@ -21,19 +26,19 @@ export default function ContactForm() {
     const name = String(data.get("name") || "").trim();
     const email = String(data.get("email") || "").trim();
     const phone = String(data.get("phone") || "").trim();
-    const stage = String(data.get("stage") || "");
+    const targetExam = String(data.get("targetExam") || "");
     const reason = String(data.get("reason") || "");
     const message = String(data.get("message") || "").trim();
 
     const subject = encodeURIComponent(
-      `Career Prepp — ${reason || "message"} (${stage || "UPSC"})`,
+      `Career Prepp — ${reason || "message"} (${targetExam || "UPSC"})`,
     );
     const body = encodeURIComponent(
       [
         `Name: ${name}`,
         `Email: ${email}`,
         `Phone: ${phone}`,
-        `Stage: ${stage}`,
+        `Target Exam: ${targetExam}`,
         `Reason: ${reason}`,
         "",
         message,
@@ -80,12 +85,12 @@ export default function ContactForm() {
           />
         </label>
         <label className="contact-field">
-          <span>Your stage</span>
-          <select name="stage" required defaultValue="">
+          <span>Target exam / goal</span>
+          <select name="targetExam" required defaultValue="">
             <option value="" disabled>
-              Select stage
+              Select target
             </option>
-            {stages.map((s) => (
+            {targetExams.map((s) => (
               <option key={s} value={s}>
                 {s}
               </option>

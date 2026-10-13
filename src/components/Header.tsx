@@ -23,26 +23,8 @@ type NavLink = {
 const links: NavLink[] = [
   { href: "/", label: "Home", id: "home" },
   { href: "/about", label: "About Us", id: "about" },
-  {
-    href: "/geography",
-    label: "Geography",
-    id: "geography",
-    overviewLabel: "All Geography",
-    children: [
-      { href: "/geography?stage=Prelims", label: "Prelims", id: "geo-prelims", group: "Exam Stages" },
-      { href: "/geography?stage=Mains", label: "Mains", id: "geo-mains", group: "Exam Stages" },
-    ],
-  },
-  {
-    href: "/environment",
-    label: "Environment",
-    id: "environment",
-    overviewLabel: "All Environment",
-    children: [
-      { href: "/environment?stage=Prelims", label: "Prelims", id: "env-prelims", group: "Exam Stages" },
-      { href: "/environment?stage=Mains", label: "Mains", id: "env-mains", group: "Exam Stages" },
-    ],
-  },
+  { href: "/geography", label: "Geography", id: "geography" },
+  { href: "/environment", label: "Environment", id: "environment" },
   {
     href: "/science-tech",
     label: "Science & Tech",
@@ -50,52 +32,14 @@ const links: NavLink[] = [
     overviewLabel: "All Science & Technology",
     children: [
       {
-        href: "/science-tech/biotechnology",
-        label: "Biotechnology & Bioinformatics",
-        id: "st-biotech",
-        group: "Biotechnology",
-      },
-      {
-        href: "/science-tech/biotechnology#recombinant-dna",
-        label: "Recombinant DNA & Gene Cloning",
-        id: "st-dna",
-        group: "Biotechnology",
-      },
-      {
-        href: "/science-tech/biotechnology#bioinformatics",
-        label: "Bioinformatics Interdisciplinary Hub",
-        id: "st-bioinformatics",
-        group: "Biotechnology",
-      },
-      {
-        href: "/science-tech/nanotechnology",
-        label: "Nanotechnology & 2D Materials",
-        id: "st-nanotech",
-        group: "Nanotechnology",
-      },
-      {
-        href: "/science-tech/nanotechnology#materials",
-        label: "Graphene, CNTs & MXenes",
-        id: "st-materials",
-        group: "Nanotechnology",
-      },
-      {
-        href: "/science-tech/nanotechnology#pyqs",
-        label: "Nanotech UPSC PYQs (2014-2022)",
-        id: "st-nanotech-pyqs",
-        group: "Nanotechnology",
-      },
-      {
         href: "/science-tech?stage=Prelims",
-        label: "Prelims High-Yield Topics",
+        label: "Prelims",
         id: "st-prelims",
-        group: "Exam Stages",
       },
       {
         href: "/science-tech?stage=Mains",
-        label: "Mains (GS Paper 3)",
+        label: "Mains",
         id: "st-mains",
-        group: "Exam Stages",
       },
     ],
   },
@@ -139,6 +83,16 @@ export default function Header({ forceSolid = false }: HeaderProps) {
       document.body.style.overflow = "";
     };
   }, [open]);
+
+  useEffect(() => {
+    const onResize = () => {
+      if (window.innerWidth >= 1280) {
+        setOpen(false);
+      }
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
   const solid = forceSolid || scrolled || open;
   const onLight = solid;
@@ -303,7 +257,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className={`relative z-[110] flex h-10 w-10 flex-col items-center justify-center gap-[5px] xl:hidden ${onLight ? "text-black" : "text-white"
+          className={`relative z-[110] flex h-11 w-11 min-h-[44px] min-w-[44px] touch-manipulation flex-col items-center justify-center gap-[5px] xl:hidden ${onLight ? "text-black" : "text-white"
             }`}
         >
           <span
@@ -358,7 +312,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
                           id === link.id ? null : link.id,
                         )
                       }
-                      className={`flex w-full items-center gap-4 py-3.5 text-left text-[15px] font-medium transition-colors duration-200 ${isActive ? "text-blue" : "text-ink"
+                      className={`flex min-h-[44px] w-full items-center gap-4 py-3 text-left text-[15px] font-medium transition-colors duration-200 touch-manipulation ${isActive ? "text-blue" : "text-ink"
                         }`}
                     >
                       <span className="text-[11px] tracking-wider text-muted">
@@ -391,7 +345,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
                             setOpen(false);
                             setMobileOpenId(null);
                           }}
-                          className="block py-2.5 pl-12 pr-4 text-sm text-ink hover:text-blue"
+                          className="flex min-h-[44px] items-center py-2.5 pl-12 pr-4 text-sm text-ink hover:text-blue touch-manipulation"
                         >
                           {link.overviewLabel ?? link.label}
                         </Link>
@@ -413,7 +367,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
                                 setOpen(false);
                                 setMobileOpenId(null);
                               }}
-                              className="block py-2.5 pl-12 pr-4 text-sm text-ink hover:text-blue"
+                              className="flex min-h-[44px] items-center py-2.5 pl-12 pr-4 text-sm text-ink hover:text-blue touch-manipulation"
                             >
                               {child.label}
                             </Link>
@@ -433,7 +387,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
                   <Link
                     href={link.href}
                     onClick={() => setOpen(false)}
-                    className={`flex items-center gap-4 py-3.5 text-[15px] font-medium transition-colors duration-200 ${isActive ? "text-blue" : "text-ink hover:text-blue"
+                    className={`flex min-h-[44px] items-center gap-4 py-3 text-[15px] font-medium transition-colors duration-200 touch-manipulation ${isActive ? "text-blue" : "text-ink hover:text-blue"
                       }`}
                   >
                     <span className="text-[11px] tracking-wider text-muted">
@@ -448,7 +402,7 @@ export default function Header({ forceSolid = false }: HeaderProps) {
           <Link
             href="/current-affairs"
             onClick={() => setOpen(false)}
-            className="header-cta footer-cta-shine mt-5 inline-flex w-full items-center justify-center bg-blue px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-hover"
+            className="header-cta footer-cta-shine mt-5 inline-flex min-h-[44px] w-full items-center justify-center bg-blue px-5 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-hover touch-manipulation"
           >
             Current Affairs
           </Link>

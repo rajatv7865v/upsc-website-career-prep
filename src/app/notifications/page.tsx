@@ -16,7 +16,7 @@ export default function NotificationsPage() {
       <Header forceSolid />
       <main className="flex-1 pt-16 sm:pt-[4.75rem]">
         <section className="border-b border-line bg-black py-16 lg:py-20">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <p className="section-label !text-blue-soft">Notifications</p>
             <h1 className="mt-3 max-w-2xl text-3xl font-semibold tracking-tight text-white sm:text-4xl">
               Government exam notifications.
@@ -29,7 +29,7 @@ export default function NotificationsPage() {
         </section>
 
         <section className="bg-surface py-14 lg:py-20">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <ul className="grid gap-4 lg:grid-cols-2">
               {examNotifications.map((item) => (
                 <li key={item.id}>

@@ -23,20 +23,20 @@ export const defaultArticles: BlogPost[] = [
     ],
   },
   {
-    slug: "president-of-india-prelims-polity",
-    category: "Polity",
+    slug: "president-of-india-prelims-governance",
+    category: "Strategy",
     stage: "Prelims",
-    subjects: ["Polity"],
+    subjects: ["Strategy"],
     title: "President of India: what Prelims usually asks",
     excerpt:
-      "Election, powers, impeachment, and ordinances — a short Prelims-ready note on the President. Tagged Polity so it also appears on the Polity subject tab.",
+      "Election, powers, impeachment, and ordinances — a short Prelims-ready note on the President.",
     read: "6 min read",
     date: "22 July 2026",
     image:
       "https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?auto=format&fit=crop&w=1400&h=900&q=85",
-    alt: "Government building facade for polity study",
+    alt: "Government building facade for civil services study",
     content: [
-      "A current-affairs note on the President is usually a Polity fact note for Prelims — election method, term, impeachment, and a few high-yield powers.",
+      "A current-affairs note on the President is usually a high-yield fact note for Prelims — election method, term, impeachment, and a few key powers.",
       "Remember: the President is elected by an electoral college consisting of elected MPs of both Houses of Parliament and elected MLAs of State Legislative Assemblies and UTs (Delhi, Puducherry, J&K), not nominated members.",
       "The election is held in accordance with the system of proportional representation by means of the single transferable vote, with voting done by secret ballot.",
       "For powers, keep a short list: executive, legislative (including ordinances under Article 123), judicial (pardoning powers under Article 72), and emergency provisions (Articles 352, 356, 360).",
@@ -68,7 +68,7 @@ export const defaultArticles: BlogPost[] = [
     slug: "mains-current-affairs-issue-to-answer",
     category: "Mains",
     stage: "Mains",
-    subjects: ["Polity", "IR", "Economy"],
+    subjects: ["IR", "Strategy"],
     title: "Mains Current Affairs: from issue to answer",
     excerpt:
       "How to turn editorials into GS-ready arguments — stakeholders, both sides, examples, and a crisp way forward.",
@@ -79,7 +79,7 @@ export const defaultArticles: BlogPost[] = [
     alt: "Writing analysis notes for Mains",
     content: [
       "Mains current affairs is analysis, not headlines. After reading an editorial, write four lines: issue, stakeholders, arguments on both sides, and a realistic way forward.",
-      "Tag every note to a paper — GS II (governance, IR), GS III (economy, security, environment), Essay, or Ethics. Untagged notes rarely return in the exam hall.",
+      "Tag every note to a paper — GS II (governance, IR), GS III (security, environment, S&T), Essay, or Ethics. Untagged notes rarely return in the exam hall.",
       "Collect reusable examples: a judgment, a scheme, a committee, a state innovation. One strong example used in three answers beats twenty unread clippings.",
       "Weekly, convert three issues into 150-word mini-answers under time. This trains structure while your content stays current.",
       "Career Prepp's Mains CA track focuses on this issue → argument → example loop — free notes built for writing, not for scrolling.",
@@ -121,7 +121,7 @@ export const defaultArticles: BlogPost[] = [
     alt: "Student revising notes at a desk",
     content: [
       "Revision is where ranks are protected — and where many aspirants burn out. The mistake is trying to re-read everything. The exam rewards selective, repeated recall of high-yield areas linked to current affairs.",
-      "Start with a 7-day loop: two days for Polity + current schemes/judgments, one day for Economy + Budget themes, one day for History/Culture with timeline sheets, one day for Geography/Environment maps and reports, one day for S&T + IR briefs, and one lighter day for CSAT or Essay outlines.",
+      "Start with a 7-day loop: two days for governance and current schemes, one day for growth and development themes, one day for History/Culture with timeline sheets, one day for Geography/Environment maps and reports, one day for S&T + IR briefs, and one lighter day for CSAT or Essay outlines.",
       "In the last 30 days before Prelims, drop new thick books. Protect PYQs, error notebooks, and monthly current affairs compilations. If a topic has not appeared in your notes or mocks, it is probably not worth a fresh deep dive now.",
       "Burnout usually comes from guilt, not from lack of hours. Cap revision blocks at 50–60 minutes with a short walk between them. Sleep and a fixed wake time matter more than an extra late-night chapter.",
       "Career Prepp's approach is simple: static and current affairs revise together, weekly targets stay visible, and you measure progress by recall — not by pages flipped.",
@@ -152,7 +152,7 @@ export const defaultArticles: BlogPost[] = [
     slug: "newspaper-reading-exam-ready",
     category: "Current Affairs",
     stage: "Both",
-    subjects: ["Polity", "Economy", "Geography"],
+    subjects: ["Geography", "Environment"],
     title: "Making newspaper reading exam-ready",
     excerpt:
       "What to note from The Hindu / Indian Express, how to link editorials to GS papers, and when monthly magazines are enough.",
@@ -184,7 +184,7 @@ export const defaultArticles: BlogPost[] = [
     alt: "Library shelves filled with books",
     content: [
       "Optional marks can decide your final rank. Choosing late — or switching mid-year — costs months. Decide with a checklist, then commit.",
-      "Interest matters because you will live with the subject for a long time. Overlap with GS (Polity, Sociology, Geography, Literature, etc.) can save revision time, but overlap alone is not enough if you dislike the syllabus.",
+      "Interest matters because you will live with the subject for a long time. Overlap with GS (Sociology, Geography, Literature, etc.) can save revision time, but overlap alone is not enough if you dislike the syllabus.",
       "Check resource availability: standard books, previous year questions, and whether you can get evaluation. Scoring trends change; treat them as one input, not the only one.",
       "If you are a working professional, prefer an optional with clearer notes and fewer sprawling theories — unless your background already gives you an edge.",
       "Once chosen, protect optional hours every week. GS and current affairs will always feel urgent; optional consistency is what compounds.",

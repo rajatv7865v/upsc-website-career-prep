@@ -17,7 +17,7 @@ import {
   getPostBySlug,
   getRelatedPosts,
 } from "@/lib/articles";
-import { IconArrow, IconBook, IconGlobe, IconTarget } from "@/components/Icons";
+import { IconArrow, IconBook, IconGlobe } from "@/components/Icons";
 
 export const revalidate = 60;
 
@@ -68,7 +68,6 @@ export default async function BlogArticlePage({ params }: PageProps) {
       : null;
 
   const primarySubject = post.subjects[0] ?? post.category;
-  const stageLabel = post.stage === "Both" ? "Prelims & Mains" : post.stage;
 
   return (
     <>
@@ -96,10 +95,10 @@ export default async function BlogArticlePage({ params }: PageProps) {
 
               {/* Bottom Caption Pill over Hero */}
               <div className="absolute bottom-4 left-4 right-4 sm:left-6 sm:right-6 flex items-center justify-between pointer-events-none">
-                <span className="rounded-full bg-black/70 backdrop-blur-md px-3.5 py-1 text-xs font-medium text-white/90 border border-white/15 shadow-xs">
+                <span className="rounded-full bg-black/70 backdrop-blur-md px-3.5 py-1 text-xs font-medium text-white/90 border border-white/15 shadow-xs truncate max-w-full">
                   {post.alt || `${primarySubject} · In-Depth Analysis`}
                 </span>
-                <span className="hidden sm:inline-block rounded-full bg-black/50 backdrop-blur-md px-3 py-1 text-[11px] text-white/80 border border-white/10">
+                <span className="hidden sm:inline-block rounded-full bg-black/50 backdrop-blur-md px-3 py-1 text-[11px] text-white/80 border border-white/10 shrink-0 ml-2">
                   Career Prepp Observational Archive
                 </span>
               </div>
@@ -110,15 +109,11 @@ export default async function BlogArticlePage({ params }: PageProps) {
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-6 sm:pt-8">
             {/* Header Block */}
             <header className="pb-8">
-              {/* Pillar & Stage Row */}
-              <div className="flex flex-wrap items-center gap-3 mb-4">
+              {/* Pillar & Topic Row */}
+              <div className="flex flex-wrap items-center gap-2.5 sm:gap-3 mb-4">
                 <span className="esa-pillar">
                   <IconGlobe className="h-3.5 w-3.5" />
                   {primarySubject}
-                </span>
-                <span className="inline-flex items-center rounded-full bg-slate-100 px-3 py-0.5 text-xs font-semibold text-slate-700 border border-slate-200">
-                  <IconTarget className="mr-1.5 h-3 w-3 text-slate-500" />
-                  {stageLabel}
                 </span>
                 {post.subjects.slice(1).map((sub) => (
                   <Link
@@ -155,7 +150,7 @@ export default async function BlogArticlePage({ params }: PageProps) {
                   {primarySubject}
                 </Link>
                 <span className="text-slate-300" aria-hidden>/</span>
-                <span className="text-ink font-medium truncate max-w-[11rem] sm:max-w-md">
+                <span className="text-ink font-medium truncate max-w-[8rem] sm:max-w-md">
                   {post.title}
                 </span>
               </nav>
@@ -228,9 +223,6 @@ export default async function BlogArticlePage({ params }: PageProps) {
                         {sub}
                       </Link>
                     ))}
-                    <span className="rounded-lg bg-blue-tint border border-blue-tint-line px-3 py-1.5 text-xs font-semibold text-blue">
-                      {stageLabel}
-                    </span>
                   </div>
                 </div>
               </div>
@@ -283,7 +275,7 @@ export default async function BlogArticlePage({ params }: PageProps) {
           </div>
 
           {/* Adjacent Story Navigation (Prev / Next) */}
-          <nav className="mx-auto max-w-7xl px-6 lg:px-8 mt-16 pt-10 border-t border-line" aria-label="Article navigation">
+          <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 mt-16 pt-10 border-t border-line" aria-label="Article navigation">
             <div className="grid gap-4 sm:grid-cols-2">
               {prev ? (
                 <Link
@@ -331,7 +323,7 @@ export default async function BlogArticlePage({ params }: PageProps) {
         {/* More in this topic Section (ESA-style card carousel / grid) */}
         {related.length > 0 && (
           <section className="border-t border-line bg-[#f8fafc] py-16 lg:py-20">
-            <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <RelatedArticles posts={related} title={`More in ${primarySubject}`} />
             </div>
           </section>

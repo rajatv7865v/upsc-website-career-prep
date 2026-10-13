@@ -27,7 +27,7 @@ export default function Hero({ latest }: Props) {
         <div className="hero-frame absolute inset-0" aria-hidden />
       </div>
 
-      <div className="relative z-10 mx-auto flex min-h-[82svh] max-w-7xl flex-col justify-end px-6 pb-20 pt-32 sm:pb-24 lg:min-h-[76svh] lg:justify-center lg:px-8 lg:pb-28 lg:pt-28">
+      <div className="relative z-10 mx-auto flex min-h-[82svh] max-w-7xl flex-col justify-end px-4 pb-20 pt-28 sm:px-6 sm:pb-24 sm:pt-32 lg:min-h-[76svh] lg:justify-center lg:px-8 lg:pb-28 lg:pt-28">
         <div className="hero-content max-w-3xl">
           <div className="hero-brand-row">
             <span className="hero-brand-rule" aria-hidden />
@@ -41,7 +41,7 @@ export default function Hero({ latest }: Props) {
           {latest && (
             <Link
               href={`/blog/${latest.slug}`}
-              className="group mb-5 inline-flex max-w-full items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1 text-xs text-white/90 backdrop-blur-xs transition-colors hover:border-white/40 hover:bg-white/15"
+              className="group mb-5 inline-flex max-w-full items-center gap-2 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs text-white/90 backdrop-blur-xs transition-colors hover:border-white/40 hover:bg-white/15 touch-manipulation"
             >
               <span className="flex h-2 w-2 shrink-0 rounded-full bg-emerald-400 animate-pulse" />
               <span className="shrink-0 font-semibold text-white">Latest article:</span>
@@ -57,7 +57,7 @@ export default function Hero({ latest }: Props) {
           </h1>
 
           <p className="hero-support">
-            Short, easy-to-read articles on geography, economy, polity, and
+            Short, easy-to-read articles on geography and
             daily news — helpful whether you are preparing for exams or simply
             want to stay informed.
           </p>
@@ -82,22 +82,22 @@ export default function Hero({ latest }: Props) {
 
           {/* Quick Section Anchor Pills */}
           <div className="mt-8 flex flex-wrap items-center gap-2 pt-2 border-t border-white/10 text-xs">
-            <span className="text-white/60 font-medium">Quick jump:</span>
+            <span className="text-white/60 font-medium py-1">Quick jump:</span>
             <Link
               href="#latest-articles"
-              className="rounded-full bg-white/10 px-3 py-1 text-white/90 backdrop-blur-xs transition-colors hover:bg-white/20 hover:text-white"
+              className="inline-flex min-h-[36px] items-center rounded-full bg-white/10 px-3.5 py-1.5 text-white/90 backdrop-blur-xs transition-colors hover:bg-white/20 hover:text-white touch-manipulation"
             >
               Latest articles
             </Link>
             <Link
               href="#trending-articles"
-              className="rounded-full bg-amber-500/20 px-3 py-1 text-amber-300 backdrop-blur-xs transition-colors hover:bg-amber-500/30 hover:text-amber-200"
+              className="inline-flex min-h-[36px] items-center rounded-full bg-amber-500/20 px-3.5 py-1.5 text-amber-300 backdrop-blur-xs transition-colors hover:bg-amber-500/30 hover:text-amber-200 touch-manipulation"
             >
               🔥 Trending
             </Link>
             <Link
               href="#favourite-articles"
-              className="rounded-full bg-blue-500/20 px-3 py-1 text-blue-200 backdrop-blur-xs transition-colors hover:bg-blue-500/30 hover:text-white"
+              className="inline-flex min-h-[36px] items-center rounded-full bg-blue-500/20 px-3.5 py-1.5 text-blue-200 backdrop-blur-xs transition-colors hover:bg-blue-500/30 hover:text-white touch-manipulation"
             >
               ⭐ Favourites
             </Link>
@@ -106,7 +106,7 @@ export default function Hero({ latest }: Props) {
       </div>
 
       <div className="hero-footer-bar" aria-hidden>
-        <span>Knowledge first</span>
+        <span>Clear &amp; In-Depth</span>
         <span className="hero-footer-dot" />
         <span>Free to read</span>
       </div>

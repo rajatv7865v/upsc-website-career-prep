@@ -43,6 +43,7 @@ html {
   scroll-behavior: smooth;
   max-width: 100%;
   overflow-x: hidden;
+  overflow-x: clip;
   -webkit-text-size-adjust: 100%;
 }
 
@@ -52,6 +53,27 @@ body {
   font-family: var(--font-sans);
   max-width: 100%;
   overflow-x: hidden;
+  overflow-x: clip;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Universal responsive typography & media safety net */
+h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+p, span, a, li, blockquote {
+  overflow-wrap: break-word;
+}
+
+img, svg, video, canvas, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+button, a, input, select, textarea {
+  touch-action: manipulation;
 }
 
 @keyframes fade-up {
@@ -243,10 +265,16 @@ body {
 .hero-brand-rule {
   width: 2px;
   align-self: stretch;
-  min-height: 3.5rem;
+  min-height: 2.5rem;
   background: linear-gradient(to bottom, var(--blue-soft), var(--blue));
   transform-origin: top;
   animation: hero-rule 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
+}
+
+@media (min-width: 640px) {
+  .hero-brand-rule {
+    min-height: 3.5rem;
+  }
 }
 
 .hero-eyebrow {
@@ -259,7 +287,7 @@ body {
 }
 
 .hero-brand {
-  font-size: clamp(3rem, 8vw, 5.5rem);
+  font-size: clamp(2.15rem, 8vw, 5.5rem);
   font-weight: 600;
   line-height: 0.98;
   letter-spacing: -0.04em;
@@ -273,7 +301,7 @@ body {
 .hero-headline {
   margin-top: 1.75rem;
   max-width: min(100%, 32ch);
-  font-size: clamp(1.45rem, 3.2vw, 2.25rem);
+  font-size: clamp(1.35rem, 3.2vw, 2.25rem);
   font-weight: 500;
   line-height: 1.28;
   letter-spacing: -0.025em;
@@ -489,7 +517,13 @@ body {
 .cp-container {
   margin-inline: auto;
   max-width: 80rem;
-  padding-inline: 1.5rem;
+  padding-inline: 1rem;
+}
+
+@media (min-width: 640px) {
+  .cp-container {
+    padding-inline: 1.5rem;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -499,7 +533,13 @@ body {
 }
 
 .section-pad {
-  padding-block: 5rem;
+  padding-block: 3.5rem;
+}
+
+@media (min-width: 640px) {
+  .section-pad {
+    padding-block: 5rem;
+  }
 }
 
 @media (min-width: 1024px) {
@@ -530,7 +570,7 @@ body {
 .page-hero-title {
   margin-top: 1rem;
   max-width: 48rem;
-  font-size: clamp(2.25rem, 5vw, 3.25rem);
+  font-size: clamp(1.75rem, 5vw, 3.25rem);
   font-weight: 600;
   letter-spacing: -0.03em;
   line-height: 1.1;
@@ -570,7 +610,7 @@ body {
 
 .section-title {
   margin-top: 0.75rem;
-  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-size: clamp(1.5rem, 3.5vw, 2.5rem);
   font-weight: 600;
   letter-spacing: -0.03em;
   line-height: 1.15;
@@ -1097,7 +1137,7 @@ body {
   flex-direction: column;
   height: 100%;
   overflow: hidden;
-  padding: 1.65rem 1.5rem 1.5rem;
+  padding: 1.25rem 1.15rem 1.15rem;
   background: #0a0a0a;
   border: 1px solid rgba(255, 255, 255, 0.12);
   color: #fff;
@@ -1106,6 +1146,12 @@ body {
     border-color 0.35s ease,
     transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
     background-color 0.35s ease;
+}
+
+@media (min-width: 640px) {
+  .stage-card {
+    padding: 1.65rem 1.5rem 1.5rem;
+  }
 }
 
 .stage-card:hover {
@@ -1483,12 +1529,18 @@ body {
 }
 
 .blog-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.375rem;
   border: 1px solid var(--line);
   background: #fff;
   padding: 0.5rem 0.95rem;
   font-size: 0.8125rem;
   font-weight: 500;
   color: var(--ink);
+  cursor: pointer;
+  touch-action: manipulation;
   transition:
     border-color 0.2s ease,
     background-color 0.2s ease,
@@ -1559,9 +1611,11 @@ body {
 .blog-share-menu {
   position: absolute;
   top: calc(100% + 0.4rem);
-  left: 0;
+  right: 0;
+  left: auto;
   z-index: 20;
   min-width: 11rem;
+  max-width: calc(100vw - 2rem);
   border: 1px solid var(--line);
   background: #fff;
   box-shadow: 0 16px 36px rgba(10, 10, 10, 0.12);
@@ -2140,7 +2194,7 @@ body {
 }
 
 .esa-heading-main {
-  font-size: clamp(2rem, 4.5vw, 3.25rem);
+  font-size: clamp(1.65rem, 4.5vw, 3.25rem);
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.12;
@@ -2371,6 +2425,39 @@ body {
 .article-page-html strong {
   font-weight: 600;
   color: var(--black);
+}
+
+.article-page-html table,
+.esa-content-prose table {
+  width: 100%;
+  max-width: 100%;
+  border-collapse: collapse;
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 1.5rem 0;
+}
+
+.article-page-html pre,
+.esa-content-prose pre {
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.article-page-html code,
+.esa-content-prose code {
+  word-break: break-word;
+}
+
+.article-page-html iframe,
+.article-page-html video,
+.esa-content-prose iframe,
+.esa-content-prose video {
+  max-width: 100%;
+  height: auto;
 }
 
 .article-page-footer {
@@ -2786,10 +2873,18 @@ body {
 
 .news-side-item {
   display: flex;
-  gap: 0.85rem;
-  padding: 0.85rem 1rem;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.75rem 0.75rem;
   border-bottom: 1px solid var(--line);
   transition: background-color 0.2s ease;
+}
+
+@media (min-width: 640px) {
+  .news-side-item {
+    gap: 0.85rem;
+    padding: 0.85rem 1rem;
+  }
 }
 
 .news-side-item:last-child {
@@ -2969,6 +3064,14 @@ body {
   transition: background-color 0.25s ease;
 }
 
+@media (max-width: 480px) {
+  .articles-masthead-cta {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+}
+
 .articles-masthead-cta:hover {
   background: var(--blue);
 }
@@ -3034,7 +3137,13 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 1.5rem 1.35rem;
+  padding: 1rem 1rem;
+}
+
+@media (min-width: 640px) {
+  .news-lead-overlay {
+    padding: 1.5rem 1.35rem;
+  }
 }
 
 .news-badge-premium {
@@ -3055,7 +3164,7 @@ body {
 
 .news-lead-title-premium {
   margin-top: 0.45rem;
-  font-size: clamp(1.5rem, 3vw, 2.15rem);
+  font-size: clamp(1.25rem, 3.5vw, 2.15rem);
   font-weight: 600;
   letter-spacing: -0.03em;
   line-height: 1.2;
@@ -3067,9 +3176,15 @@ body {
 }
 
 .news-lead-body-premium {
-  padding: 1.35rem 1.5rem 1.65rem;
+  padding: 1.15rem 1.15rem 1.35rem;
   background: #fff;
   border-top: 3px solid var(--blue);
+}
+
+@media (min-width: 640px) {
+  .news-lead-body-premium {
+    padding: 1.35rem 1.5rem 1.65rem;
+  }
 }
 
 .news-lead-excerpt {
@@ -3293,7 +3408,13 @@ body {
 }
 
 .ca-expand-panel-inner-premium {
-  padding: 0 1.35rem 1.35rem 3.35rem;
+  padding: 0 1rem 1.15rem 1rem;
+}
+
+@media (min-width: 640px) {
+  .ca-expand-panel-inner-premium {
+    padding: 0 1.35rem 1.35rem 3.35rem;
+  }
 }
 
 .ca-expand-media {
@@ -3519,6 +3640,12 @@ body {
   gap: 0.85rem;
 }
 
+@media (max-width: 480px) {
+  .review-card-top {
+    flex-wrap: wrap;
+  }
+}
+
 .review-avatar {
   display: inline-flex;
   align-items: center;
@@ -3558,6 +3685,14 @@ body {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--blue);
+}
+
+@media (max-width: 480px) {
+  .review-tag {
+    margin-left: 0;
+    margin-top: 0.35rem;
+    width: fit-content;
+  }
 }
 
 .review-quote {
@@ -3697,6 +3832,14 @@ body {
   transition: color 0.2s ease;
 }
 
+@media (max-width: 480px) {
+  .faq-trigger {
+    grid-template-columns: auto 1fr auto;
+    gap: 0.65rem 0.75rem;
+    padding: 1rem 0.15rem;
+  }
+}
+
 @media (min-width: 640px) {
   .faq-trigger {
     padding: 1.25rem 0.5rem;
@@ -3715,6 +3858,12 @@ body {
   color: var(--blue);
   opacity: 0.45;
   width: 1.75rem;
+}
+
+@media (max-width: 480px) {
+  .faq-index {
+    display: none;
+  }
 }
 
 .faq-trigger-icon {
@@ -3757,6 +3906,12 @@ body {
 
 .faq-panel {
   padding: 0 0.25rem 1.25rem 1rem;
+}
+
+@media (max-width: 480px) {
+  .faq-panel {
+    padding: 0 0.25rem 1.15rem 0.5rem;
+  }
 }
 
 @media (min-width: 640px) {
@@ -3927,7 +4082,7 @@ body {
 }
 
 .gs1-hero .hero-brand {
-  font-size: clamp(2.6rem, 6.5vw, 4.5rem);
+  font-size: clamp(2rem, 6.5vw, 4.5rem);
 }
 
 .gs1-hero-content > * {
@@ -3966,7 +4121,7 @@ body {
 .gs1-hero-title {
   margin-top: 0.85rem;
   max-width: 17ch;
-  font-size: clamp(2.1rem, 4.8vw, 3.35rem);
+  font-size: clamp(1.65rem, 4.8vw, 3.35rem);
   font-weight: 600;
   letter-spacing: -0.038em;
   line-height: 1.06;
@@ -3992,6 +4147,19 @@ body {
   flex-wrap: wrap;
   gap: 0.85rem;
   margin-top: 2rem;
+}
+
+@media (max-width: 480px) {
+  .gs1-hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .gs1-hero-actions > * {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
 }
 
 .gs1-rail-link {

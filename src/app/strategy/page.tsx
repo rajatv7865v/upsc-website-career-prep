@@ -17,7 +17,7 @@ export default function StrategyIndexPage() {
       <Header forceSolid />
       <main className="flex-1 pt-16 sm:pt-[4.75rem]">
         <section className="border-b border-line bg-black py-16 lg:py-20">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <p className="section-label !text-blue-soft">Strategy</p>
             <h1 className="mt-3 max-w-2xl text-3xl font-semibold tracking-tight text-white sm:text-4xl">
               How to prepare each paper — separate from the syllabus.
@@ -37,7 +37,7 @@ export default function StrategyIndexPage() {
         </section>
 
         <section className="bg-white py-14 lg:py-20">
-          <div className="mx-auto grid max-w-7xl gap-5 px-6 sm:grid-cols-2 lg:grid-cols-3 lg:px-8">
+          <div className="mx-auto grid max-w-7xl gap-5 px-4 sm:px-6 sm:grid-cols-2 lg:grid-cols-3 lg:px-8">
             {strategyGuides.map((guide) => (
               <Link
                 key={guide.slug}

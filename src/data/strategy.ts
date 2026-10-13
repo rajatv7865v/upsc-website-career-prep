@@ -38,9 +38,9 @@ export const strategyGuides: StrategyGuide[] = [
     paper: "GS Paper 2",
     title: "GS Paper 2 strategy",
     summary:
-      "Polity, governance, social justice, and IR — structure answers around the Constitution and current issues.",
+      "Governance, Constitution, social justice, and IR — structure answers around constitutional principles and current issues.",
     points: [
-      "Anchor polity answers in constitutional provisions, judgments, and institutional design.",
+      "Anchor answers in constitutional provisions, judgments, and institutional design.",
       "For governance and social justice, keep scheme + performance + way-forward notes.",
       "IR: bilateral issues, groupings, and institutions — write short issue briefs weekly.",
       "Practise demand words (discuss, critically examine) with 150-word mini-answers.",
@@ -51,9 +51,9 @@ export const strategyGuides: StrategyGuide[] = [
     paper: "GS Paper 3",
     title: "GS Paper 3 strategy",
     summary:
-      "Economy, agriculture, S&T, environment, and security — link newspaper issues to syllabus lines.",
+      "Agriculture, S&T, environment, and security — link newspaper issues to syllabus lines.",
     points: [
-      "Economy: Budget, growth, and inclusive development themes with one data point each.",
+      "Growth & fiscal policy: Budget, national development, and inclusive growth themes with one data point each.",
       "Agriculture and food security need scheme + constraint + reform structure.",
       "Environment and disaster management pair well with Geography current affairs maps.",
       "Internal security: keep short notes on cyber, border, and organised crime linkages.",

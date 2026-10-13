@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import AboutIllustration from "@/components/AboutIllustration";
 import AnimatedIcon from "@/components/AnimatedIcon";
+import { siteContact } from "@/data/site";
 import {
   IconArrow,
   IconBriefcase,
@@ -12,19 +13,23 @@ import {
   IconCalendar,
   IconCheck,
   IconCompass,
+  IconInstagram,
   IconLayers,
   IconMic,
   IconPen,
   IconRefresh,
   IconSearch,
   IconTarget,
+  IconTelegram,
   IconUsers,
+  IconWhatsApp,
+  IconYouTube,
 } from "@/components/Icons";
 
 export const metadata: Metadata = {
   title: "About Us | Career Prepp",
   description:
-    "Career Prepp publishes free, readable notes on current affairs and public life — for curious readers and serious learners alike.",
+    "Career Prepp publishes free, readable notes on current affairs and civil services — for curious readers and serious learners alike.",
 };
 
 const values = [
@@ -58,7 +63,7 @@ const journey = [
   {
     number: "01",
     title: "Start with curiosity",
-    text: "Browse Current Affairs by topic — geography, economy, polity — and save what helps you.",
+    text: "Browse Current Affairs by topic — geography, environment, science & tech — and save what helps you.",
     icon: IconSearch,
   },
   {
@@ -94,7 +99,7 @@ const audiences = [
   },
   {
     title: "Serious learners",
-    text: "If you need stages, syllabus, or strategy later, those sections are available and will keep improving.",
+    text: "If you need deeper syllabus analysis or strategy later, those sections are available and will keep improving.",
     icon: IconCompass,
   },
 ];
@@ -102,8 +107,8 @@ const audiences = [
 const pillars = [
   {
     title: "Current affairs",
-    text: "Free topic maps and notes on places, policy, economy, and everyday science in the news.",
-    points: ["Subject-tagged articles", "Stage filters when useful", "Short revisable briefs"],
+    text: "Free topic maps and notes on places, policy, environment, and everyday science in the news.",
+    points: ["Subject-tagged articles", "Topic-focused filters", "Short revisable briefs"],
   },
   {
     title: "Clear writing",
@@ -149,6 +154,29 @@ const beliefs = [
   "Consistency beats intensity. A weekly habit you can keep will outrun bursts of panic reading.",
 ];
 
+const heroSocials = [
+  {
+    label: "YouTube",
+    href: siteContact.youtube,
+    icon: IconYouTube,
+  },
+  {
+    label: "Telegram",
+    href: siteContact.telegram,
+    icon: IconTelegram,
+  },
+  {
+    label: "Instagram",
+    href: siteContact.instagram,
+    icon: IconInstagram,
+  },
+  {
+    label: "WhatsApp",
+    href: siteContact.whatsapp,
+    icon: IconWhatsApp,
+  },
+];
+
 export default function AboutPage() {
   return (
     <>
@@ -171,37 +199,40 @@ export default function AboutPage() {
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/40" />
           </div>
 
-          <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <p className="section-label">About Us</p>
             <h1 className="page-hero-title">
-              Knowledge-first notes on public life.
+              Clear, in-depth notes on current affairs & governance.
             </h1>
             <p className="page-hero-text">
               Career Prepp centres on open Current Affairs — clear articles on
-              geography, economy, polity, and today’s issues. Built for curious
+              geography, environment, science & tech, and today’s issues. Built for curious
               readers; deeper structure is available when you want it.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
-              <Link
-                href="/#current-affairs"
-                className="inline-flex items-center gap-2 bg-blue px-6 py-3.5 text-sm font-medium text-white transition-colors hover:bg-blue-hover"
-              >
-                Explore Current Affairs
-                <IconArrow className="h-4 w-4" />
-              </Link>
-              <Link
-                href="/blog"
-                className="inline-flex items-center gap-2 border border-white/35 px-6 py-3.5 text-sm font-medium text-white transition-colors hover:border-white hover:bg-white/10"
-              >
-                Browse CA guides
-              </Link>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              {heroSocials.map((social) => {
+                const Icon = social.icon;
+                return (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.label}
+                    className="inline-flex items-center gap-2.5 border border-white/25 bg-white/10 px-5 py-3 text-sm font-medium text-white backdrop-blur-sm transition-all hover:border-white hover:bg-white/20"
+                  >
+                    <Icon className="h-4 w-4" />
+                    <span>{social.label}</span>
+                  </a>
+                );
+              })}
             </div>
           </div>
         </section>
 
         {/* Story + Emblem */}
         <section className="border-b border-line bg-white py-20 lg:py-28">
-          <div className="mx-auto grid max-w-7xl items-start gap-12 px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
+          <div className="mx-auto grid max-w-7xl items-start gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
             <div className="lg:col-span-6">
               <p className="section-label">Our story</p>
               <h2 className="section-title">
@@ -238,7 +269,7 @@ export default function AboutPage() {
                 <AboutIllustration />
               </div>
               <p className="mt-3 text-xs tracking-wide text-muted">
-                Clear notes on public life — for curious minds first.
+                Clear notes on current affairs & governance — built for curious minds and serious learners.
               </p>
             </div>
           </div>
@@ -246,7 +277,7 @@ export default function AboutPage() {
 
         {/* Values */}
         <section className="bg-surface py-20 lg:py-28">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="section-head">
               <p className="section-label">What we believe</p>
               <h2 className="section-title">Four principles behind every guide.</h2>
@@ -276,7 +307,7 @@ export default function AboutPage() {
 
         {/* Leadership */}
         <section className="border-y border-line bg-white py-20 lg:py-28">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="section-head">
               <p className="section-label">Our team</p>
               <h2 className="section-title">The people behind Career Prepp.</h2>
@@ -325,7 +356,7 @@ export default function AboutPage() {
 
         {/* Journey */}
         <section className="bg-black py-20 lg:py-28">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="section-head section-head-dark">
               <p className="section-label">How to use our content</p>
               <h2 className="section-title">
@@ -360,7 +391,7 @@ export default function AboutPage() {
 
         {/* Who + Pillars */}
         <section className="border-y border-line bg-white py-20 lg:py-28">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="section-head">
               <p className="section-label">Who we write for</p>
               <h2 className="section-title">
@@ -419,8 +450,8 @@ export default function AboutPage() {
 
         {/* Promise strip */}
         <section className="bg-surface py-20 lg:py-28">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="grid items-center gap-10 border border-line bg-white p-8 lg:grid-cols-[1.2fr_1fr] lg:gap-16 lg:p-12">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="grid items-center gap-10 border border-line bg-white p-6 sm:p-8 lg:grid-cols-[1.2fr_1fr] lg:gap-16 lg:p-12">
               <div>
                 <div className="flex items-center gap-3">
                   <AnimatedIcon

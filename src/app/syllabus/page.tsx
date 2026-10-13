@@ -17,7 +17,7 @@ export default function SyllabusIndexPage() {
       <Header forceSolid />
       <main className="flex-1 pt-16 sm:pt-[4.75rem]">
         <section className="border-b border-line bg-white py-16 lg:py-20">
-          <div className="mx-auto max-w-3xl px-6 lg:px-8">
+          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
             <p className="text-sm text-muted">Syllabus</p>
             <h1 className="mt-2 text-3xl font-semibold tracking-tight text-black sm:text-4xl">
               Official UPSC syllabus
@@ -37,7 +37,7 @@ export default function SyllabusIndexPage() {
         </section>
 
         <section className="bg-surface py-14 lg:py-20">
-          <div className="mx-auto max-w-3xl px-6 lg:px-8">
+          <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
             <ul className="divide-y divide-line border border-line bg-white">
               {officialSyllabusPapers.map((paper) => (
                 <li key={paper.slug}>

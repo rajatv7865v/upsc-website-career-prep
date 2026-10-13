@@ -88,7 +88,7 @@ const socialLinks = [
 ];
 
 const tips = [
-  "What you are reading for (general interest, or a specific stage)",
+  "What you are reading for (general interest, or civil services preparation)",
   "The topic or guide you need (or a correction you spotted)",
   "Any subject area that confused you",
   "Whether you want to suggest a new free article idea",
@@ -139,19 +139,18 @@ export default function ContactPage() {
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/40" />
           </div>
 
-          <div className="relative z-10 mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <p className="section-label">Contact Us</p>
             <h1 className="page-hero-title">
-              Suggest a topic — or ask how to use the library.
+              Get in touch with us — we’d love to hear from you.
             </h1>
             <p className="page-hero-text">
-              Career Prepp is a free library of knowledge notes on current
-              affairs. Write with a topic idea, a correction, or a question.
+              Have a question about our study material, want to suggest a topic, or have feedback? Reach out to our team anytime.
             </p>
-            <div className="mt-8 flex flex-wrap gap-3">
+            <div className="mt-8 flex flex-col sm:flex-row flex-wrap gap-3">
               <a
                 href="#message"
-                className="inline-flex items-center gap-2 bg-blue px-6 py-3.5 text-sm font-medium text-white transition-colors hover:bg-blue-hover"
+                className="inline-flex items-center justify-center gap-2 bg-blue px-6 py-3.5 text-sm font-medium text-white transition-colors hover:bg-blue-hover"
               >
                 Open message form
                 <IconArrow className="h-4 w-4" />
@@ -160,7 +159,7 @@ export default function ContactPage() {
                 href={siteContact.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 border border-white/35 px-6 py-3.5 text-sm font-medium text-white transition-colors hover:border-white hover:bg-white/10"
+                className="inline-flex items-center justify-center gap-2 border border-white/35 px-6 py-3.5 text-sm font-medium text-white transition-colors hover:border-white hover:bg-white/10"
               >
                 WhatsApp {siteContact.phoneDisplay}
               </a>
@@ -170,7 +169,7 @@ export default function ContactPage() {
 
         {/* Channels */}
         <section className="border-b border-line bg-white py-20 lg:py-28">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="grid gap-5 md:grid-cols-3">
               {channels.map((item, i) => (
                 <a
@@ -202,7 +201,7 @@ export default function ContactPage() {
 
         {/* Social links — Instagram, YouTube, Telegram, WhatsApp (no LinkedIn, no address) */}
         <section className="border-b border-line bg-surface py-12">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <p className="text-xs font-semibold tracking-[0.16em] text-muted uppercase">
               Social
             </p>
@@ -231,7 +230,7 @@ export default function ContactPage() {
           id="message"
           className="scroll-mt-28 bg-surface py-20 lg:py-28"
         >
-          <div className="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
+          <div className="mx-auto grid max-w-7xl gap-12 px-4 sm:px-6 lg:grid-cols-12 lg:gap-16 lg:px-8">
             <div className="lg:col-span-5">
               <p className="section-label">Message form</p>
               <h2 className="section-title">
@@ -289,7 +288,7 @@ export default function ContactPage() {
 
         {/* Why contact */}
         <section className="bg-black py-20 lg:py-28">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="section-head section-head-dark">
               <p className="section-label">Why write to us</p>
               <h2 className="section-title">

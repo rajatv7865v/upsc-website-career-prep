@@ -76,13 +76,13 @@ export default function TrendingArticlesSection({ posts }: Props) {
                     <span>{rankLabel}</span>
                   </div>
 
-                  {/* Stage / Subject Tag */}
+                  {/* Subject Tag */}
                   <div className="absolute bottom-3 left-3.5 right-3.5 flex items-center justify-between text-xs text-white/90">
                     <span className="rounded-md bg-white/20 px-2.5 py-0.5 font-medium backdrop-blur-md">
                       {post.subjects[0] ?? post.category}
                     </span>
                     <span className="font-medium text-white/80">
-                      {post.stage === "Both" ? "Prelims + Mains" : post.stage}
+                      {post.read}
                     </span>
                   </div>
                 </Link>

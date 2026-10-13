@@ -24,7 +24,7 @@ export default async function BiotechnologyPage() {
         {/* Hero Section */}
         <section className="border-b border-line bg-gradient-to-b from-[#0a1128] via-[#001f54] to-[#034078] text-white py-16 lg:py-24 relative overflow-hidden">
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(59,130,246,0.3),transparent_60%)] pointer-events-none" />
-          <div className="mx-auto max-w-7xl px-6 lg:px-8 relative z-10">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="flex flex-wrap items-center gap-2 mb-4">
               <Link href="/science-tech" className="text-xs font-bold uppercase tracking-wider text-blue-soft hover:underline">
                 Science &amp; Technology
@@ -42,7 +42,7 @@ export default async function BiotechnologyPage() {
               Comprehensive notes, molecular mechanisms, and conceptual frameworks for UPSC Civil Services GS Paper 3 (Science &amp; Technology) and Prelims.
             </p>
 
-            <div className="mt-8 flex flex-wrap items-center gap-4 text-xs font-semibold">
+            <div className="mt-8 flex flex-wrap items-center gap-3 text-xs font-semibold">
               <span className="rounded-full bg-white/10 px-3.5 py-1.5 backdrop-blur-md border border-white/20">
                 🧬 Recombinant DNA Technology
               </span>
@@ -58,14 +58,14 @@ export default async function BiotechnologyPage() {
 
         {/* Interactive Visual Studio */}
         <section className="py-14 lg:py-20">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <BiotechnologyVisualSection />
           </div>
         </section>
 
         {/* Syllabus & Exam Relevance Breakdown */}
         <section className="border-t border-line bg-surface py-14 lg:py-20">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="mb-10">
               <span className="text-xs font-bold uppercase tracking-wider text-blue">
                 Civil Services Syllabus Alignment
@@ -120,7 +120,7 @@ export default async function BiotechnologyPage() {
 
         {/* Related Articles Section */}
         <section className="border-t border-line bg-white py-14 lg:py-20">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between mb-8">
               <div>
                 <p className="text-xs font-bold uppercase tracking-wider text-blue">Latest Notes</p>
