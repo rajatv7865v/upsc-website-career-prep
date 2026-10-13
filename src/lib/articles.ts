@@ -88,7 +88,27 @@ function toBlogPost(article: AdminArticle | BlogPost): BlogPost {
   };
 }
 
+let cachedArticles: AdminArticle[] | null = null;
+let lastFetchTime = 0;
+let lastFailTime = 0;
+const CACHE_TTL_MS = 20_000; // 20s in-memory cache to deduplicate during build and requests
+const RETRY_COOLDOWN_MS = 30_000; // If DB failed, do not hammer it on every single page render
+
+export function invalidateArticlesCache() {
+  cachedArticles = null;
+  lastFetchTime = 0;
+  lastFailTime = 0;
+}
+
 async function getMongoArticles(): Promise<AdminArticle[]> {
+  const now = Date.now();
+  if (cachedArticles && now - lastFetchTime < CACHE_TTL_MS) {
+    return cachedArticles;
+  }
+  if (now - lastFailTime < RETRY_COOLDOWN_MS) {
+    return cachedArticles ?? [];
+  }
+
   try {
     const db = await getDb();
     const docs = await db
@@ -96,10 +116,13 @@ async function getMongoArticles(): Promise<AdminArticle[]> {
       .find()
       .sort({ createdAt: -1 })
       .toArray();
-    return docs.map(mapDocument);
+    cachedArticles = docs.map(mapDocument);
+    lastFetchTime = Date.now();
+    return cachedArticles;
   } catch (error) {
+    lastFailTime = Date.now();
     console.error("MongoDB articles fetch failed:", error);
-    return [];
+    return cachedArticles ?? [];
   }
 }
 
@@ -185,6 +208,7 @@ export async function createArticle(input: CreateArticleInput) {
   };
 
   const result = await collection.insertOne(doc);
+  invalidateArticlesCache();
   return mapDocument({ ...doc, _id: result.insertedId });
 }
 
@@ -194,5 +218,9 @@ export async function deleteArticle(id: string) {
   const result = await db
     .collection(ARTICLES_COLLECTION)
     .deleteOne({ _id: new ObjectId(id) });
-  return result.deletedCount === 1;
+  if (result.deletedCount === 1) {
+    invalidateArticlesCache();
+    return true;
+  }
+  return false;
 }
